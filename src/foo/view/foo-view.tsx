@@ -1,7 +1,9 @@
+import { Box, Container, Grid } from '@material-ui/core';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Container, Typography, Button, Box, Grid } from '@material-ui/core';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { UIButton } from '../../ui-components/button/ui-button';
+import { UITypography } from '../../ui-components/typography/ui-typography';
 import { FooDecrementAction, FooIncrementAction } from '../reducer/foo-actions';
 
 export const FooView: React.FC = () => {
@@ -20,31 +22,28 @@ export const FooView: React.FC = () => {
 
             <Grid container spacing={2} justify='center' alignItems='center'>
                 <Grid item>
-                    <Typography variant='body1'>
+                    <UITypography variant='body1'>
                         foo value: <b>{foo}</b>
-                    </Typography>
+                    </UITypography>
 
                 </Grid>
 
                 <Grid item>
-                    <Button
-                        variant='contained'
-                        color='primary'
-                        onClick={actions.increment}>Increment</Button>
+                    <UIButton
+                        variant='primary'
+                        onClick={actions.increment}>Increment</UIButton>
 
                 </Grid>
                 <Grid item>
-                    <Button
-                        variant='contained'
-                        color='primary'
-                        onClick={actions.decrement}>Decrement</Button>
+                    <UIButton
+                        variant='primary'
+                        onClick={actions.decrement}>Decrement</UIButton>
 
                 </Grid>
                 <Grid item>
-                    <Button
-                        variant='contained'
-                        color='secondary'
-                        onClick={actions.reset}>Reset</Button>
+                    <UIButton
+                        variant='secondary'
+                        onClick={actions.reset}>Reset</UIButton>
                 </Grid>
             </Grid>
 
