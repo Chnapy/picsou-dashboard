@@ -1,16 +1,12 @@
-import { UIThemeProvider } from '../../main/view/ui-theme-provider';
-import React from 'react';
-import { Box } from '@material-ui/core';
-import { UITypography, UITypographyProps } from './ui-typography';
 import { Story } from '@storybook/react/types-6-0';
+import React from 'react';
+import { UITypography, UITypographyProps } from './ui-typography';
 
 export default {
     title: 'UI components/Typography'
 };
 
-const Template: Story<UITypographyProps> = props => <UIThemeProvider>
-    <UITypography {...props} />
-</UIThemeProvider>;
+const Template: Story<UITypographyProps> = props => <UITypography {...props} />;
 
 export const DefaultSingle = Template.bind({});
 DefaultSingle.args = {
@@ -20,8 +16,7 @@ DefaultSingle.args = {
 
 export const Default = () => {
 
-    return <UIThemeProvider>
-        <Box p={2}>
+    return <>
 
             <UITypography variant="h1" gutterBottom>
                 h1. Heading
@@ -57,6 +52,5 @@ export const Default = () => {
                 12.4s
       </UITypography>
 
-        </Box>
-    </UIThemeProvider>;
+    </>;
 };

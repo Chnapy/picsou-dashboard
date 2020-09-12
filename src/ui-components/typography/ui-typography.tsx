@@ -12,23 +12,25 @@ type UITypographyVariant = Extract<Variant, 'h1' | 'h2' | 'h3' | 'h4' | 'body1' 
 
 type UITypographyColor = 'default' | 'primary' | 'positive' | 'negative';
 
-export type UITypographyProps = Omit<TypographyProps, 'variant'> & {
+export type UITypographyProps = Omit<TypographyProps, 'variant' | 'color'> & {
     variant: UITypographyVariant;
     color?: UITypographyColor;
+    disabled?: boolean;
     component?: React.ReactType;
 };
 
 const useStyles = makeStyles(({ palette }) => ({
     root: ({
-        color
-    }: Pick<UITypographyProps, 'color'>) => ({
+        color, disabled
+    }: Pick<UITypographyProps, 'color' | 'disabled'>) => ({
         color: switchUtil(color ?? 'none', {
             none: undefined,
             default: palette.text.primary,
             primary: palette.primary.main,
             positive: palette.progress.positive,
             negative: palette.progress.negative,
-        })
+        }),
+        opacity: disabled ? 0.5 : undefined,
     }),
     bodyMini: {
         fontSize: '0.8rem'
@@ -45,11 +47,13 @@ const useStyles = makeStyles(({ palette }) => ({
 
 export const UITypography: React.FC<UITypographyProps> = ({
     variant,
+    color,
+    disabled,
     className,
     ...rest
 }) => {
 
-    const classes = useStyles(rest);
+    const classes = useStyles({ color, disabled });
 
     const defaultClassName = clsx(classes.root, className);
 

@@ -54,8 +54,8 @@ export const appTheme: Theme = createMuiTheme({
             level1: bgMain
         },
         progress: {
-            positive: '6FCF97',
-            negative: 'EB5757'
+            positive: '#6FCF97',
+            negative: '#EB5757'
         }
     },
     shape: {
