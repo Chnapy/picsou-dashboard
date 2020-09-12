@@ -9,16 +9,25 @@ declare module '@material-ui/core/styles/createPalette' {
 
 declare module '@material-ui/core/styles/createPalette' {
 
-    export interface PaletteProgress {
-        positive: string;
-        negative: string;
-    }
+  export interface PaletteInvestment {
+    cash: string;
+    gold: string;
+    market: string;
+    immo: string;
+  }
 
-    interface Palette {
-        progress: PaletteProgress;
-    }
+  export interface PaletteProgress {
+    positive: string;
+    negative: string;
+  }
 
-    interface PaletteOptions {
-      progress: PaletteProgress;
-    }
+  interface Palette {
+    investment: PaletteInvestment;
+    progress: PaletteProgress;
+  }
+
+  interface PaletteOptions {
+    investment: PaletteInvestment;
+    progress: PaletteProgress;
+  }
 }

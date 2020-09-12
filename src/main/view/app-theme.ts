@@ -53,6 +53,12 @@ export const appTheme: Theme = createMuiTheme({
             paper: bgPanel,
             level1: bgMain
         },
+        investment: {
+            cash: '#E0E0E0',
+            gold: '#EBDE66',
+            market: '#EB5757',
+            immo: '#8EB1E6'
+        },
         progress: {
             positive: '#6FCF97',
             negative: '#EB5757'

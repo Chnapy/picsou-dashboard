@@ -23,12 +23,16 @@ export const UIGain: React.FC<UIGainProps> = ({
 
     const prefix = (isGain && '+') || undefined;
 
-    return <UITypography {...rest} color={isGain ? 'positive' : 'negative'}>
-        {switchUtil(gainVariant, {
-            euro: () => <UIEuroValue {...rest} value={diff} prefix={prefix} />,
-            percent: () => <UIPercent {...rest} oldValue={oldValue} newValue={newValue} prefix={prefix} />
-        })()}
-    </UITypography>;
+    const finalProps: Omit<UITypographyProps, 'children'> = {
+        ...rest,
+        prefix,
+        color: isGain ? 'positive' : 'negative'
+    };
+
+    return switchUtil(gainVariant, {
+        euro: () => <UIEuroValue {...finalProps} value={diff} />,
+        percent: () => <UIPercent {...finalProps} oldValue={oldValue} newValue={newValue} />
+    })();
 };
 
 type UIPercentProps = Omit<UITypographyProps, 'children'> & {
