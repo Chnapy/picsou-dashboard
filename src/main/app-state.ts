@@ -1,6 +1,6 @@
 import { AppStepState } from '../app-step/reducer/app-step-reducer';
 import { AuthState } from '../auth/reducer/auth-reducer';
-import { FooState } from '../foo/reducer/foo-reducer';
+import { MainBoardState } from '../main-board/reducer/main-board-reducer';
 
 export type AppState = {
 
@@ -8,7 +8,5 @@ export type AppState = {
 
     auth: AuthState;
 
-
-    foo: FooState;
-
+    mainBoard: MainBoardState;
 };

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { AuthView } from '../../auth/view/auth-view';
-import { FooView } from '../../foo/view/foo-view';
-import { switchUtil } from '../../util';
+import { switchUtil } from '../../util/util';
+import { MainBoardView } from '../../main-board/view/main-board-view';
 
 export const AppStepRouter: React.FC = () => {
 
@@ -10,6 +10,6 @@ export const AppStepRouter: React.FC = () => {
 
     return switchUtil(appStep, {
         auth: () => <AuthView/>,
-        main: () => <FooView />
+        main: () => <MainBoardView />
     })();
 };

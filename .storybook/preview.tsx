@@ -7,7 +7,7 @@ export const parameters = {
 };
 
 export const decorators = [
-  (Story) => <UIThemeProvider>
+  (Story: React.FC) => <UIThemeProvider>
   <Box p={2}>
     <Story />
     </Box>

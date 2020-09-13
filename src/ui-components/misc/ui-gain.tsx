@@ -1,6 +1,6 @@
 import React from 'react';
 import { UITypography, UITypographyProps } from '../typography/ui-typography';
-import { switchUtil } from '../../util';
+import { switchUtil } from '../../util/util';
 import { UIEuroValue } from './ui-euro-value';
 
 export type UIGainProps = Omit<UITypographyProps, 'color' | 'children'> & {

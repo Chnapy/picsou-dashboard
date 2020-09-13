@@ -1,8 +1,8 @@
-import { ButtonBase, Grid, makeStyles, Box, Divider } from '@material-ui/core';
+import { Box, ButtonBase, Divider, Grid, makeStyles } from '@material-ui/core';
 import React from 'react';
+import { UIEuroValue } from '../misc/ui-euro-value';
+import { UIGain } from '../misc/ui-gain';
 import { UITypography } from '../typography/ui-typography';
-import { UIEuroValue } from './ui-euro-value';
-import { UIGain } from './ui-gain';
 
 export type ValueLineProps = {
     name: string;

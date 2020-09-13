@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Variant } from '@material-ui/core/styles/createTypography';
 import clsx from 'clsx';
 import React from 'react';
-import { switchUtil } from '../../util';
+import { switchUtil } from '../../util/util';
 
 type UITypographyVariant = Extract<Variant, 'h1' | 'h2' | 'h3' | 'h4' | 'body1' | 'body2'>
     | 'bodyMini'
