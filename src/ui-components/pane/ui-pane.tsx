@@ -7,12 +7,16 @@ import { UITypography } from '../typography/ui-typography';
 export type UIPaneProps = {
     title: string;
     paneColor: keyof PaletteInvestment;
+    children: React.ReactNode;
 };
 
 export const UIPane: React.FC<UIPaneProps> = props => {
 
     return <Paper>
         <UIPaneHeader {...props} />
+        <Box>
+            {props.children}
+        </Box>
     </Paper>;
 };
 

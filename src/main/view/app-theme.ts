@@ -56,8 +56,7 @@ export const appTheme: Theme = createMuiTheme({
         investment: {
             cash: '#E0E0E0',
             gold: '#EBDE66',
-            market: '#EB5757',
-            immo: '#8EB1E6'
+            market: '#EB5757'
         },
         progress: {
             positive: '#6FCF97',
@@ -113,9 +112,6 @@ export const appTheme: Theme = createMuiTheme({
                 '@font-face': [ iFlash705FontFace, monogramFontFace ],
                 html: {
                     fontSize: '62.5%'
-                },
-                body: {
-                    overflow: 'hidden'
                 }
             },
         },

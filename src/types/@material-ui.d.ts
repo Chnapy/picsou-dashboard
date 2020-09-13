@@ -1,4 +1,5 @@
 import { Palette, PaletteOptions, TypeBackground } from '@material-ui/core/styles/createPalette';
+import { BoardKind } from '../main-board/reducer/main-board-reducer';
 
 declare module '@material-ui/core/styles/createPalette' {
 
@@ -9,12 +10,9 @@ declare module '@material-ui/core/styles/createPalette' {
 
 declare module '@material-ui/core/styles/createPalette' {
 
-  export interface PaletteInvestment {
-    cash: string;
-    gold: string;
-    market: string;
-    immo: string;
-  }
+  export type PaletteInvestment = {
+    [K in BoardKind]: string;
+  };
 
   export interface PaletteProgress {
     positive: string;

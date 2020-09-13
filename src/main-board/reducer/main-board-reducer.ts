@@ -1,14 +1,19 @@
 import { Normalizable, NormalizeObject, NormalizeArray } from '../../util/normalize';
 import { createRichReducer } from '../../main/create-rich-reducer';
 
-export type BoardKind = 'cash' | 'gold' | 'market';
+export type BoardKind = typeof boardKindList[number];
+export const boardKindList = ['cash', 'gold', 'market'] as const;
 
-type BoardValueInfos = Normalizable<string> & {
+export type QuantityUnit = 'unit' | 'kg';
+
+export type BoardValueInfos = Normalizable<string> & {
     board: BoardKind;
-    oldValue: number;
+    oldValueList: {
+        oldValue: number;
+        quantity: number;
+    }[];
     currentValue: number;
-    quantity: number;
-    quantityUnit: 'unit' | 'kg';
+    quantityUnit: QuantityUnit;
 };
 
 export type MainBoardState = {

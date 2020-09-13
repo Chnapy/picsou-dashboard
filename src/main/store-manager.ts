@@ -3,6 +3,7 @@ import { createLogger } from 'redux-logger';
 import { AppState } from './app-state';
 import { rootReducer } from './root-reducer';
 import { authMiddleware } from '../auth/reducer/auth-middleware';
+import { marketMiddleware } from '../main-board/reducer/market-middleware';
 
 export type StoreManager = ReturnType<typeof createStoreManager>;
 
@@ -19,7 +20,8 @@ type Props = {
 };
 
 const defaultMiddlewareList = (deps: StoreDependencies): Middleware[] => [
-    authMiddleware(deps)
+    authMiddleware(deps),
+    marketMiddleware(deps),
 ];
 
 export const getFullStoreMiddlewareList = (deps: StoreDependencies, middlewareList: Middleware[] = defaultMiddlewareList(deps)) => {

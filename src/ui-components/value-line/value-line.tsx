@@ -3,44 +3,44 @@ import React from 'react';
 import { UIEuroValue } from '../misc/ui-euro-value';
 import { UIGain } from '../misc/ui-gain';
 import { UITypography } from '../typography/ui-typography';
+import { BoardValueInfos } from '../../main-board/reducer/main-board-reducer';
+import { enumToString } from '../../util/enum-to-string';
 
-export type ValueLineProps = {
-    name: string;
-    oldValue: number;
-    currentValue: number;
-    quantity: number;
-    // oldValueDate: Date;
-};
+export type ValueLineProps = Omit<BoardValueInfos, 'board'>;
 
-const useStyles = makeStyles(({ palette, spacing, shadows }) => ({
+const useStyles = makeStyles(({ palette, spacing }) => ({
     root: {
         display: 'flex',
         width: '100%',
         textAlign: 'left',
         backgroundColor: palette.background.level1,
         padding: spacing(1),
-        boxShadow: shadows[2]
+        marginBottom: 2
     }
 }));
 
 export const ValueLine: React.FC<ValueLineProps> = ({
-    name, oldValue, currentValue, quantity, // oldValueDate
+    id, oldValueList, currentValue, quantityUnit
 }) => {
     const classes = useStyles();
 
-    const oldValueFull = oldValue * quantity;
-    const currentValueFull = currentValue * quantity;
+    const quantityTotal = oldValueList.reduce((acc, v) => acc + v.quantity, 0);
+
+    const oldValueFull = oldValueList.reduce((acc, v) => acc + v.oldValue * v.quantity, 0);
+    const currentValueFull = currentValue * quantityTotal;
+
+    const oldValueAverage = oldValueFull / quantityTotal;
 
     return <ButtonBase className={classes.root}>
         <Grid container spacing={1}>
 
             <Grid item xs={8}>
                 <UITypography variant='h4' color='primary'>
-                    {name}
+                    {id}
                 </UITypography>
             </Grid>
             <Grid container item justify='flex-end' xs={4}>
-                <UIGain gainVariant='percent' oldValue={oldValue} newValue={currentValue} variant='h4' />
+                <UIGain gainVariant='percent' oldValue={oldValueAverage} newValue={currentValue} variant='h4' />
             </Grid>
 
             <Grid item xs={12}>
@@ -48,15 +48,15 @@ export const ValueLine: React.FC<ValueLineProps> = ({
             </Grid>
 
             <Grid container item xs={4}>
-                <UIEuroValue value={oldValue} variant='body1' disabled />
+                <UIEuroValue value={oldValueAverage} variant='body1' disabled />
                 <Box ml={1}>
                     <UITypography variant='body1'>
-                        x{quantity}
+                        {enumToString.quantity(quantityTotal, quantityUnit)}
                     </UITypography>
                 </Box>
             </Grid>
             <Grid container item justify='center' xs={4}>
-                <UIGain gainVariant='euro' oldValue={oldValue} newValue={currentValue} variant='body1' />
+                <UIGain gainVariant='euro' oldValue={oldValueAverage} newValue={currentValue} variant='body1' />
             </Grid>
             <Grid container item justify='flex-end' xs={4}>
                 <UIEuroValue value={currentValue} variant='body1' color='primary' />
