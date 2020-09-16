@@ -1,10 +1,11 @@
 import * as firebase from "firebase/app";
-import "firebase/auth";
 
 export const firebaseAuthClientID = '360932669439-0va9nbd861ttb9sju51poph48vbi6130.apps.googleusercontent.com';
 
 export const createFirebaseApp = () => {
 
+    // TODO remove from git
+    // should be SECRET
     const firebaseConfig = {
         apiKey: "AIzaSyAVIyoVGl7IhtI0G8QwIXSGdjFzsvn4cXw",
         authDomain: "picsou-dashboard.firebaseapp.com",

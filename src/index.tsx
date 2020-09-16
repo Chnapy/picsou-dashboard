@@ -1,7 +1,8 @@
 // should be first
-import { createFirebaseApp } from './firebase/create-firebase-app';
+import './firebase/firebase-imports';
 
 import ReactDOM from 'react-dom';
+import { createFirebaseApp } from './firebase/create-firebase-app';
 import { createStoreManager } from './main/store-manager';
 import { createView } from './main/view/view';
 import * as serviceWorker from './serviceWorker';
