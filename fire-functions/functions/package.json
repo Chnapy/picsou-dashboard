@@ -6,6 +6,8 @@
     "shell": "yarn build && firebase functions:shell",
     "start": "yarn shell",
     "test": "jest --watchAll",
+    "test-ci": "jest",
+    "test-integration": "yarn build  && firebase emulators:exec run-integration-test.sh",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
   },

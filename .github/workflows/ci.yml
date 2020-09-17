@@ -36,11 +36,19 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-yarn-
 
-    - name: Install dependencies
+    - name: Install frontend dependencies
       run: yarn --frozen-lockfile
 
-    - name: Test
-      run: yarn test-ci --ci
+    - name: Install functions dependencies
+      run: cd fire-functions/functions && yarn --frozen-lockfile
+
+    - name: Test functions
+      run: cd fire-functions/functions && yarn test-ci
+      env:
+        CI: true
+
+    - name: Test frontend
+      run: yarn test-ci
       env:
         CI: true
 
@@ -72,8 +80,14 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-yarn-
 
-    - name: Install dependencies
+    - name: Install frontend dependencies
       run: yarn --frozen-lockfile
 
-    - name: Build
+    - name: Install functions dependencies
+      run: cd fire-functions/functions && yarn --frozen-lockfile
+
+    - name: Build frontend
       run: yarn build
+
+    - name: Build functions
+      run: cd fire-functions/functions && yarn build
