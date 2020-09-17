@@ -7,6 +7,10 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  CI: true
+  FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+
 jobs:
   test:
     name: Test
@@ -47,13 +51,9 @@ jobs:
 
     - name: Test functions
       run: cd fire-functions/functions && yarn test-ci
-      env:
-        CI: true
 
     - name: Test frontend
       run: yarn test-ci
-      env:
-        CI: true
 
   build:
     name: Build
