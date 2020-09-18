@@ -1,6 +1,6 @@
-import React from 'react';
 import { Box } from '@material-ui/core';
-import { boardKindList } from '../reducer/main-board-reducer';
+import React from 'react';
+import { boardKindList } from '../../../shared/types/board-types';
 import { MainPane } from './main-pane';
 
 export const MainBoardView: React.FC = () => {

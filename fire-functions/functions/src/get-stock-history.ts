@@ -13,9 +13,13 @@ type InvestingReqBody = {
     interval_sec: StockHistoryInterval;
 };
 
-const getOrThrow = <V>(value: V): NonNullable<V> => {
+export type GetStockHistoryReturn = {
+    history: StockHistoryValue[];
+};
+
+const getOrThrow = <V>(value: V, message?: string): NonNullable<V> => {
     if (value === undefined || value === null) {
-        throw new AssertionError();
+        throw new AssertionError({ message });
     }
     return value!;
 };
@@ -36,7 +40,7 @@ const url = 'https://www.investing.com/instruments/HistoricalDataAjax';
 
 export const getStockHistory = async ({
     pairId, startDate, endDate, interval
-}: Partial<StockHistoryReqParams>) => {
+}: Partial<StockHistoryReqParams>): Promise<GetStockHistoryReturn> => {
 
     const rawBody: InvestingReqBody = {
         curr_id: getOrThrow(pairId),
@@ -59,11 +63,15 @@ export const getStockHistory = async ({
     const table = getOrThrow(dom.window.document.querySelector('table'));
     const trList = Array.from(table.querySelectorAll('tbody > tr'));
 
+    if (trList[0].querySelector('td')?.textContent === 'No results found') {
+        throw new Error('No results found');
+    }
+
     const history = trList.map((tr): StockHistoryValue => {
         const tdList = tr.querySelectorAll('td');
 
         const getValue = (i: number) => {
-            const item = tdList.item(i)
+            const item = getOrThrow(tdList.item(i), `td n°${i} is null`);
 
             return getOrThrow(item.getAttribute('data-real-value') ?? item.textContent);
         };
@@ -79,5 +87,5 @@ export const getStockHistory = async ({
         };
     });
 
-    return history;
+    return { history };
 };

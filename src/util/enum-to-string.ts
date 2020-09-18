@@ -1,4 +1,4 @@
-import { BoardKind, QuantityUnit } from '../main-board/reducer/main-board-reducer';
+import { BoardKind, QuantityUnit } from '../../shared/types/board-types';
 import { AppStepStateNoAuth } from '../app-step/reducer/app-step-reducer';
 import { switchUtil } from './util';
 

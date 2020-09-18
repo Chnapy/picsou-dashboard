@@ -24,3 +24,13 @@ export type FetchStockHistoryValuesProps = {
     endDate: Date;
     interval: StockHistoryInterval;
 };
+
+export type StockValueFullData = {
+    id: number;
+    name: string;
+    ownValueList: {
+        oldValue: number;
+        quantity: number;
+    }[];
+    currentValue: number;
+};

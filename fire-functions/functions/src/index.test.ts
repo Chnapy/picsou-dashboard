@@ -6,7 +6,7 @@ import { getStockHistoryValuesTestData } from '../../../shared/tests/stock-histo
 describe('routes', () => {
 
     it('requestStockHistory', async () => {
-        
+
         const request = fbTester.wrap(requestStockHistory);
 
         const { paramsQuery, expectedData } = getStockHistoryValuesTestData();

@@ -14,7 +14,8 @@ const Template: Story<ValueLineProps> = props => <Box width={400}>
 
 export const Default = Template.bind({});
 Default.args = {
-    id: 'Euro stoxx 300',
+    id: 1234,
+    name: 'Euro stoxx 300',
     currentValue: 174.23,
     quantityUnit: 'unit',
     oldValueList: [

@@ -3,7 +3,16 @@ import { createMarketFetcher } from "./market-fetcher";
 
 describe('# market-fetcher', () => {
 
-    it('fetchStockHistoryValues', async () => {
+    it('fetch initial market data', async () => {
+
+        const fetcher = createMarketFetcher();
+
+        const { data } = await fetcher.fetchInitialMarketData();
+
+        expect(data).toEqual(expect.any(Array));
+    });
+
+    it('fetch stock-history-values', async () => {
 
         const fetcher = createMarketFetcher();
 
@@ -11,6 +20,6 @@ describe('# market-fetcher', () => {
 
         const { data } = await fetcher.fetchStockHistoryValues(paramsRaw);
 
-        expect(data).toEqual(expectedData);
+        expect(data).toEqual({ history: expectedData });
     });
 });

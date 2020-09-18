@@ -1,20 +1,8 @@
-import { Normalizable, NormalizeObject, NormalizeArray } from '../../util/normalize';
+import { BoardKind, BoardValueInfos } from '../../../shared/types/board-types';
 import { createRichReducer } from '../../main/create-rich-reducer';
+import { NormalizeArray, NormalizeObject } from '../../util/normalize';
+import { MainBoardInitAction } from './main-board-actions';
 
-export type BoardKind = typeof boardKindList[number];
-export const boardKindList = ['cash', 'gold', 'market'] as const;
-
-export type QuantityUnit = 'unit' | 'kg';
-
-export type BoardValueInfos = Normalizable<string> & {
-    board: BoardKind;
-    oldValueList: {
-        oldValue: number;
-        quantity: number;
-    }[];
-    currentValue: number;
-    quantityUnit: QuantityUnit;
-};
 
 export type MainBoardState = {
     values: NormalizeObject<BoardValueInfos>;
@@ -33,5 +21,10 @@ const initialState: MainBoardState = {
 };
 
 export const mainBoardReducer = createRichReducer(initialState, () => ({
-
+    [MainBoardInitAction.type]: (state, {payload}: MainBoardInitAction) => {
+        payload.forEach(value => {
+            state.values[value.id] = value;
+            state.valuesList[value.board].push(value.id);
+        });
+    }
 }));

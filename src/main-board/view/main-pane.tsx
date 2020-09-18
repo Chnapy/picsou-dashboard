@@ -1,8 +1,8 @@
-import { BoardKind } from '../reducer/main-board-reducer';
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { BoardKind } from '../../../shared/types/board-types';
 import { UIPane } from '../../ui-components/pane/ui-pane';
 import { enumToString } from '../../util/enum-to-string';
-import { useSelector } from 'react-redux';
 import { MainValueLine } from './main-value-line';
 
 export type MainPaneProps = {

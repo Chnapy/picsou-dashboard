@@ -1,10 +1,10 @@
 import { Box, ButtonBase, Divider, Grid, makeStyles } from '@material-ui/core';
 import React from 'react';
+import { BoardValueInfos } from '../../../shared/types/board-types';
+import { enumToString } from '../../util/enum-to-string';
 import { UIEuroValue } from '../misc/ui-euro-value';
 import { UIGain } from '../misc/ui-gain';
 import { UITypography } from '../typography/ui-typography';
-import { BoardValueInfos } from '../../main-board/reducer/main-board-reducer';
-import { enumToString } from '../../util/enum-to-string';
 
 export type ValueLineProps = Omit<BoardValueInfos, 'board'>;
 
