@@ -43,17 +43,17 @@ jobs:
     - name: Install Firebase
       run: yarn global add firebase-tools
 
-    - name: Install frontend dependencies
+    - name: Install dependencies
       run: yarn --frozen-lockfile
 
-    - name: Install functions dependencies
-      run: cd fire-functions/functions && yarn --frozen-lockfile
+    - name: Build shared
+      run: yarn workspace @picsou/shared build
 
     - name: Test functions
-      run: cd fire-functions/functions && yarn test-ci
+      run: yarn workspace @picsou/functions test-ci
 
     - name: Test frontend
-      run: yarn test-ci
+      run: yarn workspace @picsou/frontend test-ci
 
   build:
     name: Build
@@ -83,14 +83,14 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-yarn-
 
-    - name: Install frontend dependencies
+    - name: Install dependencies
       run: yarn --frozen-lockfile
 
-    - name: Install functions dependencies
-      run: cd fire-functions/functions && yarn --frozen-lockfile
+    - name: Build shared
+      run: yarn workspace @picsou/shared build
 
     - name: Build frontend
-      run: yarn build
+      run: yarn workspace @picsou/frontend build
 
     - name: Build functions
-      run: cd fire-functions/functions && yarn build
+      run: yarn workspace @picsou/functions build

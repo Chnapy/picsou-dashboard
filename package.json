@@ -1,81 +1,17 @@
 {
-  "name": "starter-front-trrms",
-  "version": "0.1.0",
+  "name": "picsou-dashboard",
+  "version": "1.0.0",
+  "repository": "https://github.com/Chnapy/picsou-dashboard",
+  "author": "Richard Haddad <richardhaddad@hotmail.fr>",
+  "license": "MIT",
   "private": true,
-  "dependencies": {
-    "@material-ui/core": "4.11.0",
-    "@material-ui/icons": "4.9.1",
-    "@material-ui/lab": "4.0.0-alpha.56",
-    "@reduxjs/toolkit": "1.4.0",
-    "clsx": "1.1.1",
-    "date-fns": "2.16.1",
-    "firebase": "7.21.0",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "react-firebaseui": "4.1.0",
-    "react-redux": "7.2.1",
-    "react-scripts": "3.4.3",
-    "redux-logger": "3.0.6"
-  },
-  "devDependencies": {
-    "@babel/core": "7.11.6",
-    "@storybook/addon-actions": "6.0.21",
-    "@storybook/addon-essentials": "6.0.21",
-    "@storybook/addon-links": "6.0.21",
-    "@storybook/node-logger": "6.0.21",
-    "@storybook/preset-create-react-app": "3.1.4",
-    "@storybook/react": "6.0.21",
-    "@testing-library/jest-dom": "4.2.4",
-    "@testing-library/react": "9.3.2",
-    "@testing-library/user-event": "7.1.2",
-    "@types/jest": "^26.0.14",
-    "@types/node": "14.11.1",
-    "@types/react": "16.9.49",
-    "@types/react-dom": "16.9.8",
-    "@types/react-redux": "7.1.9",
-    "@types/redux-logger": "3.0.8",
-    "babel-loader": "8.1.0",
-    "eslint-plugin-jest": "24.0.1",
-    "react-is": "16.13.1",
-    "typescript": "4.0.2"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "test-ci": "cd fire-functions/functions && yarn test-integration",
-    "lint": "eslint src/ .storybook/ --ext .ts,.tsx --cache --no-error-on-unmatched-pattern",
-    "check-type": "tsc --noEmit",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
+  "workspaces": [
+    "packages/shared",
+    "packages/frontend",
+    "packages/fire-functions/functions"
+  ],
   "engineStrict": true,
   "engines": {
     "node": ">=10.14.2"
-  },
-  "jest": {
-    "clearMocks": true,
-    "collectCoverageFrom": [
-      "src/**/*.ts",
-      "!src/**/*.d.ts",
-      "!src/**/*.seed.ts",
-      "!src/**/*.stories.tsx",
-      "!src/**/__*__/"
-    ],
-    "transformIgnorePatterns": [
-      "\\\\node_modules\\\\"
-    ]
   }
 }
