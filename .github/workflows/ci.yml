@@ -7,6 +7,10 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  CI: true
+  FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+
 jobs:
   test:
     name: Test
@@ -14,7 +18,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x]
+        node-version: [10.14.2]
 
     steps:
     - uses: actions/checkout@v2
@@ -36,13 +40,20 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-yarn-
 
+    - name: Install Firebase
+      run: yarn global add firebase-tools
+
     - name: Install dependencies
       run: yarn --frozen-lockfile
 
-    - name: Test
-      run: yarn test-ci --ci
-      env:
-        CI: true
+    - name: Build shared
+      run: yarn workspace @picsou/shared build
+
+    - name: Test functions
+      run: yarn workspace @picsou/functions test-ci
+
+    - name: Test frontend
+      run: yarn workspace @picsou/frontend test-ci
 
   build:
     name: Build
@@ -50,7 +61,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x]
+        node-version: [10.14.2]
 
     steps:
     - uses: actions/checkout@v2
@@ -75,5 +86,11 @@ jobs:
     - name: Install dependencies
       run: yarn --frozen-lockfile
 
-    - name: Build
-      run: yarn build
+    - name: Build shared
+      run: yarn workspace @picsou/shared build
+
+    - name: Build frontend
+      run: yarn workspace @picsou/frontend build
+
+    - name: Build functions
+      run: yarn workspace @picsou/functions build
