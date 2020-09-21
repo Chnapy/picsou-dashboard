@@ -6,7 +6,7 @@ import './firebase/firebase-imports';
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom/extend-expect';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 
 // In Node v7 unhandled promise rejections will terminate the process
 if (!process.env.LISTENING_TO_UNHANDLED_REJECTION) {

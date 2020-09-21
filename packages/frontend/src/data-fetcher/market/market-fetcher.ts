@@ -1,41 +1,50 @@
-import { BoardValueInfos, FetchStockHistoryValuesProps, StockHistoryReqParams, StockHistoryValue } from '@picsou/shared';
-import { format as dateFnsFormat } from 'date-fns';
-import firebase from 'firebase';
+import { FetchStockHistoryValuesProps, fetchStockPropsToParams, routes, StockHistoryValue } from '@picsou/shared';
+import { add } from 'date-fns';
+import { getFirebase } from '../../firebase/create-firebase-app';
 
-const dateToStr = (date: Date) => dateFnsFormat(date, 'MM/dd/yyyy');
+export type FetchStockCurrentValueData = {
+    pairId: number;
+    currentValue: StockHistoryValue;
+}[];
 
 export const createMarketFetcher = () => {
-    const fbFunctions = firebase.functions();
+    const fbFunctions = getFirebase().functions();
 
-    const requestStockHistory = fbFunctions.httpsCallable('requestStockHistory');
-    const requestInitialMarketData = fbFunctions.httpsCallable('requestInitialMarketData');
+    const requestStockHistory = routes.stockHistory.createFetcher(fbFunctions);
+    const requestInitialMarketData = routes.initialMarketData.createFetcher(fbFunctions);
+
+    const fetchStockHistoryValues = async (props: FetchStockHistoryValuesProps) => {
+
+        const params = fetchStockPropsToParams(props);
+
+        return requestStockHistory(params);
+    };
 
     return {
 
-        fetchInitialMarketData: async (): Promise<{
-            data: BoardValueInfos[];
-        }> => {
+        fetchInitialMarketData: async () => {
 
-            return requestInitialMarketData();
+            return requestInitialMarketData({});
         },
 
-        // TODO fetchStockCurrentValue
+        fetchStockCurrentValue: async (pairIdList: number[]): Promise<FetchStockCurrentValueData> => {
 
-        fetchStockHistoryValues: async ({
-            pairId, startDate, endDate, interval
-        }: FetchStockHistoryValuesProps): Promise<{
-            data: { history: StockHistoryValue[]; };
-        }> => {
+            const endDate = new Date();
 
-            const params: StockHistoryReqParams = {
-                pairId: pairId.toString(),
-                startDate: dateToStr(startDate),
-                endDate: dateToStr(endDate),
-                interval,
-            };
+            const { data } = await fetchStockHistoryValues({
+                pairId: pairIdList,
+                startDate: add(endDate, { days: -1 }),
+                endDate,
+                interval: 'Daily'
+            });
 
-            return requestStockHistory(params);
+            return data.map(({ pairId, history }) => ({
+                pairId,
+                currentValue: history[ 0 ],
+            }));
         },
+
+        fetchStockHistoryValues,
 
         // TODO fetchStockSearch
     };

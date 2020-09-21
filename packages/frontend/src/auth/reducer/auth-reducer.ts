@@ -1,18 +1,16 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { StoreDependencies } from '../../main/store-manager';
-import { AuthSuccessAction, AuthFailureAction } from './auth-actions';
+import { getFirebase } from '../../firebase/create-firebase-app';
+import { AuthFailureAction, AuthSuccessAction } from './auth-actions';
 
 export type AuthState = {
-    firebaseAuth: firebase.auth.Auth;
     isAuth: boolean;
 };
 
-const getInitialState = ({ firebaseAuth }: StoreDependencies): AuthState => ({
-    firebaseAuth,
-    isAuth: !!firebaseAuth.currentUser,
+const getInitialState = (): AuthState => ({
+    isAuth: !!getFirebase().auth().currentUser,
 });
 
-export const authReducer = (deps: StoreDependencies) => createReducer(getInitialState(deps), {
+export const authReducer = () => createReducer(getInitialState(), {
     [ AuthSuccessAction.type ]: (state, action) => {
         state.isAuth = true;
     },

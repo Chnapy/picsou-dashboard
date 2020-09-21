@@ -10,7 +10,8 @@
     "test-ci": "jest",
     "test-integration": "yarn build  && firebase emulators:exec \"yarn workspace @picsou/frontend test\"",
     "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "logs": "firebase functions:log",
+    "check-type": "tsc --noEmit"
   },
   "engines": {
     "node": "10.14.2"

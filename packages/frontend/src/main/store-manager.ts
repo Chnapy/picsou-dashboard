@@ -9,22 +9,17 @@ export type StoreManager = ReturnType<typeof createStoreManager>;
 
 export type StoreEmitter = Pick<StoreManager, 'getState' | 'dispatch'>;
 
-export type StoreDependencies = {
-    firebaseAuth: firebase.auth.Auth;
-};
-
 type Props = {
-    firebaseApp: firebase.app.App;
     initialState?: AppState;
     middlewareList?: Middleware[];
 };
 
-const defaultMiddlewareList = (deps: StoreDependencies): Middleware[] => [
-    authMiddleware(deps),
-    marketMiddleware(deps),
+const defaultMiddlewareList = (): Middleware[] => [
+    authMiddleware(),
+    marketMiddleware(),
 ];
 
-export const getFullStoreMiddlewareList = (deps: StoreDependencies, middlewareList: Middleware[] = defaultMiddlewareList(deps)) => {
+export const getFullStoreMiddlewareList = (middlewareList: Middleware[] = defaultMiddlewareList()) => {
 
     if (process.env.NODE_ENV === 'development') {
         const logger = createLogger({
@@ -45,18 +40,13 @@ export const getFullStoreMiddlewareList = (deps: StoreDependencies, middlewareLi
 }
 
 export const createStoreManager = ({
-    firebaseApp,
     initialState,
     middlewareList
 }: Props) => {
-    
-    const deps: StoreDependencies = {
-        firebaseAuth: firebaseApp.auth(),
-    };
 
     const store = configureStore({
-        reducer: rootReducer(deps),
-        middleware: getFullStoreMiddlewareList(deps, middlewareList),
+        reducer: rootReducer(),
+        middleware: getFullStoreMiddlewareList(middlewareList),
         preloadedState: initialState
     });
 

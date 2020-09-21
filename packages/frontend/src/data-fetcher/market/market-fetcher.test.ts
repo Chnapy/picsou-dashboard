@@ -1,5 +1,5 @@
 import { getStockHistoryValuesTestData } from '@picsou/shared';
-import { createMarketFetcher } from "./market-fetcher";
+import { createMarketFetcher, FetchStockCurrentValueData } from "./market-fetcher";
 
 describe('# market-fetcher', () => {
 
@@ -20,6 +20,22 @@ describe('# market-fetcher', () => {
 
         const { data } = await fetcher.fetchStockHistoryValues(paramsRaw);
 
-        expect(data).toEqual({ history: expectedData });
+        expect(data).toEqual(expectedData);
+    });
+
+    it('fetch stock-current-value', async () => {
+
+        const fetcher = createMarketFetcher();
+
+        const { paramsRaw, expectedData } = getStockHistoryValuesTestData();
+
+        const data = await fetcher.fetchStockCurrentValue(paramsRaw.pairId);
+
+        expect(data).toEqual<FetchStockCurrentValueData>(
+            expect.arrayContaining(expectedData.map(({ pairId }): FetchStockCurrentValueData[ number ] => ({
+                pairId,
+                currentValue: expect.any(Object)
+            })))
+        );
     });
 });

@@ -13,6 +13,6 @@ describe('routes', () => {
 
         const data = await request(paramsQuery);
 
-        expect(data).toEqual({ history: expectedData });
+        expect(data).toEqual(expectedData);
     });
 });

@@ -183,14 +183,6 @@ module.exports = {
             "webkitRequestFileSystem",
             "webkitResolveLocalFileSystemURL",
             "openDatabase",
-            {
-                name: "setTimeout",
-                message: "Use promise-based waitTimeout instead."
-            },
-            {
-                name: "clearTimeout",
-                message: "Use promise-based waitTimeout instead."
-            },
         ],
 
         // Typescript

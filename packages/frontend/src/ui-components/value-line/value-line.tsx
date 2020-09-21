@@ -20,7 +20,7 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
 }));
 
 export const ValueLine: React.FC<ValueLineProps> = ({
-    id, oldValueList, currentValue, quantityUnit
+    name, oldValueList, currentValue, quantityUnit
 }) => {
     const classes = useStyles();
 
@@ -36,7 +36,7 @@ export const ValueLine: React.FC<ValueLineProps> = ({
 
             <Grid item xs={8}>
                 <UITypography variant='h4' color='primary'>
-                    {id}
+                    {name}
                 </UITypography>
             </Grid>
             <Grid container item justify='flex-end' xs={4}>

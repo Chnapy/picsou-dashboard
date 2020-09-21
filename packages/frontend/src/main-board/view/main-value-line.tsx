@@ -4,7 +4,7 @@ import { BoardValueInfos } from '@picsou/shared';
 import { ValueLine } from '../../ui-components/value-line/value-line';
 
 export type MainValueLineProps = {
-    valueId: BoardValueInfos['id'];
+    valueId: BoardValueInfos[ 'id' ];
 };
 
 export const MainValueLine = React.memo<MainValueLineProps>(({ valueId }) => {

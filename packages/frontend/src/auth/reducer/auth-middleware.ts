@@ -1,9 +1,10 @@
+import { getFirebase } from '../../firebase/create-firebase-app';
 import { createMiddleware } from '../../main/create-middleware';
 import { AuthSuccessAction } from './auth-actions';
 
-export const authMiddleware = createMiddleware(({ firebaseAuth }) => api => next => {
+export const authMiddleware = createMiddleware(() => api => next => {
 
-    firebaseAuth.onAuthStateChanged(user => {
+    getFirebase().auth().onAuthStateChanged(user => {
 
         if (user) {
             return api.dispatch(

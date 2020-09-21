@@ -3,8 +3,7 @@ import firebase from 'firebase/app';
 import * as firebaseui from 'firebaseui';
 import React from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import { useSelector } from 'react-redux';
-import { firebaseAuthClientID } from '../../firebase/create-firebase-app';
+import { firebaseAuthClientID, getFirebase } from '../../firebase/create-firebase-app';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { UITypography } from '../../ui-components/typography/ui-typography';
 import { AuthSuccessAction } from '../reducer/auth-actions';
@@ -30,7 +29,7 @@ const getFirebaseUIConfig = (dispatchAuthSuccess: () => void): firebaseui.auth.C
 
 export const AuthView: React.FC = () => {
 
-    const firebaseAuth = useSelector(state => state.auth.firebaseAuth);
+    const firebaseAuth = getFirebase().auth();
 
     const { dispatchAuthSuccess } = useAppDispatch({
         dispatchAuthSuccess: AuthSuccessAction

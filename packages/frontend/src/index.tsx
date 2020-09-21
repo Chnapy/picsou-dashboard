@@ -9,11 +9,9 @@ import * as serviceWorker from './serviceWorker';
 
 console.log('Env variables', process.env);
 
-const firebaseApp = createFirebaseApp();
+createFirebaseApp();
 
-const storeManager = createStoreManager({
-    firebaseApp
-});
+const storeManager = createStoreManager({});
 
 const view = createView({ storeManager });
 

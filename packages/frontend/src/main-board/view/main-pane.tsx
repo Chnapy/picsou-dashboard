@@ -17,6 +17,6 @@ export const MainPane = React.memo<MainPaneProps>(({ board }) => {
         title={enumToString.boardKind(board)}
         paneColor={board}
     >
-        {valuesIds.map(id => <MainValueLine valueId={id} />)}
+        {valuesIds.map(id => <MainValueLine key={id} valueId={id} />)}
     </UIPane>
 });

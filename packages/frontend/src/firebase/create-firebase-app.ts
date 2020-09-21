@@ -17,5 +17,11 @@ export const createFirebaseApp = () => {
         measurementId: "G-YC1FD409ZH"
     };
 
-    return firebase.initializeApp(firebaseConfig);
+    firebase.initializeApp(firebaseConfig);
+
+    if (process.env.NODE_ENV === 'development') {
+        firebase.functions().useFunctionsEmulator("http://localhost:5001");
+    }
 };
+
+export const getFirebase = () => firebase;

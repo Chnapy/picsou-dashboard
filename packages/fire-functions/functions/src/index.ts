@@ -1,23 +1,23 @@
+import { BoardValueInfos, fetchStockPropsToParams, routes } from '@picsou/shared';
 import { add } from 'date-fns';
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
-import { dateToInvestingStr, BoardValueInfos, StockHistoryReqParams } from '@picsou/shared';
-import { getStockHistory, GetStockHistoryReturn } from './get-stock-history';
+import { extractStockHistory } from './extractor/extract-stock-history';
 
 admin.initializeApp();
 
-export const requestStockHistory = functions.https.onCall(async (query) => {
+export const requestStockHistory = functions.https.onCall(routes.stockHistory.createFunction(async (query) => {
     console.log('query', query)
-    return await getStockHistory(query);
-});
+    return await extractStockHistory(query);
+}));
 
 /**
- * returns each market name with there current value
+ * returns each market infos with there current value
  */
-export const requestInitialMarketData = functions.https.onCall(async () => {
+export const requestInitialMarketData = functions.https.onCall(routes.initialMarketData.createFunction(async () => {
 
     // TODO get infos
-    const stockInfos = [
+    const stockInfos: Pick<BoardValueInfos, 'id' | 'name' | 'oldValueList'>[] = [
         {
             id: 997026,
             name: 'Euro Stoxx 300',
@@ -48,23 +48,23 @@ export const requestInitialMarketData = functions.https.onCall(async () => {
         },
     ];
 
-    const getHistoryForDate = (date: Date) => {
-        const queries = stockInfos.map(({ id }): StockHistoryReqParams => ({
-            pairId: id + '',
-            startDate: dateToInvestingStr(add(date, { days: -7 })),
-            endDate: dateToInvestingStr(date),
+    const getHistoryForDate = (endDate: Date) => {
+        const query = fetchStockPropsToParams({
+            pairId: stockInfos.map(infos => infos.id),
+            startDate: add(endDate, { days: -7 }),
+            endDate,
             interval: 'Daily'
-        }));
+        });
 
-        return Promise.all(queries.map(requestStockHistory.run));
+        return extractStockHistory(query);
     };
 
     const today = new Date();
 
-    const histories: GetStockHistoryReturn[] = await getHistoryForDate(today);
+    const histories = await getHistoryForDate(today);
 
     return stockInfos.map((infos, i): BoardValueInfos => {
-        const [value] = histories[i].history;
+        const [ value ] = histories[ i ].history;
 
         return {
             ...infos,
@@ -73,4 +73,4 @@ export const requestInitialMarketData = functions.https.onCall(async () => {
             currentValue: value.price
         };
     });
-});
+}));
