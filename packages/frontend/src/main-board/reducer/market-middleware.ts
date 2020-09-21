@@ -14,7 +14,7 @@ export const marketMiddleware = createMiddleware(() => api => next => {
 
         api.dispatch(MainBoardInitAction(data));
 
-        setTimeout(async () => {
+        setInterval(async () => {
 
             const marketList = api.getState().mainBoard.valuesList.market;
 
@@ -25,8 +25,8 @@ export const marketMiddleware = createMiddleware(() => api => next => {
                 data
             }));
         },
-            // every 20 min
-            20 * 60 * 1000
+            // every 5 min
+            5 * 60 * 1000
         );
     });
 
