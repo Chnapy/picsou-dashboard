@@ -12,6 +12,7 @@ export const createMarketFetcher = () => {
 
     const requestStockHistory = routes.stockHistory.createFetcher(fbFunctions);
     const requestInitialMarketData = routes.initialMarketData.createFetcher(fbFunctions);
+    const requestStockSearch = routes.stockSearch.createFetcher(fbFunctions);
 
     const fetchStockHistoryValues = async (props: FetchStockHistoryValuesProps) => {
 
@@ -22,10 +23,7 @@ export const createMarketFetcher = () => {
 
     return {
 
-        fetchInitialMarketData: async () => {
-
-            return requestInitialMarketData({});
-        },
+        fetchInitialMarketData: () => requestInitialMarketData({}),
 
         fetchStockCurrentValue: async (pairIdList: number[]): Promise<FetchStockCurrentValueData> => {
 
@@ -46,6 +44,6 @@ export const createMarketFetcher = () => {
 
         fetchStockHistoryValues,
 
-        // TODO fetchStockSearch
+        fetchStockSearch: (search: string) => requestStockSearch({ search }),
     };
 };

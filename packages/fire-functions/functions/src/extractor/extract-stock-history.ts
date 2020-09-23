@@ -1,8 +1,7 @@
 import { GetStockHistoryReturn, StockHistoryInterval, StockHistoryReqParams, StockHistoryValue } from '@picsou/shared';
-import { AssertionError } from 'assert';
 import { JSDOM } from 'jsdom';
 import fetch, { Headers } from 'node-fetch';
-import { URLSearchParams } from 'url';
+import { extractorUtils } from './extractor-utils';
 
 
 type InvestingReqBody = {
@@ -13,24 +12,7 @@ type InvestingReqBody = {
     interval_sec: StockHistoryInterval;
 };
 
-const getOrThrow = <V>(value: V, message?: string): NonNullable<V> => {
-    if (value === undefined || value === null) {
-        throw new AssertionError({ message });
-    }
-    return value!;
-};
-
-const commonHeaders = {
-    'X-Requested-With': 'XMLHttpRequest'
-};
-
-const createBody = (rawBody: object) => {
-    const body = new URLSearchParams();
-
-    Object.entries(rawBody).forEach(([ key, value ]) => body.append(key, value));
-
-    return body;
-};
+const { getOrThrow, commonHeaders, createBody } = extractorUtils;
 
 const url = 'https://www.investing.com/instruments/HistoricalDataAjax';
 
@@ -92,7 +74,7 @@ export const extractStockHistory = async ({
 
         return {
             pairId: +pairId,
-            history 
+            history
         };
     };
 

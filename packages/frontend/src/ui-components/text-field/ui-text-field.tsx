@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import React from 'react';
 
-export type UITextFieldProps = Omit<TextFieldProps, 'variant' | 'color' | 'size' | 'InputProps'>;
+export type UITextFieldProps = Omit<TextFieldProps, 'variant' | 'color' | 'size' | 'fullWidth'>;
 
 const useStyles = makeStyles(() => ({
     withoutLabel: {
@@ -12,7 +12,7 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-export const UITextField: React.FC<UITextFieldProps> = ({ ...rest }) => {
+export const UITextField: React.FC<UITextFieldProps> = ({ InputProps, ...rest }) => {
 
     const classes = useStyles();
 
@@ -22,8 +22,11 @@ export const UITextField: React.FC<UITextFieldProps> = ({ ...rest }) => {
 
     return <TextField
         variant='filled'
+        fullWidth
         InputProps={{
+            ...InputProps,
             classes: {
+                ...InputProps?.classes,
                 input: inputClass
             }
         }}

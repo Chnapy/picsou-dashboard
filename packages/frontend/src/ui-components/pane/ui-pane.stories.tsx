@@ -17,7 +17,8 @@ const ValueLineStory: React.FC = () => <ValueLine {...ValueLineDefault.args as a
 export const Default = Template.bind({});
 Default.args = {
     title: 'Market',
-    paneColor: 'market'
+    paneColor: 'market',
+    onEdit: undefined,
 };
 
 export const WithValues = Template.bind({});

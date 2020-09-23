@@ -1,5 +1,5 @@
 import { BoardValueInfos } from './board';
-import { GetStockHistoryReturn, StockHistoryReqParams } from './market';
+import { FetchStockSearchDataItem, FetchStockSearchParams, GetStockHistoryReturn, StockHistoryReqParams } from './market';
 
 export type FetchData<D> = {
     data: D;
@@ -23,5 +23,7 @@ export const routes = {
     stockHistory: createRoute<StockHistoryReqParams, GetStockHistoryReturn>('requestStockHistory'),
 
     initialMarketData: createRoute<{}, BoardValueInfos[]>('requestInitialMarketData'),
+
+    stockSearch: createRoute<FetchStockSearchParams, FetchStockSearchDataItem[]>('requestStockSearch'),
 
 } as const;

@@ -38,4 +38,20 @@ describe('# market-fetcher', () => {
             })))
         );
     });
+
+    it('fetch stock-search', async () => {
+
+        const fetcher = createMarketFetcher();
+
+        const { data } = await fetcher.fetchStockSearch('fdj');
+
+        expect(data).toContainEqual(
+            expect.objectContaining({
+                pairId: 1155481,
+                name: "La Francaise Des Jeux Sa",
+                flag: "France",
+                symbol: "FDJ",
+            })
+        );
+    });
 });

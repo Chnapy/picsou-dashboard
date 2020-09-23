@@ -1,6 +1,6 @@
 import { createMarketFetcher } from '../../data-fetcher/market/market-fetcher';
 import { createMiddleware } from '../../main/create-middleware';
-import { MainBoardInitAction, MainBoardRefreshAction } from './main-board-actions';
+import { MainBoardEditAction, MainBoardInitAction, MainBoardRefreshAction } from './main-board-actions';
 
 
 export const marketMiddleware = createMiddleware(() => api => next => {
@@ -32,6 +32,16 @@ export const marketMiddleware = createMiddleware(() => api => next => {
 
     return async action => {
 
-        return next(action);
+        const ret = next(action);
+
+        if(MainBoardEditAction.match(action)) {
+            // TODO 
+            // send data to backend
+            // which return current value
+            // or error if bad
+            // then send to reducer (not before)
+        }
+
+        return ret;
     };
 });

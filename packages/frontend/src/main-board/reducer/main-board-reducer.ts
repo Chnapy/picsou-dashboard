@@ -1,13 +1,18 @@
 import { BoardKind, BoardValueInfos } from '@picsou/shared';
 import { createRichReducer } from '../../main/create-rich-reducer';
 import { NormalizeArray, NormalizeObject } from '../../util/normalize';
-import { MainBoardInitAction, MainBoardRefreshAction } from './main-board-actions';
+import { MainBoardEditAction, MainBoardInitAction, MainBoardRefreshAction } from './main-board-actions';
 
 
 export type MainBoardState = {
     values: NormalizeObject<BoardValueInfos>;
     valuesList: {
         [ k in BoardKind ]: NormalizeArray<BoardValueInfos>;
+    };
+    settings: {
+        [ k in BoardKind ]: {
+            editable?: boolean;
+        };
     };
 };
 
@@ -17,7 +22,14 @@ const initialState: MainBoardState = {
         cash: [],
         gold: [],
         market: [],
-    }
+    },
+    settings: {
+        cash: {},
+        market: {
+            editable: true,
+        },
+        gold: {},
+    },
 };
 
 export const mainBoardReducer = createRichReducer(initialState, () => ({
@@ -31,6 +43,18 @@ export const mainBoardReducer = createRichReducer(initialState, () => ({
         payload.data.forEach(({ pairId, currentValue }) => {
             const { price } = currentValue;
             state.values[ pairId ].currentValue = price;
+        });
+    },
+    [ MainBoardEditAction.type ]: ({ values, valuesList }, { payload }: MainBoardEditAction) => {
+        Object.entries(payload.data).forEach(([ k, v ]) => {
+            const key = +k;
+            values[ key ] = {
+                ...v,
+                currentValue: values[ key ]?.currentValue ?? -1,
+            };
+            if(!valuesList[payload.board].includes(key)) {
+                valuesList[payload.board].push(key);
+            }
         });
     },
 }));
