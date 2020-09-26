@@ -1,11 +1,11 @@
-import { AssertionError } from 'assert';
+import * as functions from 'firebase-functions';
 import { URLSearchParams } from 'url';
 
 export const extractorUtils = {
 
     getOrThrow: <V>(value: V, message?: string): NonNullable<V> => {
         if (value === undefined || value === null) {
-            throw new AssertionError({ message });
+            throw new functions.https.HttpsError('invalid-argument', message ?? '');
         }
         return value!;
     },

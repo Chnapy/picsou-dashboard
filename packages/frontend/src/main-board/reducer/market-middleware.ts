@@ -1,45 +1,92 @@
+import { BoardKind, boardKindList, BoardValueInfos } from '@picsou/shared';
+import { AuthSuccessAction } from '../../auth/reducer/auth-actions';
 import { createMarketFetcher } from '../../data-fetcher/market/market-fetcher';
+import { getFirebase } from '../../firebase/create-firebase-app';
 import { createMiddleware } from '../../main/create-middleware';
-import { MainBoardEditAction, MainBoardInitAction, MainBoardRefreshAction } from './main-board-actions';
+import { normalize, NormalizeObject } from '../../util/normalize';
+import { MainBoardEditLocalAction, MainBoardEditSuccessAction, MainBoardRefreshAction } from './main-board-actions';
 
+type DBValueLine = Omit<BoardValueInfos, 'currentValue'>;
 
 export const marketMiddleware = createMiddleware(() => api => next => {
 
     const fetcher = createMarketFetcher();
 
-    setImmediate(async () => {
+    const getDBValues = (board: BoardKind) => getFirebase().database().ref('values').child(board);
 
-        // TODO do it for each board
-        const { data } = await fetcher.fetchInitialMarketData();
+    const onAuthSuccess = async () => {
 
-        api.dispatch(MainBoardInitAction(data));
+        // await getFirebase().database().ref('values').once('value');
+
+        boardKindList.forEach(board => {
+            const dbValues = getDBValues(board);
+
+            dbValues.on('value', async (childSnapshot) => {
+                const valueLines: NormalizeObject<DBValueLine> = childSnapshot.val() ?? {};
+                const ids = Object.keys(valueLines).map(Number);
+
+                ids.forEach(id => {
+                    valueLines[ id ].oldValueList = valueLines[ id ].oldValueList ?? [];
+                });
+
+                const currentValues = ids.length
+                    ? await fetcher.fetchStockCurrentValue(ids)
+                    : [];
+
+                const boardValues = normalize(
+                    currentValues.map(({ pairId, currentValue }): BoardValueInfos => ({
+                        ...valueLines[ pairId ],
+                        id: pairId,
+                        currentValue: currentValue.price
+                    }))
+                );
+
+                api.dispatch(MainBoardEditSuccessAction({
+                    board,
+                    data: boardValues
+                }));
+            });
+        });
 
         setInterval(async () => {
 
             const marketList = api.getState().mainBoard.valuesList.market;
 
-            const data = await fetcher.fetchStockCurrentValue(marketList);
+            if (marketList.length) {
 
-            api.dispatch(MainBoardRefreshAction({
-                board: 'market',
-                data
-            }));
+                const data = await fetcher.fetchStockCurrentValue(marketList);
+
+                api.dispatch(MainBoardRefreshAction({
+                    board: 'market',
+                    data
+                }));
+            }
         },
             // every 5 min
             5 * 60 * 1000
         );
-    });
+    };
+
+    const onLocalEdit = async ({ payload }: MainBoardEditLocalAction) => {
+        const { board, data } = payload;
+
+        const dbValues = getDBValues(board);
+
+        await dbValues.set(data);
+
+        // db listeners will do the rest
+    };
 
     return async action => {
 
         const ret = next(action);
 
-        if(MainBoardEditAction.match(action)) {
-            // TODO 
-            // send data to backend
-            // which return current value
-            // or error if bad
-            // then send to reducer (not before)
+        if (AuthSuccessAction.match(action)) {
+            await onAuthSuccess();
+        }
+
+        if (MainBoardEditLocalAction.match(action)) {
+            await onLocalEdit(action);
         }
 
         return ret;

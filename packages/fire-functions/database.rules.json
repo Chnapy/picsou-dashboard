@@ -1,0 +1,6 @@
+{
+	"rules": {
+    ".read": "auth != null && (auth.admin == true || root.child('white-list-uid/' + auth.uid).exists())",
+    ".write": "auth != null && (auth.admin == true || root.child('white-list-uid/' + auth.uid).exists())"
+  }
+}

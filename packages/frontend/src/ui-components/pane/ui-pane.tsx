@@ -1,4 +1,4 @@
-import { Box, IconButton, ListItemIcon, ListItemText, Menu, MenuItem, Paper, Theme, useTheme } from '@material-ui/core';
+import { Box, CircularProgress, IconButton, ListItemIcon, ListItemText, Menu, MenuItem, Paper, Theme, useTheme } from '@material-ui/core';
 import { PaletteInvestment } from '@material-ui/core/styles/createPalette';
 import EditIcon from '@material-ui/icons/Edit';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
@@ -8,6 +8,7 @@ import { UITypography } from '../typography/ui-typography';
 export type UIPaneProps = {
     title: string;
     paneColor: keyof PaletteInvestment;
+    loading: boolean;
     onEdit?: () => void;
     children: React.ReactNode;
 };
@@ -22,7 +23,7 @@ export const UIPane: React.FC<UIPaneProps> = props => {
     </Paper>;
 };
 
-const UIPaneHeader: React.FC<UIPaneProps> = ({ title, paneColor, onEdit }) => {
+const UIPaneHeader: React.FC<UIPaneProps> = ({ title, paneColor, loading, onEdit }) => {
 
     const { palette } = useTheme<Theme>();
 
@@ -40,10 +41,13 @@ const UIPaneHeader: React.FC<UIPaneProps> = ({ title, paneColor, onEdit }) => {
     return <Box height={32} display='flex' flexWrap='nowrap' alignItems='center'>
         <Box width={2} height='100%' bgcolor={palette.investment[ paneColor ]} />
 
-        <Box flexGrow={1} ml={1}>
+        <Box display='flex' flexGrow={1} alignItems='center' ml={1}>
             <UITypography variant='labelMini' color='primary'>
                 {title}
             </UITypography>
+            {loading && <Box ml={0.5}>
+                <CircularProgress style={{ width: '1em', height: '1em' }} />
+            </Box>}
         </Box>
 
         <Box pr={0.5}>

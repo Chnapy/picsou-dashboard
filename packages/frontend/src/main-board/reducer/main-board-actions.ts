@@ -4,17 +4,20 @@ import { FetchStockCurrentValueData } from '../../data-fetcher/market/market-fet
 import { InputBoardValueInfos } from '../../ui-components/dialog/edit-values-dialog';
 import { NormalizeObject } from '../../util/normalize';
 
-export type MainBoardInitAction = ReturnType<typeof MainBoardInitAction>;
-export const MainBoardInitAction = createAction<BoardValueInfos[]>('main-board/init');
-
 export type MainBoardRefreshAction = ReturnType<typeof MainBoardRefreshAction>;
 export const MainBoardRefreshAction = createAction<{
     board: BoardKind;
     data: FetchStockCurrentValueData;
 }>('main-board/refresh');
 
-export type MainBoardEditAction = ReturnType<typeof MainBoardEditAction>;
-export const MainBoardEditAction = createAction<{
+export type MainBoardEditLocalAction = ReturnType<typeof MainBoardEditLocalAction>;
+export const MainBoardEditLocalAction = createAction<{
     board: BoardKind;
     data: NormalizeObject<InputBoardValueInfos>;
-}>('main-board/edit');
+}>('main-board/edit/local');
+
+export type MainBoardEditSuccessAction = ReturnType<typeof MainBoardEditSuccessAction>;
+export const MainBoardEditSuccessAction = createAction<{
+    board: BoardKind;
+    data: NormalizeObject<BoardValueInfos>;
+}>('main-board/edit/success');

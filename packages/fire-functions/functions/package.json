@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "scripts": {
     "build": "rimraf lib/ && tsc --project tsconfig.prod.json",
-    "serve": "yarn build && firebase emulators:start --only functions",
+    "serve": "yarn build && firebase emulators:start --only functions,database",
     "shell": "yarn build && firebase functions:shell",
     "start": "yarn shell",
     "test": "jest --watchAll",
     "test-ci": "jest",
     "test-integration": "yarn build  && firebase emulators:exec \"yarn workspace @picsou/frontend test\"",
-    "deploy": "firebase deploy --only functions",
+    "deploy": "firebase deploy --only functions,database",
     "logs": "firebase functions:log",
     "check-type": "tsc --noEmit"
   },

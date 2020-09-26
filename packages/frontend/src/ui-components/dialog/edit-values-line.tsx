@@ -103,7 +103,8 @@ export const EditValuesLine: React.FC<EditValuesLineProps> = ({
                         setId(option.id);
                         onChange({
                             ...infos,
-                            ...option,
+                            id: option.id,
+                            name: option.name
                         });
                     }
                     if (reason !== 'blur') {

@@ -1,4 +1,5 @@
 import { GetStockHistoryReturn, StockHistoryInterval, StockHistoryReqParams, StockHistoryValue } from '@picsou/shared';
+import * as functions from 'firebase-functions';
 import { JSDOM } from 'jsdom';
 import fetch, { Headers } from 'node-fetch';
 import { extractorUtils } from './extractor-utils';
@@ -21,6 +22,10 @@ export const extractStockHistory = async ({
 }: Partial<StockHistoryReqParams>): Promise<GetStockHistoryReturn> => {
 
     const pairIdList = getOrThrow(pairIdJoined).split(',');
+
+    if(!pairIdList.length) {
+        throw new functions.https.HttpsError('invalid-argument', 'Pair ID list empty');
+    }
 
     const partialBody: Omit<InvestingReqBody, 'curr_id'> = {
         action: 'historical_data',

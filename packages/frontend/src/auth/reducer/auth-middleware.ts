@@ -4,9 +4,13 @@ import { AuthSuccessAction } from './auth-actions';
 
 export const authMiddleware = createMiddleware(() => api => next => {
 
+    let hasPrevious = false;
+
     getFirebase().auth().onAuthStateChanged(user => {
 
-        if (user) {
+        if (user && !hasPrevious) {
+            hasPrevious = true;
+
             return api.dispatch(
                 AuthSuccessAction()
             );

@@ -9,10 +9,9 @@ export type NormalizeObject<O extends Normalizable<any>> = {
 
 export type NormalizeArray<O extends Normalizable<any>> = O[ 'id' ][];
 
-// export type Normalized<KO extends string, KA extends string, O extends Normalizable<any>> =
-//     & {
-//         [ ko in KO ]: NormalizeObject<O>;
-//     }
-//     & {
-//         [ ka in KA ]: NormalizeArray<O>;
-//     };
+export const normalize = <O extends Normalizable<any>>(arr: O[]) => arr.reduce((acc, v) => {
+    (acc as any)[ v.id ] = v;
+    return acc;
+}, {} as NormalizeObject<O>);
+
+export const denormalize = <O extends Normalizable<any>>(o: NormalizeObject<O>): O[] => Object.values(o);

@@ -11,7 +11,6 @@ export const createMarketFetcher = () => {
     const fbFunctions = getFirebase().functions();
 
     const requestStockHistory = routes.stockHistory.createFetcher(fbFunctions);
-    const requestInitialMarketData = routes.initialMarketData.createFetcher(fbFunctions);
     const requestStockSearch = routes.stockSearch.createFetcher(fbFunctions);
 
     const fetchStockHistoryValues = async (props: FetchStockHistoryValuesProps) => {
@@ -22,8 +21,6 @@ export const createMarketFetcher = () => {
     };
 
     return {
-
-        fetchInitialMarketData: () => requestInitialMarketData({}),
 
         fetchStockCurrentValue: async (pairIdList: number[]): Promise<FetchStockCurrentValueData> => {
 

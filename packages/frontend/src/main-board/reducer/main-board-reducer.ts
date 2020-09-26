@@ -1,13 +1,18 @@
 import { BoardKind, BoardValueInfos } from '@picsou/shared';
 import { createRichReducer } from '../../main/create-rich-reducer';
 import { NormalizeArray, NormalizeObject } from '../../util/normalize';
-import { MainBoardEditAction, MainBoardInitAction, MainBoardRefreshAction } from './main-board-actions';
+import { MainBoardEditSuccessAction, MainBoardRefreshAction } from './main-board-actions';
 
 
 export type MainBoardState = {
     values: NormalizeObject<BoardValueInfos>;
     valuesList: {
         [ k in BoardKind ]: NormalizeArray<BoardValueInfos>;
+    };
+    status: {
+        [ k in BoardKind ]: {
+            loading: boolean;
+        };
     };
     settings: {
         [ k in BoardKind ]: {
@@ -23,6 +28,17 @@ const initialState: MainBoardState = {
         gold: [],
         market: [],
     },
+    status: {
+        cash: {
+            loading: true
+        },
+        market: {
+            loading: true
+        },
+        gold: {
+            loading: true
+        },
+    },
     settings: {
         cash: {},
         market: {
@@ -33,28 +49,29 @@ const initialState: MainBoardState = {
 };
 
 export const mainBoardReducer = createRichReducer(initialState, () => ({
-    [ MainBoardInitAction.type ]: (state, { payload }: MainBoardInitAction) => {
-        payload.forEach(value => {
-            state.values[ value.id ] = value;
-            state.valuesList[ value.board ].push(value.id);
-        });
-    },
     [ MainBoardRefreshAction.type ]: (state, { payload }: MainBoardRefreshAction) => {
         payload.data.forEach(({ pairId, currentValue }) => {
             const { price } = currentValue;
             state.values[ pairId ].currentValue = price;
         });
     },
-    [ MainBoardEditAction.type ]: ({ values, valuesList }, { payload }: MainBoardEditAction) => {
-        Object.entries(payload.data).forEach(([ k, v ]) => {
-            const key = +k;
-            values[ key ] = {
-                ...v,
-                currentValue: values[ key ]?.currentValue ?? -1,
-            };
-            if(!valuesList[payload.board].includes(key)) {
-                valuesList[payload.board].push(key);
-            }
+    [ MainBoardEditSuccessAction.type ]: (state, { payload }: MainBoardEditSuccessAction) => {
+        const { board, data } = payload;
+
+        const previousIds = state.valuesList[ board ];
+        const ids = Object.keys(data).map(Number);
+        const removedIds = previousIds.filter(prevId => !ids.includes(prevId));
+
+        state.valuesList[ board ] = ids;
+
+        removedIds.forEach(id => {
+            delete state.values[ id ];
         });
+
+        Object.entries(data).forEach(([ k, v ]) => {
+            state.values[ +k ] = { ...v };
+        });
+
+        state.status[board].loading = false;
     },
 }));
