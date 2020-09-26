@@ -28,7 +28,7 @@ export const createMarketFetcher = () => {
 
             const { data } = await fetchStockHistoryValues({
                 pairId: pairIdList,
-                startDate: add(endDate, { days: -1 }),
+                startDate: add(endDate, { days: -7 }),
                 endDate,
                 interval: 'Daily'
             });

@@ -6,17 +6,16 @@ import { extractStockSearch } from './extractor/extract-stock-search';
 
 console.log('NODE_ENV', process.env.NODE_ENV);
 
-const appOptions: admin.AppOptions | undefined = process.env.NODE_ENV !== 'production'
-    ? {
-        ...JSON.parse(process.env.FIREBASE_CONFIG!),
-        // hack to allow database use in dev
-        databaseAuthVariableOverride: { admin: true }
-    }
-    : undefined;
+const isTestEnv = process.env.NODE_ENV === 'test';
 
-admin.initializeApp(appOptions);
+admin.initializeApp();
 
 const needAuth = (fn: (data: any) => any) => async (data: any, { auth }: functions.https.CallableContext) => {
+
+    if (isTestEnv) {
+        return fn(data);
+    }
+
     if (!auth) {
         throw new functions.https.HttpsError('failed-precondition', 'The function must be called while authenticated.');
     }
@@ -26,15 +25,9 @@ const needAuth = (fn: (data: any) => any) => async (data: any, { auth }: functio
 
     if (!snapshot.exists()) {
 
-        // hack to allow function use in dev
-        if (process.env.NODE_ENV !== 'production') {
-            await dbWhiteList.set(true);
-
-        } else {
-            await admin.auth().revokeRefreshTokens(auth.uid);
-            await admin.auth().deleteUser(auth.uid);
-            throw new functions.https.HttpsError('permission-denied', 'User UID not white-listed.');
-        }
+        await admin.auth().revokeRefreshTokens(auth.uid);
+        await admin.auth().deleteUser(auth.uid);
+        throw new functions.https.HttpsError('permission-denied', 'User UID not white-listed.');
     }
 
     return fn(data);

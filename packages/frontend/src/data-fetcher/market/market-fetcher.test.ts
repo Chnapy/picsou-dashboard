@@ -3,15 +3,6 @@ import { createMarketFetcher, FetchStockCurrentValueData } from "./market-fetche
 
 describe('# market-fetcher', () => {
 
-    it('fetch initial market data', async () => {
-
-        const fetcher = createMarketFetcher();
-
-        const { data } = await fetcher.fetchInitialMarketData();
-
-        expect(data).toEqual(expect.any(Array));
-    });
-
     it('fetch stock-history-values', async () => {
 
         const fetcher = createMarketFetcher();
