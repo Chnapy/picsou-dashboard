@@ -24,7 +24,7 @@ const getFirebaseFullConfig = (): FirebaseFullConfig => {
     try {
         return require('./firebase.config.json');
     } catch (e) {
-        console.error('Env variable FIREBASE_CONFIG is not defined, and firebase-config.json is not present. You must put one of them.');
+        console.error('Env variable FIREBASE_CONFIG is not defined, and firebase.config.json is not present. You must put one of them.');
         throw e;
     }
 };
