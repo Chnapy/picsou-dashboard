@@ -7,6 +7,7 @@ import './firebase/firebase-imports';
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom/extend-expect';
 import firebase from 'firebase/app';
+import { firebaseFullConfig } from './firebase-full-config';
 
 // In Node v7 unhandled promise rejections will terminate the process
 if (!process.env.LISTENING_TO_UNHANDLED_REJECTION) {
@@ -19,7 +20,7 @@ if (!process.env.LISTENING_TO_UNHANDLED_REJECTION) {
 }
 
 beforeEach(() => {
-    firebase.initializeApp({ projectId: "picsou-dashboard" });
+    firebase.initializeApp({ projectId: firebaseFullConfig.projectName });
     firebase.functions().useFunctionsEmulator("http://localhost:5001");
 });
 

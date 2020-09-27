@@ -28,3 +28,4 @@ yarn-error.log*
 **/.vscode
 
 **/emulator-data/database_export/picsou-dashboard.json
+**/frontend/src/firebase.config.json

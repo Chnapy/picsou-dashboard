@@ -1,4 +1,5 @@
 import * as firebase from "firebase/app";
+import { firebaseFullConfig } from '../firebase-full-config';
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -8,24 +9,13 @@ export const firebaseAuthClientID = '360932669439-0va9nbd861ttb9sju51poph48vbi61
 
 export const createFirebaseApp = () => {
 
-    const databaseURL = isProd
-        ? "https://picsou-dashboard.firebaseio.com"
-        : "http://localhost:9000?ns=picsou-dashboard";
+    const config = { ...firebaseFullConfig.config };
 
-    // TODO remove from git
-    // should be SECRET
-    const firebaseConfig = {
-        apiKey: "AIzaSyAVIyoVGl7IhtI0G8QwIXSGdjFzsvn4cXw",
-        authDomain: "picsou-dashboard.firebaseapp.com",
-        databaseURL,
-        projectId: "picsou-dashboard",
-        storageBucket: "picsou-dashboard.appspot.com",
-        messagingSenderId: "360932669439",
-        appId: "1:360932669439:web:5b9417189c8efcf9ac59ca",
-        measurementId: "G-YC1FD409ZH"
-    };
+    if(!isProd) {
+        config.databaseURL = "http://localhost:9000?ns=" + firebaseFullConfig.projectName;
+    }
 
-    firebase.initializeApp(firebaseConfig);
+    firebase.initializeApp(config);
 
     if (!isProd) {
         firebase.functions().useFunctionsEmulator("http://localhost:5001");
