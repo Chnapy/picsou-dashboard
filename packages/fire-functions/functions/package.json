@@ -8,7 +8,7 @@
     "start": "yarn shell",
     "test": "cross-env NODE_ENV=test && jest --watchAll",
     "test-ci": "cross-env NODE_ENV=test jest",
-    "test-integration": "yarn build  && cross-env NODE_ENV=test firebase emulators:exec \"yarn workspace @picsou/frontend test\"",
+    "test-integration": "yarn build  && cross-env NODE_ENV=test firebase emulators:exec \"yarn workspace @picsou/frontend test-no-env\"",
     "deploy": "firebase deploy --only functions,database",
     "logs": "firebase functions:log",
     "check-type": "tsc --noEmit"

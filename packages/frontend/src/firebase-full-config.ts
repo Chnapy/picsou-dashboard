@@ -16,17 +16,22 @@ type FirebaseFullConfig = {
 
 const getFirebaseFullConfig = (): FirebaseFullConfig => {
 
-    const configEnv = process.env.FIREBASE_CONFIG;
-    if (configEnv) {
-        return JSON.parse(configEnv);
+    const configEnv = process.env.REACT_APP_FIREBASE_CONFIG;
+
+    if (!configEnv) {
+        const isProd = process.env.NODE_ENV === 'production';
+        const isCI = process.env.CI;
+        const message = isCI
+            ? 'In CI env you have to set GitHub secret FIREBASE_CONFIG.'
+            : (
+                isProd
+                    ? 'To run a build in local env you have to use firebase.config.json file.'
+                    : 'In development/test env you have to use firebase.config.json file.'
+            );
+        throw new Error(`Env variable REACT_APP_FIREBASE_CONFIG is not defined. ${message} Check README for more.`);
     }
 
-    try {
-        return require('./firebase.config.json');
-    } catch (e) {
-        console.error('Env variable FIREBASE_CONFIG is not defined, and firebase.config.json is not present. You must put one of them.');
-        throw e;
-    }
+    return JSON.parse(configEnv);
 };
 
 export const firebaseFullConfig = getFirebaseFullConfig();

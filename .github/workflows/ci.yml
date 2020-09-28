@@ -10,7 +10,7 @@ on:
 env:
   CI: true
   FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-  FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
+  REACT_APP_FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
 
 jobs:
   test:
