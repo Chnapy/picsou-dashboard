@@ -16,8 +16,6 @@ export const marketMiddleware = createMiddleware(() => api => next => {
 
     const onAuthSuccess = async () => {
 
-        // await getFirebase().database().ref('values').once('value');
-
         boardKindList.forEach(board => {
             const dbValues = getDBValues(board);
 
@@ -30,6 +28,7 @@ export const marketMiddleware = createMiddleware(() => api => next => {
                 });
 
                 const currentValues = ids.length
+                    // TODO use a global fetcher which handle all board kind
                     ? await fetcher.fetchStockCurrentValue(ids)
                     : [];
 
@@ -48,6 +47,7 @@ export const marketMiddleware = createMiddleware(() => api => next => {
             });
         });
 
+        // TODO add interval for each board kind (not the same)
         setInterval(async () => {
 
             const marketList = api.getState().mainBoard.valuesList.market;

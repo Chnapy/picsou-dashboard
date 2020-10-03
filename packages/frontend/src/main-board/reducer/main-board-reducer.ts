@@ -44,7 +44,9 @@ const initialState: MainBoardState = {
         market: {
             editable: true,
         },
-        gold: {},
+        gold: {
+            editable: true,
+        },
     },
 };
 

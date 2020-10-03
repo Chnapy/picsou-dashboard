@@ -22,6 +22,8 @@ export type EditValuesDialogProps = {
     fetchNameSearch?: (search: string) => Promise<EditSearchData[]>;
 };
 
+// TODO different form for each board kind (id/name)
+
 export const EditValuesDialog: React.FC<EditValuesDialogProps> = ({ open, onClose, onSubmit, board, boardInfos, fetchNameSearch }) => {
 
     const [ allInfos, setAllInfos ] = React.useState(
