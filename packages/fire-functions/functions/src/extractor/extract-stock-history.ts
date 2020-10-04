@@ -1,4 +1,4 @@
-import { GetStockHistoryReturn, StockHistoryInterval, StockHistoryReqParams, StockHistoryValue } from '@picsou/shared';
+import { HistoryData, HistoryValue, StockHistoryInterval, StockHistoryReqParams } from '@picsou/shared';
 import * as functions from 'firebase-functions';
 import { JSDOM } from 'jsdom';
 import fetch, { Headers } from 'node-fetch';
@@ -19,7 +19,7 @@ const url = 'https://www.investing.com/instruments/HistoricalDataAjax';
 
 export const extractStockHistory = async ({
     pairId: pairIdJoined, startDate, endDate, interval
-}: Partial<StockHistoryReqParams>): Promise<GetStockHistoryReturn> => {
+}: Partial<StockHistoryReqParams>): Promise<HistoryData[]> => {
 
     const pairIdList = getOrThrow(pairIdJoined).split(',');
 
@@ -57,7 +57,7 @@ export const extractStockHistory = async ({
             throw new Error('No results found');
         }
 
-        const history = trList.map((tr): StockHistoryValue => {
+        const history = trList.map((tr): HistoryValue => {
             const tdList = tr.querySelectorAll('td');
 
             const getValue = (i: number) => {
@@ -69,16 +69,11 @@ export const extractStockHistory = async ({
             return {
                 time: +getValue(0),
                 price: +getValue(1),
-                open: +getValue(2),
-                high: +getValue(3),
-                low: +getValue(4),
-                volume: +getValue(5),
-                change: +getValue(6).replace('%', ''),
             };
         });
 
         return {
-            pairId: +pairId,
+            id: +pairId,
             history
         };
     };

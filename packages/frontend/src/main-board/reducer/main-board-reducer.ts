@@ -1,7 +1,7 @@
 import { BoardKind, BoardValueInfos } from '@picsou/shared';
 import { createRichReducer } from '../../main/create-rich-reducer';
 import { NormalizeArray, NormalizeObject } from '../../util/normalize';
-import { MainBoardEditSuccessAction, MainBoardRefreshAction } from './main-board-actions';
+import { MainBoardEditSuccessAction, MainBoardHistorySuccessAction, MainBoardRefreshAction, MainBoardValueSelectAction } from './main-board-actions';
 
 
 export type MainBoardState = {
@@ -12,6 +12,7 @@ export type MainBoardState = {
     status: {
         [ k in BoardKind ]: {
             loading: boolean;
+            selectedValue?: number;
         };
     };
     settings: {
@@ -52,9 +53,9 @@ const initialState: MainBoardState = {
 
 export const mainBoardReducer = createRichReducer(initialState, () => ({
     [ MainBoardRefreshAction.type ]: (state, { payload }: MainBoardRefreshAction) => {
-        payload.data.forEach(({ pairId, currentValue }) => {
+        payload.data.forEach(({ id, currentValue }) => {
             const { price } = currentValue;
-            state.values[ pairId ].currentValue = price;
+            state.values[ id ].currentValue = price;
         });
     },
     [ MainBoardEditSuccessAction.type ]: (state, { payload }: MainBoardEditSuccessAction) => {
@@ -74,6 +75,19 @@ export const mainBoardReducer = createRichReducer(initialState, () => ({
             state.values[ +k ] = { ...v };
         });
 
-        state.status[board].loading = false;
+        state.status[ board ].loading = false;
     },
+    [ MainBoardValueSelectAction.type ]: (state, { payload }: MainBoardValueSelectAction) => {
+        const status = state.status[ payload.board ];
+        status.loading = !!payload.valueId;
+        status.selectedValue = payload.valueId ?? undefined;
+    },
+    [ MainBoardHistorySuccessAction.type ]: (state, { payload }: MainBoardHistorySuccessAction) => {
+        const { valueId, history } = payload;
+
+        const value = state.values[ valueId ];
+        value.history = history.history;
+        value.currentValue = history.history[ 0 ].price;
+        state.status[ value.board ].loading = false;
+    }
 }));

@@ -4,7 +4,7 @@ const fs = require('fs');
 // Pass JSON config to .env.local file
 
 const configFilePath = '../firebase.config.json';
-const envFilePath = '.env.local';
+const envFilePath = [ '.env.local', '.env.test.local' ];
 
 
 try {
@@ -16,7 +16,9 @@ try {
 REACT_APP_FIREBASE_CONFIG=${stringifiedConfig}
 `;
 
-    fs.writeFileSync(path.resolve(envFilePath), content);
+    envFilePath.forEach(envPath => {
+        fs.writeFileSync(path.resolve(envPath), content);
+    });
 } catch (e) {
     if (e.code === 'MODULE_NOT_FOUND') {
         console.error('Error: File "firebase.config.json" is not present at path ' + path.resolve(configFilePath));

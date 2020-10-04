@@ -16,5 +16,15 @@ export type BoardValueInfos = ValueBasicInfos & {
         quantity: number;
     }[];
     currentValue: number;
-    quantityUnit: QuantityUnit;
+    history: HistoryValue[];
+};
+
+export type HistoryValue = {
+    price: number;
+    time: number;
+};
+
+export type HistoryData = {
+    id: number;
+    history: HistoryValue[];
 };

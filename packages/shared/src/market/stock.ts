@@ -3,7 +3,7 @@ import { investingDateUtil } from './util';
 
 export type StockHistoryInterval = 'Daily' | 'Weekly' | 'Monthly';
 
-export type StockHistoryValue = {
+type StockHistoryValue = {
     time: number;
     price: number;
     open: number;
@@ -21,11 +21,6 @@ export type FetchStockHistoryValuesProps = {
 };
 
 export type StockHistoryReqParams = ObjStringValues<FetchStockHistoryValuesProps>;
-
-export type GetStockHistoryReturn = {
-    pairId: number;
-    history: StockHistoryValue[];
-}[];
 
 export const fetchStockPropsToParams = ({ pairId, startDate, endDate, interval }: FetchStockHistoryValuesProps): StockHistoryReqParams => ({
     pairId: pairId.join(','),

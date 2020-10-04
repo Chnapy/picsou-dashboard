@@ -4,7 +4,7 @@ import { BoardKind, BoardValueInfos } from '@picsou/shared';
 import React from 'react';
 import { enumToString } from '../../util/enum-to-string';
 import { NormalizeObject } from '../../util/normalize';
-import { EditValuesLine } from './edit-values-line';
+import { EditValuesLine, EditValuesLineProps } from './edit-values-line';
 
 export type InputBoardValueInfos = Omit<BoardValueInfos, 'currentValue'>;
 
@@ -13,25 +13,47 @@ export type EditSearchData = Pick<InputBoardValueInfos, 'id' | 'name'> & {
     secondary?: string;
 };
 
-export type EditValuesDialogProps = {
+export type EditValuesDialogProps = EditvaluesDialogContentProps & {
     open: boolean;
+};
+
+export const EditValuesDialog: React.FC<EditValuesDialogProps> = ({
+    open, ...rest
+}) => (
+        <Dialog open={open} onClose={rest.onClose} fullWidth maxWidth='sm' PaperProps={{ elevation: 4 }}>
+            {open && <EditvaluesDialogContent {...rest} />}
+        </Dialog>
+    );
+
+type EditvaluesDialogContentProps = Pick<EditValuesLineProps, 'fetchNameSearch' | 'hideNameAndId'> & {
     onClose: () => void;
     onSubmit: (data: NormalizeObject<InputBoardValueInfos>) => Promise<void>;
     board: BoardKind;
     boardInfos: InputBoardValueInfos[];
-    fetchNameSearch?: (search: string) => Promise<EditSearchData[]>;
 };
 
-// TODO different form for each board kind (id/name)
+const EditvaluesDialogContent: React.FC<EditvaluesDialogContentProps> = ({
+    onClose, onSubmit, board, boardInfos, fetchNameSearch, hideNameAndId
+}) => {
 
-export const EditValuesDialog: React.FC<EditValuesDialogProps> = ({ open, onClose, onSubmit, board, boardInfos, fetchNameSearch }) => {
+    const getEmptyAllInfos = (): NormalizeObject<InputBoardValueInfos> => ({
+        0: {
+            id: 0,
+            board,
+            name: '- new -',
+            oldValueList: [],
+            history: []
+        }
+    });
 
-    const [ allInfos, setAllInfos ] = React.useState(
-        boardInfos.reduce<NormalizeObject<InputBoardValueInfos>>((acc, v) => {
+    const getInitialAllInfos = (): NormalizeObject<InputBoardValueInfos> => boardInfos.length
+        ? boardInfos.reduce<NormalizeObject<InputBoardValueInfos>>((acc, v) => {
             acc[ v.id ] = v;
             return acc;
         }, {})
-    );
+        : getEmptyAllInfos();
+
+    const [ allInfos, setAllInfos ] = React.useState(getInitialAllInfos());
     const infosIds = Object.keys(allInfos).map(k => +k);
 
     const hasValues = !!infosIds.length;
@@ -46,90 +68,83 @@ export const EditValuesDialog: React.FC<EditValuesDialogProps> = ({ open, onClos
 
     const canSubmit = canAdd;
 
-    return (
-        <Dialog open={open} onClose={onClose} fullWidth maxWidth='sm' PaperProps={{ elevation: 4 }}>
-            <DialogTitle>
-                <div>
-                    {enumToString.boardKind(board)} - Edit values
-                    </div>
+    return <>
+        <DialogTitle>
+            <div>
+                {enumToString.boardKind(board)} - Edit values
+            </div>
 
-                <Grid container xs={12}>
-                    <Grid item xs style={{ overflow: 'hidden' }}>
-                        <Tabs
-                            variant='scrollable'
-                            indicatorColor="primary"
-                            textColor="primary"
-                            value={currentId}
-                            onChange={(e, v) => setCurrentId(v)}
-                        >
-                            {infosIds.map(id => <Tab key={id} value={id} label={allInfos[ id ].name} />)}
-                        </Tabs>
-                    </Grid>
-                    <Grid item>
-                        <IconButton
-                            onClick={() => {
-                                setAllInfos(allInfos => ({
-                                    ...allInfos,
-                                    0: {
-                                        id: 0,
-                                        board,
-                                        name: '-new-',
-                                        oldValueList: [],
-                                        quantityUnit: 'unit',
-                                    }
-                                }));
-                                setCurrentId(0);
-                            }}
-                            disabled={!canAdd}
-                        >
-                            <AddBoxIcon />
-                        </IconButton>
-                    </Grid>
+            <Grid container xs={12}>
+                <Grid item xs style={{ overflow: 'hidden' }}>
+                    <Tabs
+                        variant='scrollable'
+                        indicatorColor="primary"
+                        textColor="primary"
+                        value={currentId}
+                        onChange={(e, v) => setCurrentId(v)}
+                    >
+                        {infosIds.map(id => <Tab key={id} value={id} label={allInfos[ id ].name} />)}
+                    </Tabs>
                 </Grid>
-            </DialogTitle>
-            <DialogContent>
-                {hasValues && <EditValuesLine
-                    key={currentId}
-                    infos={currentInfos}
-                    onChange={item => {
+                <Grid item>
+                    <IconButton
+                        onClick={() => {
+                            setAllInfos(allInfos => ({
+                                ...allInfos,
+                                ...getEmptyAllInfos()
+                            }));
+                            setCurrentId(0);
+                        }}
+                        disabled={!canAdd}
+                    >
+                        <AddBoxIcon />
+                    </IconButton>
+                </Grid>
+            </Grid>
+        </DialogTitle>
+        <DialogContent>
+            {hasValues && <EditValuesLine
+                key={currentId}
+                hideNameAndId={hideNameAndId}
+                infos={currentInfos}
+                onChange={item => {
 
-                        setAllInfos(prevAllInfos => {
-                            const { id } = currentInfos;
+                    setAllInfos(prevAllInfos => {
+                        const { id } = currentInfos;
 
-                            const allInfos = { ...prevAllInfos };
-                            if (item.id !== id) {
+                        const allInfos = { ...prevAllInfos };
+                        if (item.id !== id) {
 
-                                if (allInfos[ item.id ] && item.name !== allInfos[ item.id ].name) {
-                                    return prevAllInfos;
-                                }
-
-                                delete allInfos[ id ];
-
-                                setCurrentId(item.id);
+                            if (allInfos[ item.id ] && item.name !== allInfos[ item.id ].name) {
+                                return prevAllInfos;
                             }
 
-                            return ({
-                                ...allInfos,
-                                [ item.id ]: item
-                            });
-                        });
-                    }}
-                    fetchNameSearch={fetchNameSearch}
-                />}
+                            delete allInfos[ id ];
 
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={onClose}>
-                    Cancel
-          </Button>
-                <Button
-                    onClick={onSubmitFull}
-                    color="primary"
-                    disabled={!canSubmit}
-                >
-                    Submit
-          </Button>
-            </DialogActions>
-        </Dialog>
-    );
+                            setCurrentId(item.id);
+                        }
+
+                        return ({
+                            ...allInfos,
+                            [ item.id ]: item
+                        });
+                    });
+                }}
+                fetchNameSearch={fetchNameSearch}
+            />}
+
+        </DialogContent>
+        <DialogActions>
+            <Button onClick={onClose}>
+                Cancel
+  </Button>
+            <Button
+                onClick={onSubmitFull}
+                color="primary"
+                disabled={!canSubmit}
+            >
+                Submit
+  </Button>
+        </DialogActions>
+    </>;
 };

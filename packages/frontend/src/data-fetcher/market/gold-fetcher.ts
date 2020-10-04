@@ -1,38 +1,35 @@
+import { routes } from '@picsou/shared';
+import { getFirebase } from '../../firebase/create-firebase-app';
+import { createFetcher } from '../fetcher-types';
 
-export const createGoldFetcher = () => {
+export const createGoldFetcher = createFetcher(() => {
+    const fbFunctions = getFirebase().functions();
 
-    type GoldParams = {
-        // version?: 'v2';
-        // chartType?: 'CHART_POINTS';
-        securityId: 'AUX' | 'AGX';  // AUX = gold, AGX = silver
-        valuationSecurityId: 'EUR' | 'USD';
-
-        // interval between values, in seconds
-        interval: number;
-    };
-
-    const createGoldUrlParams = ({ interval }: Pick<GoldParams, 'interval'>) => ({
-        securityId: 'AUX',
-        valuationSecurityId: 'EUR',
-        interval,
-    });
-
-    const goldUrl = 'https://www.galmarley.com/prices/prices.json';
+    const requestGoldHistory = routes.goldHistory.createFetcher(fbFunctions);
 
     return {
-        fetchGoldCurrentValue: async () => {
+        fetchCurrentValue: async ([ id ]) => {
 
-            const params = createGoldUrlParams({
+            const { data } = await requestGoldHistory({
+                id,
+                latestOnly: true,
                 interval: 600
             });
 
-            const url = new URL(goldUrl);
+            return data.map(({ id, history }) => ({
+                id,
+                currentValue: history[ 0 ]
+            }));
+        },
+        fetchHistory: async ([ id ]) => {
 
-            Object.keys(params).forEach(k => {
-                url.searchParams.set(k, (params as any)[k]);
+            const { data } = await requestGoldHistory({
+                id,
+                interval: 172800
             });
 
-            return fetch(url.href);
-        },
-    }
-};
+            return data;
+        }
+
+    };
+});

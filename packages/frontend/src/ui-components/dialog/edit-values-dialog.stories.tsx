@@ -19,7 +19,6 @@ Market.args = {
             id: 1234,
             board: 'market',
             name: 'Euro stoxx 300',
-            quantityUnit: 'unit',
             oldValueList: [
                 {
                     oldValue: 171.32,
@@ -29,13 +28,13 @@ Market.args = {
                     oldValue: 170.32,
                     quantity: 4
                 },
-            ]
+            ],
+            history: []
         },
         {
             id: 3287,
             board: 'market',
             name: 'Apple',
-            quantityUnit: 'unit',
             oldValueList: [
                 {
                     oldValue: 114.32,
@@ -45,7 +44,8 @@ Market.args = {
                     oldValue: 123.32,
                     quantity: 12
                 },
-            ]
+            ],
+            history: []
         },
     ]
 };

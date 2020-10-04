@@ -1,4 +1,4 @@
-import { BoardKind, BoardValueInfos } from "@picsou/shared";
+import { BoardKind, BoardValueInfos, HistoryData } from "@picsou/shared";
 import { createAction } from "@reduxjs/toolkit";
 import { FetchStockCurrentValueData } from '../../data-fetcher/market/market-fetcher';
 import { InputBoardValueInfos } from '../../ui-components/dialog/edit-values-dialog';
@@ -21,3 +21,15 @@ export const MainBoardEditSuccessAction = createAction<{
     board: BoardKind;
     data: NormalizeObject<BoardValueInfos>;
 }>('main-board/edit/success');
+
+export type MainBoardValueSelectAction = ReturnType<typeof MainBoardValueSelectAction>;
+export const MainBoardValueSelectAction = createAction<{
+    board: BoardKind;
+    valueId: number | null;
+}>('main-board/value/select');
+
+export type MainBoardHistorySuccessAction = ReturnType<typeof MainBoardHistorySuccessAction>;
+export const MainBoardHistorySuccessAction = createAction<{
+    valueId: number;
+    history: HistoryData;
+}>('main-board/history/success');

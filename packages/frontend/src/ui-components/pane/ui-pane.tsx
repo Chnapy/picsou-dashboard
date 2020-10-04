@@ -1,13 +1,13 @@
 import { Box, CircularProgress, IconButton, ListItemIcon, ListItemText, Menu, MenuItem, Paper, Theme, useTheme } from '@material-ui/core';
-import { PaletteInvestment } from '@material-ui/core/styles/createPalette';
 import EditIcon from '@material-ui/icons/Edit';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { BoardKind } from '@picsou/shared';
 import React from 'react';
 import { UITypography } from '../typography/ui-typography';
 
 export type UIPaneProps = {
     title: string;
-    paneColor: keyof PaletteInvestment;
+    paneColor: BoardKind;
     loading: boolean;
     onEdit?: () => void;
     children: React.ReactNode;

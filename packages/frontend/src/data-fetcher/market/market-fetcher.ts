@@ -1,13 +1,14 @@
-import { FetchStockHistoryValuesProps, fetchStockPropsToParams, routes, StockHistoryValue } from '@picsou/shared';
+import { FetchStockHistoryValuesProps, fetchStockPropsToParams, HistoryValue, routes } from '@picsou/shared';
 import { add } from 'date-fns';
 import { getFirebase } from '../../firebase/create-firebase-app';
+import { createFetcher } from '../fetcher-types';
 
 export type FetchStockCurrentValueData = {
-    pairId: number;
-    currentValue: StockHistoryValue;
+    id: number;
+    currentValue: HistoryValue;
 }[];
 
-export const createMarketFetcher = () => {
+export const createMarketFetcher = createFetcher(() => {
     const fbFunctions = getFirebase().functions();
 
     const requestStockHistory = routes.stockHistory.createFetcher(fbFunctions);
@@ -22,7 +23,7 @@ export const createMarketFetcher = () => {
 
     return {
 
-        fetchStockCurrentValue: async (pairIdList: number[]): Promise<FetchStockCurrentValueData> => {
+        fetchCurrentValue: async (pairIdList) => {
 
             const endDate = new Date();
 
@@ -33,14 +34,26 @@ export const createMarketFetcher = () => {
                 interval: 'Daily'
             });
 
-            return data.map(({ pairId, history }) => ({
-                pairId,
+            return data.map(({ id, history }) => ({
+                id,
                 currentValue: history[ 0 ],
             }));
         },
 
-        fetchStockHistoryValues,
+        fetchHistory: async (pairIdList) => {
+
+            const endDate = new Date();
+
+            const { data } = await fetchStockHistoryValues({
+                pairId: pairIdList,
+                startDate: add(endDate, { years: -1 }),
+                endDate,
+                interval: 'Daily'
+            });
+
+            return data;
+        },
 
         fetchStockSearch: (search: string) => requestStockSearch({ search }),
     };
-};
+});

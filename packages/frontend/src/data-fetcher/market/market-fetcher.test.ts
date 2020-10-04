@@ -1,33 +1,32 @@
-import { getStockHistoryValuesTestData } from '@picsou/shared';
-import { createMarketFetcher, FetchStockCurrentValueData } from "./market-fetcher";
+import { createMarketFetcher } from "./market-fetcher";
 
 describe('# market-fetcher', () => {
 
-    it('fetch stock-history-values', async () => {
+    it('fetch history', async () => {
 
         const fetcher = createMarketFetcher();
 
-        const { paramsRaw, expectedData } = getStockHistoryValuesTestData();
+        const data = await fetcher.fetchHistory([ 997026 ]);
 
-        const { data } = await fetcher.fetchStockHistoryValues(paramsRaw);
-
-        expect(data).toEqual(expectedData);
+        expect(data).toEqual<typeof data>([ {
+            id: 997026,
+            history: expect.any(Array)
+        } ]);
+        expect(data[ 0 ].history).toHaveLength(254);
     });
 
-    it('fetch stock-current-value', async () => {
+    it('fetch current-value', async () => {
 
         const fetcher = createMarketFetcher();
 
-        const { paramsRaw, expectedData } = getStockHistoryValuesTestData();
+        const data = await fetcher.fetchCurrentValue([ 997026 ]);
 
-        const data = await fetcher.fetchStockCurrentValue(paramsRaw.pairId);
-
-        expect(data).toEqual<FetchStockCurrentValueData>(
-            expect.arrayContaining(expectedData.map(({ pairId }): FetchStockCurrentValueData[ number ] => ({
-                pairId,
+        expect(data).toEqual<typeof data>([
+            {
+                id: 997026,
                 currentValue: expect.any(Object)
-            })))
-        );
+            }
+        ]);
     });
 
     it('fetch stock-search', async () => {

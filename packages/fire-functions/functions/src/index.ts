@@ -1,6 +1,7 @@
 import { routes } from '@picsou/shared';
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
+import { extractGoldHistory } from './extractor/extract-gold-history';
 import { extractStockHistory } from './extractor/extract-stock-history';
 import { extractStockSearch } from './extractor/extract-stock-search';
 
@@ -17,7 +18,7 @@ const needAuth = (fn: (data: any) => any) => async (data: any, { auth }: functio
     }
 
     if (!auth) {
-        throw new functions.https.HttpsError('failed-precondition', 'The function must be called while authenticated.');
+        throw new functions.https.HttpsError('failed-precondition', 'The function must be called while authenticated. If you are in local environment, NODE_ENV should be "test".');
     }
 
     const dbWhiteList = admin.database().ref('/white-list-uid/' + auth.uid);
@@ -38,4 +39,6 @@ module.exports = {
     [ routes.stockHistory.name ]: functions.https.onCall(needAuth(routes.stockHistory.createFunction(extractStockHistory))),
 
     [ routes.stockSearch.name ]: functions.https.onCall(needAuth(routes.stockSearch.createFunction(extractStockSearch))),
+
+    [routes.goldHistory.name]: functions.https.onCall(needAuth(routes.goldHistory.createFunction(extractGoldHistory))),
 };

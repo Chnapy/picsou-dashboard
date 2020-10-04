@@ -6,7 +6,10 @@ import { UIEuroValue } from '../misc/ui-euro-value';
 import { UIGain } from '../misc/ui-gain';
 import { UITypography } from '../typography/ui-typography';
 
-export type ValueLineProps = Omit<BoardValueInfos, 'board'>;
+export type ValueLineProps = {
+    valueLine: BoardValueInfos;
+    onClick: () => void;
+};
 
 const useStyles = makeStyles(({ palette, spacing }) => ({
     root: {
@@ -20,8 +23,9 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
 }));
 
 export const ValueLine: React.FC<ValueLineProps> = ({
-    name, oldValueList, currentValue, quantityUnit
+    valueLine, onClick
 }) => {
+    const { name, oldValueList, currentValue, board } = valueLine;
     const classes = useStyles();
 
     const quantityTotal = oldValueList.reduce((acc, v) => acc + v.quantity, 0);
@@ -31,7 +35,9 @@ export const ValueLine: React.FC<ValueLineProps> = ({
 
     const oldValueAverage = oldValueFull / quantityTotal;
 
-    return <ButtonBase className={classes.root}>
+    const quantityUnit = enumToString.quantityUnit(board);
+
+    return <ButtonBase className={classes.root} onClick={onClick}>
         <Grid container spacing={1}>
 
             <Grid item xs={8}>

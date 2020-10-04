@@ -12,11 +12,19 @@ const boardKindMap: Record<BoardKind, string> = {
     market: 'Market',
 };
 
+const boardUnit: Record<BoardKind, QuantityUnit> = {
+    cash: 'unit',
+    gold: 'kg',
+    market: 'unit'
+};
+
 export const enumToString = {
 
     appStep: (value: AppStepStateNoAuth) => appStepMap[value],
 
     boardKind: (value: BoardKind) => boardKindMap[value],
+
+    quantityUnit: (board: BoardKind) => boardUnit[board],
 
     quantity: (value: number, unit: QuantityUnit) => switchUtil(unit, {
         unit: () => 'x' + value,
