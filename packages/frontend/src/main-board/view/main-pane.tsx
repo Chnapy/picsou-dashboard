@@ -1,3 +1,4 @@
+import { Box } from '@material-ui/core';
 import { BoardKind } from '@picsou/shared';
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -7,9 +8,9 @@ import { UIPane } from '../../ui-components/pane/ui-pane';
 import { enumToString } from '../../util/enum-to-string';
 import { NormalizeObject } from '../../util/normalize';
 import { MainBoardEditLocalAction, MainBoardValueSelectAction } from '../reducer/main-board-actions';
-import { MainValueLine } from './main-value-line';
-import { MainEditValuesDialog } from './main-edit-values-dialog';
 import { MainChart } from './main-chart';
+import { MainEditValuesDialog } from './main-edit-values-dialog';
+import { MainValueLine } from './main-value-line';
 
 export type MainPaneProps = {
     board: BoardKind;
@@ -60,7 +61,9 @@ export const MainPane = React.memo<MainPaneProps>(({ board }) => {
                 valueId: null
             })} />
 
-            <MainChart valueId={selectedValue} height={300} />
+            <Box mt={6}>
+                <MainChart valueId={selectedValue} height={300} />
+            </Box>
         </>;
     };
 

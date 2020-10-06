@@ -67,7 +67,7 @@ export const extractStockHistory = async ({
             };
 
             return {
-                time: +getValue(0),
+                time: +getValue(0) * 1000,
                 price: +getValue(1),
             };
         });

@@ -8,8 +8,7 @@ import { MainBoardEditLocalAction, MainBoardEditSuccessAction, MainBoardHistoryS
 
 type DBValueLine = Omit<BoardValueInfos, 'currentValue'>;
 
-// TODO change to avoid conflicts
-export const goldValueId = 1;
+export const goldValueId = -1;
 
 const getInitialGoldValue = (): NormalizeObject<BoardValueInfos> => ({
     [ goldValueId ]: {
