@@ -1,15 +1,17 @@
-import { Box } from '@material-ui/core';
+import { Box, Grid } from '@material-ui/core';
 import React from 'react';
 import { boardKindList } from '@picsou/shared';
 import { MainPane } from './main-pane';
 
 export const MainBoardView: React.FC = () => {
 
-    return <Box display='flex' flexDirection='column'>
+    return <Grid container spacing={2}>
 
-        {boardKindList.map(board => <Box key={board} mb={2}>
-            <MainPane board={board} />
-        </Box>)}
+        {boardKindList.map(board => <Grid key={board} item xs={12} md={4}>
+            <Box mb={2}>
+                <MainPane board={board} />
+            </Box>
+        </Grid>)}
 
-    </Box>;
+    </Grid>;
 };
