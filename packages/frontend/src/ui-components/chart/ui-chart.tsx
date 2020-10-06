@@ -1,9 +1,10 @@
 import { Box, Divider, Paper, Theme, useTheme } from '@material-ui/core';
-import { ResponsiveLine, Serie, PointTooltip } from '@nivo/line';
+import { PointTooltip, ResponsiveLine, Serie } from '@nivo/line';
 import { BoardKind } from '@picsou/shared';
-import React from 'react';
-import { UITypography } from '../typography/ui-typography';
 import { format } from 'date-fns';
+import React from 'react';
+import { UIEuroValue } from '../misc/ui-euro-value';
+import { UITypography } from '../typography/ui-typography';
 
 export type UIChartProps = {
     height: number;
@@ -40,9 +41,7 @@ const Tooltip: PointTooltip = ({ point }) => {
 
     return <Paper elevation={4} style={{ transform: `translate(${x},${y})` }}>
         <Box display='flex' flexDirection='column' textAlign='center' borderLeft={'2px solid ' + color} px={2} py={1}>
-            <UITypography variant='body2'>
-                {data.y}
-            </UITypography>
+            <UIEuroValue variant='body2' value={data.y as number} />
             <Box px={2} py={1}>
                 <Divider />
             </Box>

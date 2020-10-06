@@ -2,6 +2,7 @@ import React from 'react';
 import { UITypography, UITypographyProps } from '../typography/ui-typography';
 import { switchUtil } from '../../util/util';
 import { UIEuroValue } from './ui-euro-value';
+import { UISpacedNumber } from './ui-spaced-number';
 
 export type UIGainProps = Omit<UITypographyProps, 'color' | 'children'> & {
     gainVariant: 'euro' | 'percent';
@@ -53,6 +54,6 @@ const UIPercent: React.FC<UIPercentProps> = ({
     const percentValue = diff / oldValue * 100;
 
     return <UITypography {...rest}>
-        {prefix}{percentValue.toFixed(2)}%
+        {prefix}<UISpacedNumber value={percentValue}/>%
     </UITypography>;
 };
