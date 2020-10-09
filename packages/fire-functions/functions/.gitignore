@@ -1,5 +1,0 @@
-# Compiled JavaScript files
-**/*.js.map
-
-# Node.js dependency directory
-node_modules/

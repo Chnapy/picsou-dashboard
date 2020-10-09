@@ -12,7 +12,7 @@ describe('# market-fetcher', () => {
             id: 997026,
             history: expect.any(Array)
         } ]);
-        expect(data[ 0 ].history).toHaveLength(254);
+        expect(data[ 0 ].history.length).toBeGreaterThan(100);
     });
 
     it('fetch current-value', async () => {

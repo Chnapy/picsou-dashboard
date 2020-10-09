@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "rimraf lib/ && tsc --project tsconfig.prod.json",
-    "serve": "cross-env NODE_ENV=development && yarn build && firebase emulators:start --only functions,database --import ../emulator-data",
+    "serve": "cross-env NODE_ENV=development && yarn build && firebase emulators:start --only functions,database --import ../../emulator-data",
     "shell": "yarn build && firebase functions:shell",
     "start": "yarn shell",
     "test": "cross-env NODE_ENV=test && jest --watchAll",
@@ -14,9 +14,9 @@
     "check-type": "tsc --noEmit"
   },
   "engines": {
-    "node": "10.14.2"
+    "node": "12"
   },
-  "main": "lib/fire-functions/functions/src/index.js",
+  "main": "lib/functions/src/index.js",
   "dependencies": {
     "date-fns": "2.16.1",
     "firebase-admin": "8.10.0",
