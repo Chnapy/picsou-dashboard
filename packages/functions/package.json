@@ -11,7 +11,6 @@
     "test-integration": "yarn build  && cross-env NODE_ENV=test firebase emulators:exec \"yarn workspace @picsou/frontend test-no-env\"",
     "pre-deploy": "node pre-deploy.js",
     "post-deploy": "node post-deploy.js",
-    "deploy": "firebase deploy --only functions,database",
     "logs": "firebase functions:log",
     "check-type": "tsc --noEmit"
   },

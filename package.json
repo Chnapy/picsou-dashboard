@@ -10,6 +10,9 @@
       "packages/*"
     ]
   },
+  "scripts": {
+    "deploy": "firebase deploy"
+  },
   "engineStrict": true,
   "engines": {
     "node": "12"

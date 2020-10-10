@@ -56,5 +56,5 @@ jobs:
     - name: Build functions
       run: yarn workspace @picsou/functions build
 
-    - name: Deploy to firebase
-      run: firebase deploy
+    - name: Deploy
+      run: yarn deploy
