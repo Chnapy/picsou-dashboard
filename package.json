@@ -5,13 +5,16 @@
   "author": "Richard Haddad <richardhaddad@hotmail.fr>",
   "license": "MIT",
   "private": true,
-  "workspaces": [
-    "packages/shared",
-    "packages/frontend",
-    "packages/fire-functions/functions"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "scripts": {
+    "deploy": "firebase deploy"
+  },
   "engineStrict": true,
   "engines": {
-    "node": ">=10.14.2"
+    "node": "12"
   }
 }

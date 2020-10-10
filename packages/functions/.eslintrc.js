@@ -7,7 +7,6 @@ module.exports = {
     parserOptions: {
         project: './tsconfig.json',
         tsconfigRootDir: __dirname,
-
     },
     ignorePatterns: ['jest.config.js'],
     plugins: ["@typescript-eslint", "jest"],
