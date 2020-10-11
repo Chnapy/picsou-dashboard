@@ -1,6 +1,8 @@
+import './env';
 import { routes } from '@picsou/shared';
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
+import { cronCashValues } from './cron/cron-cash-values';
 import { extractGoldHistory } from './extractor/extract-gold-history';
 import { extractStockHistory } from './extractor/extract-stock-history';
 import { extractStockSearch } from './extractor/extract-stock-search';
@@ -36,9 +38,11 @@ const needAuth = (fn: (data: any) => any) => async (data: any, { auth }: functio
 
 module.exports = {
 
+    cronCashValues: functions.pubsub.schedule('0 6 * * *').timeZone('Europe/Paris').onRun(cronCashValues),
+
     [ routes.stockHistory.name ]: functions.https.onCall(needAuth(routes.stockHistory.createFunction(extractStockHistory))),
 
     [ routes.stockSearch.name ]: functions.https.onCall(needAuth(routes.stockSearch.createFunction(extractStockSearch))),
 
-    [routes.goldHistory.name]: functions.https.onCall(needAuth(routes.goldHistory.createFunction(extractGoldHistory))),
+    [ routes.goldHistory.name ]: functions.https.onCall(needAuth(routes.goldHistory.createFunction(extractGoldHistory))),
 };

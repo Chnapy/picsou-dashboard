@@ -11,7 +11,8 @@
     ]
   },
   "scripts": {
-    "deploy": "firebase deploy"
+    "deploy": "firebase deploy",
+    "deploy:config": "firebase functions:config:set"
   },
   "engineStrict": true,
   "engines": {
