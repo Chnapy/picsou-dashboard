@@ -4,8 +4,6 @@ name: Deploy
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]  # TODO remove
 
 env:
   CI: true
@@ -13,6 +11,7 @@ env:
   REACT_APP_FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
 
 jobs:
+  if: false
   build_then_deploy:
     name: Build then deploy
     runs-on: ubuntu-18.04

@@ -38,7 +38,9 @@ const needAuth = (fn: (data: any) => any) => async (data: any, { auth }: functio
 
 module.exports = {
 
-    cronCashValues: functions.pubsub.schedule('0 6 * * *').timeZone('Europe/Paris').onRun(cronCashValues),
+    cronCashValues: functions.runWith({
+        memory: '1GB'
+    }).pubsub.schedule('0 6 * * *').timeZone('Europe/Paris').onRun(cronCashValues),
 
     [ routes.stockHistory.name ]: functions.https.onCall(needAuth(routes.stockHistory.createFunction(extractStockHistory))),
 
