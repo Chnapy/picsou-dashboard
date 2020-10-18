@@ -31,4 +31,9 @@ export const enumToString = {
         kg: () => value + 'kg',
     })(),
 
+    shouldShowQuantity: (value: number, unit: QuantityUnit) => switchUtil(unit, {
+        unit: () => value > 1,
+        kg: () => true,
+    })(),
+
 };

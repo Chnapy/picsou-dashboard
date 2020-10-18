@@ -1,24 +1,4 @@
 import createMuiTheme, { Theme } from '@material-ui/core/styles/createMuiTheme';
-import iFlash705Path from '../../@assets/fonts/iFlash_705.ttf';
-import monogramPath from '../../@assets/fonts/monogram.ttf';
-
-const iFlash705FontFace = {
-    fontFamily: '"iFlash 705"',
-    fontStyle: 'normal',
-    src: `
-      local('iFlash 705'),
-      url(${iFlash705Path}) format('truetype')
-    `
-};
-
-const monogramFontFace = {
-    fontFamily: '"monogram"',
-    fontStyle: 'normal',
-    src: `
-      local('monogram'),
-      url(${monogramPath}) format('truetype')
-    `
-};
 
 const white = '#FFFFFF';
 const primary = '#EBDE66';
@@ -70,12 +50,13 @@ export const appTheme: Theme = createMuiTheme({
         htmlFontSize: 10,
         fontSize: 12,
 
-        fontFamily: '"iFlash 705", "Roboto", "Arial", sans-serif',
+        fontFamily: '"Montserrat", sans-serif',
 
         h1: {
-            fontSize: '6.4rem',
+            fontSize: '3.4rem',
             color: primary,
-            textTransform: 'uppercase'
+            textTransform: 'uppercase',
+            fontWeight: 300
         },
         h2: {
             fontSize: '2.4rem',
@@ -89,16 +70,20 @@ export const appTheme: Theme = createMuiTheme({
         },
         h4: {
             fontSize: '1.6rem',
-            textTransform: 'uppercase'
+            textTransform: 'uppercase',
+            fontWeight: 500
         },
         body1: {
-            fontSize: '1.6rem'
+            fontSize: '1.6rem',
+            fontWeight: 500
         },
         body2: {
-            fontSize: '1.2rem'
+            fontSize: '1.2rem',
+            fontWeight: 500
         },
         button: {
-            fontSize: '1.6rem'
+            fontSize: '1.2rem',
+            fontWeight: 600
         }
     },
     props: {
@@ -109,7 +94,6 @@ export const appTheme: Theme = createMuiTheme({
     overrides: {
         MuiCssBaseline: {
             '@global': {
-                '@font-face': [ iFlash705FontFace, monogramFontFace ],
                 html: {
                     fontSize: '62.5%'
                 }

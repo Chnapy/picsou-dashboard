@@ -55,7 +55,7 @@ export const ValueLine: React.FC<ValueLineProps> = ({
 
             <Grid container item xs={4}>
                 <UIEuroValue value={oldValueAverage} variant='body1' disabled />
-                {quantityTotal > 1 && <Box ml={1}>
+                {enumToString.shouldShowQuantity(quantityTotal, quantityUnit) && <Box ml={1}>
                     <UITypography variant='body1'>
                         {enumToString.quantity(quantityTotal, quantityUnit)}
                     </UITypography>

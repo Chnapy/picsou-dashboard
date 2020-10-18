@@ -2,7 +2,7 @@ import { Box, Card, CardContent } from '@material-ui/core';
 import firebase from 'firebase/app';
 import * as firebaseui from 'firebaseui';
 import React from 'react';
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import FirebaseAuth from 'react-firebaseui/FirebaseAuth';
 import { firebaseAuthClientID, getFirebase } from '../../firebase/create-firebase-app';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { UITypography } from '../../ui-components/typography/ui-typography';
@@ -43,11 +43,11 @@ export const AuthView: React.FC = () => {
 
             <Card>
                 <CardContent>
-                    <UITypography variant='h2' gutterBottom>
+                    <UITypography variant='h1' gutterBottom>
                         Picsou dashboard
                     </UITypography>
 
-                    <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebaseAuth} />
+                    <FirebaseAuth uiConfig={uiConfig} firebaseAuth={firebaseAuth} />
                 </CardContent>
             </Card>
         </Box>

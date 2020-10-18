@@ -6,9 +6,7 @@ import React from 'react';
 import { switchUtil } from '../../util/util';
 
 type UITypographyVariant = Extract<Variant, 'h1' | 'h2' | 'h3' | 'h4' | 'body1' | 'body2'>
-    | 'bodyMini'
-    | 'labelMini'
-    | 'numeric';
+    | 'labelMini';
 
 type UITypographyColor = 'default' | 'primary' | 'positive' | 'negative';
 
@@ -32,16 +30,10 @@ const useStyles = makeStyles(({ palette }) => ({
         }),
         opacity: disabled ? 0.5 : undefined,
     }),
-    bodyMini: {
-        fontSize: '0.8rem'
-    },
     labelMini: {
-        fontSize: '0.8rem',
-        textTransform: 'uppercase'
-    },
-    numeric: {
-        fontFamily: '"monogram"',
-        fontSize: '1.6rem'
+        fontSize: '1rem',
+        textTransform: 'uppercase',
+        fontWeight: 600
     }
 }));
 
@@ -57,16 +49,8 @@ export const UITypography: React.FC<UITypographyProps> = ({
 
     const defaultClassName = clsx(classes.root, className);
 
-    if (variant === 'bodyMini') {
-        return <Typography {...rest} className={clsx(classes.bodyMini, defaultClassName)} variant='body2' />;
-    }
-
     if (variant === 'labelMini') {
         return <Typography {...rest} className={clsx(classes.labelMini, defaultClassName)} variant='body2' />;
-    }
-
-    if (variant === 'numeric') {
-        return <Typography {...rest} className={clsx(classes.numeric, defaultClassName)} variant='body2' />;
     }
 
     return <Typography {...rest} className={defaultClassName} variant={variant} />;
