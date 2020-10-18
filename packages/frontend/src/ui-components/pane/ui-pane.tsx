@@ -50,11 +50,11 @@ const UIPaneHeader: React.FC<UIPaneProps> = ({ title, paneColor, loading, onEdit
             </Box>}
         </Box>
 
-        <Box pr={0.5}>
+        {onEdit && <Box pr={0.5}>
             <IconButton onClick={handleClick} size='small'>
                 <MoreVertIcon />
             </IconButton>
-        </Box>
+        </Box>}
 
         <Menu
             anchorEl={anchorEl}

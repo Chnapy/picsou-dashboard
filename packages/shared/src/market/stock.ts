@@ -3,15 +3,15 @@ import { investingDateUtil } from './util';
 
 export type StockHistoryInterval = 'Daily' | 'Weekly' | 'Monthly';
 
-type StockHistoryValue = {
-    time: number;
-    price: number;
-    open: number;
-    high: number;
-    low: number;
-    volume: number;
-    change: number;
-};
+// type StockHistoryValue = {
+//     time: number;
+//     price: number;
+//     open: number;
+//     high: number;
+//     low: number;
+//     volume: number;
+//     change: number;
+// };
 
 export type FetchStockHistoryValuesProps = {
     pairId: number[];

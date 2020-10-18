@@ -11,6 +11,8 @@ env:
   CI: true
   FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
   REACT_APP_FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
+  LINXO_USERNAME: ${{ secrets.LINXO_USERNAME }}
+  LINXO_PASSWORD: ${{ secrets.LINXO_PASSWORD }}
 
 jobs:
   test:

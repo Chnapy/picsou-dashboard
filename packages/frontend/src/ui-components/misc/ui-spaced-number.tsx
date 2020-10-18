@@ -10,6 +10,7 @@ const formatNumber = (value: number) => value.toString().replace(/(\d)(?=(\d{3})
 const useStyles = makeStyles(() => ({
     root: {
         wordSpacing: '-0.25em',
+        whiteSpace: 'nowrap'
     }
 }));
 

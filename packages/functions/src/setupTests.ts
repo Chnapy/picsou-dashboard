@@ -1,4 +1,5 @@
 import './fb-tester';
+import './env';
 import { fbTester } from './fb-tester';
 
 

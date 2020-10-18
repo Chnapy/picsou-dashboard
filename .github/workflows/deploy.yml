@@ -54,5 +54,8 @@ jobs:
     - name: Build functions
       run: yarn workspace @picsou/functions build
 
+    - name: Set Linxo credentials config
+      run: yarn deploy:config env.linxo_username="${{ secrets.LINXO_USERNAME }}" env.linxo_password="${{ secrets.LINXO_PASSWORD }}"
+
     - name: Deploy
       run: yarn deploy
