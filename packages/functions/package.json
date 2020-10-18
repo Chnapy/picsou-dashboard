@@ -4,7 +4,7 @@
   "scripts": {
     "build": "rimraf lib/ && yarn build-only",
     "build-only": "tsc --project tsconfig.prod.json",
-    "serve": "cross-env NODE_ENV=development && yarn build && firebase emulators:start --only functions,database --import ../../emulator-data",
+    "serve": "cross-env NODE_ENV=development && yarn build && firebase emulators:start --only functions,database,pubsub --import ../../emulator-data",
     "shell": "concurrently -i \"firebase functions:shell\" \"yarn build-only -w\"",
     "start": "yarn build && yarn shell",
     "test": "cross-env NODE_ENV=test && jest --watchAll",

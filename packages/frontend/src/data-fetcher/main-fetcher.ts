@@ -1,6 +1,7 @@
 import { BoardKind } from '@picsou/shared';
+import { createCashFetcher } from './cash/cash-fetcher';
 import { Fetcher } from './fetcher-types';
-import { createGoldFetcher } from './market/gold-fetcher';
+import { createGoldFetcher } from './gold/gold-fetcher';
 import { createMarketFetcher } from './market/market-fetcher';
 
 type MainFetcher = {
@@ -14,6 +15,6 @@ export const createMainFetcher = createFn(() => {
     return {
         gold: createGoldFetcher(),
         market: createMarketFetcher(),
-        cash: createGoldFetcher(),  // TODO
+        cash: createCashFetcher()
     };
 });

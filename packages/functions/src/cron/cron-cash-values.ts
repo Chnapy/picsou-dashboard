@@ -1,3 +1,4 @@
+import { BoardValueInfos } from '@picsou/shared';
 import { ReferentialHistoryData } from '@picsou/shared/src/database';
 import * as admin from 'firebase-admin';
 import * as puppeteer from 'puppeteer';
@@ -84,29 +85,70 @@ export const cronCashValues = async () => {
     await browser.close();
 };
 
-export const valuesToDB = async (values: ParsedValue[]) => {
+export const valuesToDB = (values: ParsedValue[]) => Promise.all([
+    valuesToDBReferential(values),
+    valuesToDBValues(values)
+]);
+
+const valuesToDBReferential = async (values: ParsedValue[]) => {
 
     const now = Date.now();
 
     const dbCash = admin.database().ref('referentials/cash');
 
-    await Promise.all(
-        values.map(async ({ id, name, value }) => {
-            const dbValue = dbCash.child(id.toString());
-            const dbValueId = dbValue.child('id');
-            const s = await dbValueId.once('value');
+    const dbCashIds = dbCash.child('valuesIds');
+    const dbCashValues = dbCash.child('values');
+    const dbCashHistories = dbCash.child('histories');
 
-            if (!s.exists()) {
-                const initialValue: ReferentialHistoryData = {
-                    id,
-                    name,
-                    history: {}
-                };
-                await dbValue.set(initialValue);
-            }
+    await Promise.all([
+        dbCashIds.set(values.map(v => v.id)),
+        ...values.map(async ({ id, name, value }) => {
+            const dbValue = dbCashValues.child(id.toString());
+            const dbHistory = dbCashHistories.child(id.toString());
 
-            const dbHistory = dbValue.child('history').child(now.toString());
-            await dbHistory.set(value);
+            const initialValue: ReferentialHistoryData = {
+                name
+            };
+            const dbHistoryValue = dbHistory.child(now.toString());
+
+            await Promise.all([
+                dbValue.set(initialValue),
+                dbHistoryValue.set(value)
+            ]);
         })
-    );
+    ]);
+};
+
+const valuesToDBValues = async (values: ParsedValue[]) => {
+    const dbCash = admin.database().ref('values/cash');
+
+    await Promise.all(values.map(async (value) => {
+
+        const dbValue = dbCash.child(value.id.toString());
+
+        const v = await dbValue.once('value');
+
+        if (!v.exists()) {
+            const initialValue: Omit<BoardValueInfos, 'history'> = {
+                id: value.id,
+                board: 'cash',
+                name: value.name,
+                currentValue: value.value,
+                oldValueList: [
+                    {
+                        oldValue: value.value,
+                        quantity: 1
+                    }
+                ]
+            };
+            await dbValue.set(initialValue);
+        } else {
+
+            await Promise.all([
+                dbValue.child('name').set(value.name),
+                dbValue.child('currentValue').set(value.value)
+            ]);
+        }
+
+    }));
 };

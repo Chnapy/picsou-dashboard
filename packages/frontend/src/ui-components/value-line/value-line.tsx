@@ -55,11 +55,11 @@ export const ValueLine: React.FC<ValueLineProps> = ({
 
             <Grid container item xs={4}>
                 <UIEuroValue value={oldValueAverage} variant='body1' disabled />
-                <Box ml={1}>
+                {quantityTotal > 1 && <Box ml={1}>
                     <UITypography variant='body1'>
                         {enumToString.quantity(quantityTotal, quantityUnit)}
                     </UITypography>
-                </Box>
+                </Box>}
             </Grid>
             <Grid container item justify='center' xs={4}>
                 <UIGain gainVariant='euro' oldValue={oldValueAverage} newValue={currentValue} variant='body1' />
@@ -68,15 +68,17 @@ export const ValueLine: React.FC<ValueLineProps> = ({
                 <UIEuroValue value={currentValue} variant='body1' color='primary' />
             </Grid>
 
-            <Grid container item xs={4}>
-                <UIEuroValue value={oldValueFull} variant='body1' disabled />
-            </Grid>
-            <Grid container item justify='center' xs={4}>
-                <UIGain gainVariant='euro' oldValue={oldValueFull} newValue={currentValueFull} variant='body1' />
-            </Grid>
-            <Grid container item justify='flex-end' xs={4}>
-                <UIEuroValue value={currentValueFull} variant='body1' />
-            </Grid>
+            {quantityTotal > 1 && <>
+                <Grid container item xs={4}>
+                    <UIEuroValue value={oldValueFull} variant='body1' disabled />
+                </Grid>
+                <Grid container item justify='center' xs={4}>
+                    <UIGain gainVariant='euro' oldValue={oldValueFull} newValue={currentValueFull} variant='body1' />
+                </Grid>
+                <Grid container item justify='flex-end' xs={4}>
+                    <UIEuroValue value={currentValueFull} variant='body1' />
+                </Grid>
+            </>}
 
         </Grid>
     </ButtonBase>;

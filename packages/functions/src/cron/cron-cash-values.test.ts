@@ -34,7 +34,7 @@ describe('cron > cash values', () => {
         global.Date.now = dateNow;
         existsFn = () => false;
         Object.keys(dbSettedValues).forEach(k => {
-            delete dbSettedValues[k];
+            delete dbSettedValues[ k ];
         });
     });
 
@@ -42,7 +42,7 @@ describe('cron > cash values', () => {
         await cronCashValues();
     }, 30000);
 
-    it('sets values to DB', async () => {
+    it('sets values to DB referential', async () => {
         global.Date.now = () => 123456;
 
         await valuesToDB([
@@ -50,23 +50,20 @@ describe('cron > cash values', () => {
             { id: 5, name: 'bar', value: 543 },
         ]);
 
-        expect(dbSettedValues).toEqual({
-            'referentials/cash/2': {
-                id: 2,
-                name: 'foo',
-                history: expect.any(Object)
+        expect(dbSettedValues).toMatchObject({
+            'referentials/cash/values/2': {
+                name: 'foo'
             },
-            'referentials/cash/2/history/123456': 123,
-            'referentials/cash/5': {
-                id: 5,
-                name: 'bar',
-                history: expect.any(Object)
+            'referentials/cash/histories/2/123456': 123,
+            'referentials/cash/values/5': {
+                name: 'bar'
             },
-            'referentials/cash/5/history/123456': 543,
+            'referentials/cash/histories/5/123456': 543,
+            'referentials/cash/valuesIds': [ 2, 5 ]
         });
     });
 
-    it('sets new value day-to-day', async () => {
+    it('sets new value day-to-day to referential', async () => {
         global.Date.now = () => 123456;
 
         await valuesToDB([
@@ -83,23 +80,65 @@ describe('cron > cash values', () => {
             { id: 5, name: 'bar', value: 432 },
         ]);
 
-        expect(dbSettedValues).toEqual({
-            'referentials/cash/2': {
-                id: 2,
-                name: 'foo',
-                history: expect.any(Object)
+        expect(dbSettedValues).toMatchObject({
+            'referentials/cash/values/2': {
+                name: 'foo'
             },
-            'referentials/cash/2/history/123456': 123,
-            'referentials/cash/5': {
-                id: 5,
-                name: 'bar',
-                history: expect.any(Object)
+            'referentials/cash/histories/2/123456': 123,
+            'referentials/cash/values/5': {
+                name: 'bar'
             },
-            'referentials/cash/5/history/123456': 543,
+            'referentials/cash/histories/5/123456': 543,
 
-            'referentials/cash/2/history/321432': 213,
-            'referentials/cash/5/history/321432': 432,
+            'referentials/cash/histories/2/321432': 213,
+            'referentials/cash/histories/5/321432': 432,
+            'referentials/cash/valuesIds': [ 2, 5 ]
         });
     });
 
+    it('set current value to DB', async () => {
+        global.Date.now = () => 123456;
+
+        await valuesToDB([
+            { id: 2, name: 'foo', value: 123 },
+            { id: 5, name: 'bar', value: 543 },
+        ]);
+
+        existsFn = () => true;
+
+        global.Date.now = () => 321432;
+
+        await valuesToDB([
+            { id: 2, name: 'foo2', value: 213 },
+            { id: 5, name: 'bar', value: 432 },
+        ]);
+
+        expect(dbSettedValues).toMatchObject({
+            'values/cash/2': {
+                board: 'cash',
+                id: 2,
+                name: 'foo',
+                currentValue: 123,
+                oldValueList: [{
+                    oldValue: 123,
+                    quantity: 1
+                }]
+            },
+            'values/cash/2/name': 'foo2',
+            'values/cash/2/currentValue': 213,
+            
+            'values/cash/5': {
+                board: 'cash',
+                id: 5,
+                name: 'bar',
+                currentValue: 543,
+                oldValueList: [{
+                    oldValue: 543,
+                    quantity: 1
+                }]
+            },
+            'values/cash/5/name': 'bar',
+            'values/cash/5/currentValue': 432
+        });
+    });
 });
