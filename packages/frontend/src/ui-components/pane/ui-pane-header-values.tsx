@@ -46,7 +46,7 @@ export const UIPaneHeaderValues: React.FC<UIPaneHeaderValuesProps> = ({
                     <UIEuroValue variant='body2' value={oldValue} />
                 </Grid>
                 <Grid item>
-                    <UIGain variant='body2' gainVariant='euro' oldValue={oldValue} newValue={currentValue} />
+                    <UIGain variant='body2' oldValue={oldValue} newValue={currentValue} />
                 </Grid>
                 <Grid item>
                     <UIEuroValue variant='body2' color='primary' value={currentValue} />

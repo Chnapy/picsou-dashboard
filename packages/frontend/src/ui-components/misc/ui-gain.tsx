@@ -1,18 +1,17 @@
 import React from 'react';
-import { UITypography, UITypographyProps } from '../typography/ui-typography';
 import { switchUtil } from '../../util/util';
+import { gainUnitContext } from '../contexts/gain-unit-context';
+import { UITypography, UITypographyProps } from '../typography/ui-typography';
 import { UIEuroValue } from './ui-euro-value';
 import { UISpacedNumber } from './ui-spaced-number';
 
 export type UIGainProps = Omit<UITypographyProps, 'color' | 'children'> & {
-    gainVariant: 'euro' | 'percent';
     oldValue: number;
     newValue: number;
     children?: never;
 };
 
 export const UIGain: React.FC<UIGainProps> = ({
-    gainVariant,
     oldValue,
     newValue,
     ...rest
@@ -30,7 +29,9 @@ export const UIGain: React.FC<UIGainProps> = ({
         color: isGain ? 'positive' : 'negative'
     };
 
-    return switchUtil(gainVariant, {
+    const gainUnit = gainUnitContext.useValue();
+
+    return switchUtil(gainUnit, {
         euro: () => <UIEuroValue {...finalProps} value={diff} />,
         percent: () => <UIPercent {...finalProps} oldValue={oldValue} newValue={newValue} />
     })();
@@ -51,7 +52,7 @@ const UIPercent: React.FC<UIPercentProps> = ({
 }) => {
     const diff = newValue - oldValue;
 
-    const percentValue = diff / oldValue * 100;
+    const percentValue = (diff / oldValue * 100) || 0;
 
     return <UITypography {...rest}>
         {prefix}<UISpacedNumber value={percentValue}/>%

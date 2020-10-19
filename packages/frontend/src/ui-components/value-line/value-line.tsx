@@ -48,7 +48,7 @@ export const ValueLine: React.FC<ValueLineProps> = ({
                 </UITypography>
             </Grid>
             <Grid container item justify='flex-end' xs={4}>
-                <UIGain gainVariant='percent' oldValue={oldValueAverage} newValue={currentValue} variant='h4' />
+                <UIGain oldValue={oldValueFull} newValue={currentValueFull} variant='h4' />
             </Grid>
 
             <Grid item xs={12}>
@@ -64,20 +64,17 @@ export const ValueLine: React.FC<ValueLineProps> = ({
                 </Box>}
             </Grid>
             <Grid container item justify='center' xs={4}>
-                <UIGain gainVariant='euro' oldValue={oldValueAverage} newValue={currentValue} variant='body1' />
+                <UIGain oldValue={oldValueAverage} newValue={currentValue} variant='body1' />
             </Grid>
             <Grid container item justify='flex-end' xs={4}>
                 <UIEuroValue value={currentValue} variant='body1' color='primary' />
             </Grid>
 
             {showDetails && <>
-                <Grid container item xs={4}>
+                <Grid container item xs={6}>
                     <UIEuroValue value={oldValueFull} variant='body1' disabled />
                 </Grid>
-                <Grid container item justify='center' xs={4}>
-                    <UIGain gainVariant='euro' oldValue={oldValueFull} newValue={currentValueFull} variant='body1' />
-                </Grid>
-                <Grid container item justify='flex-end' xs={4}>
+                <Grid container item justify='flex-end' xs={6}>
                     <UIEuroValue value={currentValueFull} variant='body1' />
                 </Grid>
             </>}
