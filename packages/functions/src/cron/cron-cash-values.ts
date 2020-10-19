@@ -68,7 +68,7 @@ export const cronCashValues = async () => {
             const nameEl = item.querySelector(classNamesObj.itemName)!;
             const valueEl = item.querySelector(classNamesObj.itemValue)!;
 
-            const id = +idEl.textContent!;
+            const id = +idEl.textContent!.replace(/\D/g, '');
             const name = nameEl.textContent!.replace(/\s\(.*\)/, '');
             const value = Number.parseFloat(valueEl.textContent!.replace(/\s/g, '').replace(',', '.'));
 
