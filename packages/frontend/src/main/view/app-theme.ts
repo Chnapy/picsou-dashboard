@@ -69,12 +69,12 @@ export const appTheme: Theme = createMuiTheme({
             textTransform: 'uppercase'
         },
         h4: {
-            fontSize: '1.6rem',
+            fontSize: '1.4rem',
             textTransform: 'uppercase',
             fontWeight: 500
         },
         body1: {
-            fontSize: '1.6rem',
+            fontSize: '1.4rem',
             fontWeight: 500
         },
         body2: {

@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { InputBoardValueInfos } from '../../ui-components/dialog/edit-values-dialog';
 import { UIPane } from '../../ui-components/pane/ui-pane';
+import { UIPaneHeaderValues } from '../../ui-components/pane/ui-pane-header-values';
 import { enumToString } from '../../util/enum-to-string';
 import { NormalizeObject } from '../../util/normalize';
 import { MainBoardEditLocalAction, MainBoardValueSelectAction } from '../reducer/main-board-actions';
@@ -70,6 +71,7 @@ export const MainPane = React.memo<MainPaneProps>(({ board }) => {
     return <>
         <UIPane
             title={enumToString.boardKind(board)}
+            rightContent={!loading && <MainPaneHeaderValues board={board} />}
             paneColor={board}
             loading={loading}
             onEdit={isEditable && onEditOpen}
@@ -85,3 +87,11 @@ export const MainPane = React.memo<MainPaneProps>(({ board }) => {
         />
     </>;
 });
+
+const MainPaneHeaderValues: React.FC<{
+    board: BoardKind;
+}> = ({ board }) => {
+    const valuesIds = useSelector(state => state.mainBoard.valuesList[ board ]);
+
+    return <UIPaneHeaderValues filterFn={v => valuesIds.includes(v.id)} />;
+};

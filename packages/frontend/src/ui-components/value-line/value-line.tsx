@@ -37,6 +37,8 @@ export const ValueLine: React.FC<ValueLineProps> = ({
 
     const quantityUnit = enumToString.quantityUnit(board);
 
+    const showDetails = enumToString.shouldShowQuantity(quantityTotal, quantityUnit);
+
     return <ButtonBase className={classes.root} onClick={onClick}>
         <Grid container spacing={1}>
 
@@ -55,7 +57,7 @@ export const ValueLine: React.FC<ValueLineProps> = ({
 
             <Grid container item xs={4}>
                 <UIEuroValue value={oldValueAverage} variant='body1' disabled />
-                {enumToString.shouldShowQuantity(quantityTotal, quantityUnit) && <Box ml={1}>
+                {showDetails && <Box ml={1}>
                     <UITypography variant='body1'>
                         {enumToString.quantity(quantityTotal, quantityUnit)}
                     </UITypography>
@@ -68,7 +70,7 @@ export const ValueLine: React.FC<ValueLineProps> = ({
                 <UIEuroValue value={currentValue} variant='body1' color='primary' />
             </Grid>
 
-            {quantityTotal > 1 && <>
+            {showDetails && <>
                 <Grid container item xs={4}>
                     <UIEuroValue value={oldValueFull} variant='body1' disabled />
                 </Grid>

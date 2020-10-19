@@ -9,7 +9,7 @@ export default {
     component: UIChart
 } as Meta;
 
-const Template: Story<UIChartProps> = props => <UIPane title='chart' paneColor='market' loading={false}>
+const Template: Story<UIChartProps> = props => <UIPane title='chart' rightContent={null} paneColor='market' loading={false}>
     <UIChart {...props} />
 </UIPane>
 
