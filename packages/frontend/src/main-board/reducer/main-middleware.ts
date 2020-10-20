@@ -64,7 +64,13 @@ export const mainMiddleware = createMiddleware(() => api => next => {
                 }));
             });
 
-            setInterval(async () => {
+            const interval = setInterval(async () => {
+
+                const { isAuth } = api.getState().auth;
+                if (!isAuth) {
+                    clearInterval(interval);
+                    return;
+                }
 
                 const boardList = api.getState().mainBoard.valuesList[ board ];
 

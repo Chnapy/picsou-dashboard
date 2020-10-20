@@ -1,4 +1,5 @@
 import { BoardKind, BoardValueInfos } from '@picsou/shared';
+import { AuthLogoutAction } from '../../auth/reducer/auth-actions';
 import { createRichReducer } from '../../main/create-rich-reducer';
 import { NormalizeArray, NormalizeObject } from '../../util/normalize';
 import { MainBoardEditSuccessAction, MainBoardHistorySuccessAction, MainBoardRefreshAction, MainBoardValueSelectAction } from './main-board-actions';
@@ -22,7 +23,7 @@ export type MainBoardState = {
     };
 };
 
-const initialState: MainBoardState = {
+const getInitialState = (): MainBoardState => ({
     values: {},
     valuesList: {
         cash: [],
@@ -49,9 +50,10 @@ const initialState: MainBoardState = {
             editable: true,
         },
     },
-};
+});
 
-export const mainBoardReducer = createRichReducer(initialState, () => ({
+export const mainBoardReducer = createRichReducer(getInitialState(), () => ({
+    [ AuthLogoutAction.type ]: getInitialState,
     [ MainBoardRefreshAction.type ]: (state, { payload }: MainBoardRefreshAction) => {
         payload.data.forEach(({ id, currentValue }) => {
             const { price } = currentValue;

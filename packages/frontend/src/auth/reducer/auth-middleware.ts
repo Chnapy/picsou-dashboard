@@ -1,6 +1,6 @@
 import { getFirebase } from '../../firebase/create-firebase-app';
 import { createMiddleware } from '../../main/create-middleware';
-import { AuthSuccessAction } from './auth-actions';
+import { AuthLogoutAction, AuthSuccessAction } from './auth-actions';
 
 export const authMiddleware = createMiddleware(() => api => next => {
 
@@ -8,11 +8,17 @@ export const authMiddleware = createMiddleware(() => api => next => {
 
     getFirebase().auth().onAuthStateChanged(user => {
 
-        if (user && !hasPrevious) {
-            hasPrevious = true;
+        if (user) {
+            if (!hasPrevious) {
+                hasPrevious = true;
 
+                return api.dispatch(
+                    AuthSuccessAction()
+                );
+            }
+        } else {
             return api.dispatch(
-                AuthSuccessAction()
+                AuthLogoutAction()
             );
         }
     });

@@ -25,7 +25,26 @@ export const UIPaneHeaderTemplate: React.FC<UIPaneHeaderTemplateProps> = ({
         setAnchorEl(null);
     };
 
-    const menuContent = getMenuContent && getMenuContent(handleClose);
+    const menuContentToArray = (rawContent: React.ReactNode): React.ReactNode[] => {
+        if (!React.isValidElement(rawContent)) {
+            return [];
+        }
+
+        if (rawContent.type === React.Fragment) {
+            return React.Children.toArray(rawContent.props.children)
+        }
+
+        return [ rawContent ];
+    };
+
+    const menuContent = menuContentToArray(getMenuContent && getMenuContent(handleClose))
+        .map((child, i) => {
+            if (React.isValidElement(child) && child.key === null) {
+                child = React.cloneElement(child, { key: i });
+            }
+
+            return child;
+        })
 
     return <Paper style={{ position: 'sticky', top: 0, zIndex: 1 }}>
         <Grid container item wrap='nowrap' alignItems='center' spacing={1} style={{
@@ -59,7 +78,7 @@ export const UIPaneHeaderTemplate: React.FC<UIPaneHeaderTemplateProps> = ({
             </Grid>
 
             <Grid item>
-                {menuContent && <IconButton onClick={handleClick} size='small'>
+                {menuContent.length > 0 && <IconButton onClick={handleClick} size='small'>
                     <MoreVertIcon />
                 </IconButton>}
             </Grid>

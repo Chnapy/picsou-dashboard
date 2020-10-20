@@ -55,7 +55,7 @@ export const ValueLine: React.FC<ValueLineProps> = ({
                 <Divider />
             </Grid>
 
-            <Grid container item xs={4}>
+            <Grid container item wrap='nowrap' xs={4}>
                 <UIEuroValue value={oldValueAverage} variant='body1' disabled />
                 {showDetails && <Box ml={1}>
                     <UITypography variant='body1'>
