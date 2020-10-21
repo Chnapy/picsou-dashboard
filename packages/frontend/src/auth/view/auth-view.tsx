@@ -1,11 +1,10 @@
-import { Box, Card, CardContent, CircularProgress, SvgIcon, SvgIconProps } from '@material-ui/core';
+import { Box, Card, CardContent, SvgIcon, SvgIconProps } from '@material-ui/core';
 import firebase from 'firebase/app';
 import * as firebaseui from 'firebaseui';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { AppTitle } from '../../app-step/view/app-loading';
 import { firebaseAuthClientID } from '../../firebase/create-firebase-app';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
-import { UITypography } from '../../ui-components/typography/ui-typography';
 import { AuthSuccessAction } from '../reducer/auth-actions';
 import { FirebaseAuthButton } from './firebase-auth-button';
 
@@ -35,41 +34,27 @@ const getFirebaseUIConfig = (dispatchAuthSuccess: () => void): firebaseui.auth.C
 
 export const AuthView: React.FC = () => {
 
-    const loading = useSelector(state => state.auth.loading);
-
     const { dispatchAuthSuccess } = useAppDispatch({
         dispatchAuthSuccess: AuthSuccessAction
     });
 
     const uiConfig = getFirebaseUIConfig(dispatchAuthSuccess);
 
-    const title = (
-        <UITypography variant='h1' gutterBottom>
-            Picsou dashboard
-        </UITypography>
-    );
+    return <Box display='flex' flexDirection='column' height='100%' justifyContent='center' alignItems='center'>
+        <Card>
+            <CardContent>
+                <Box display='flex' flexDirection='column' alignItems='center'>
+                    <AppTitle withFilter />
 
-    return <>
-        <Box display='flex' flexDirection='column' height='100%' justifyContent='center' alignItems='center'>
+                    <Box display='inline-block' mb={2}>
+                        <img src={process.env.PUBLIC_URL + '/logo192.png'} alt='Logo' style={{ filter: 'drop-shadow(-15px 10px 0 rgba(0,0,0,0.25))' }} />
+                    </Box>
 
-            {loading
-                ? <>
-                    {title}
-
-                    <CircularProgress thickness={2} />
-                </>
-                : <Card>
-                    <CardContent>
-                        <Box display='flex' flexDirection='column' alignItems='center'>
-                            {title}
-
-                            <FirebaseAuthButton uiConfig={uiConfig} variant='primary' startIcon={<GoogleIcon style={{ width: '0.8em', height: '0.8em' }} />}>
-                                Enter secret room
+                    <FirebaseAuthButton uiConfig={uiConfig} variant='primary' startIcon={<GoogleIcon style={{ width: '0.8em', height: '0.8em' }} />}>
+                        Enter secret room
                         </FirebaseAuthButton>
-                        </Box>
-                    </CardContent>
-                </Card>
-            }
-        </Box>
-    </>;
+                </Box>
+            </CardContent>
+        </Card>
+    </Box>;
 };

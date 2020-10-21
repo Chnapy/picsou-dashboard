@@ -1,5 +1,5 @@
 import { FetchStockHistoryValuesProps, fetchStockPropsToParams, HistoryValue, routes } from '@picsou/shared';
-import { add } from 'date-fns';
+import add from 'date-fns/add';
 import { getFirebase } from '../../firebase/create-firebase-app';
 import { createFetcher } from '../fetcher-types';
 

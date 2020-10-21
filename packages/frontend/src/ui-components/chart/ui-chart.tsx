@@ -1,7 +1,7 @@
 import { Box, Divider, Paper, Theme, useTheme } from '@material-ui/core';
 import { PointTooltip, ResponsiveLine, Serie } from '@nivo/line';
 import { BoardKind } from '@picsou/shared';
-import { format } from 'date-fns';
+import format from 'date-fns/format';
 import React from 'react';
 import { UIEuroValue } from '../misc/ui-euro-value';
 import { UITypography } from '../typography/ui-typography';

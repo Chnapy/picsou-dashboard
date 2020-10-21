@@ -39,6 +39,7 @@
     "babel-loader": "8.1.0",
     "eslint-plugin-jest": "24.0.1",
     "react-is": "16.13.1",
+    "source-map-explorer": "^2.5.0",
     "typescript": "4.0.2"
   },
   "scripts": {
@@ -51,7 +52,8 @@
     "check-type": "tsc --noEmit",
     "firebase-env": "node firebase-extract-config/firebase-extract-config.js",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "browserslist": {
     "production": [

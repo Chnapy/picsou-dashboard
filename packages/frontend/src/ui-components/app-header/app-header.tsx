@@ -59,7 +59,7 @@ export const AppHeader: React.FC = () => {
                     <ListItemIcon>
                         <ExitToAppIcon />
                     </ListItemIcon>
-                    <ListItemText primary='Log out'/>
+                    <ListItemText primary='Log out' />
                 </MenuItem>
             </>;
         }}
