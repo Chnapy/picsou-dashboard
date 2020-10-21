@@ -40,7 +40,8 @@ export const createCashFetcher = createFetcher(() => {
                         });
 
                         return acc;
-                    }, []);
+                    }, [])
+                    .sort((a, b) => a.time > b.time ? -1 : 1);
 
                 return {
                     id,
