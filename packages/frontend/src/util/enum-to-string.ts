@@ -27,8 +27,8 @@ export const enumToString = {
     quantityUnit: (board: BoardKind) => boardUnit[board],
 
     quantity: (value: number, unit: QuantityUnit) => switchUtil(unit, {
-        unit: () => 'x' + value,
-        kg: () => value + 'kg',
+        unit: () => 'x' + value.toFixed(0),
+        kg: () => value.toFixed(3) + 'kg',
     })(),
 
     shouldShowQuantity: (value: number, unit: QuantityUnit) => switchUtil(unit, {

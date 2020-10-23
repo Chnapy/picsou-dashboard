@@ -1,23 +1,37 @@
-import { Box, Grid, ListItemIcon, ListItemText, MenuItem, Switch } from '@material-ui/core';
+import { Box, Grid, ListItemIcon, ListItemText, makeStyles, MenuItem, Switch } from '@material-ui/core';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import { boardKindList } from '@picsou/shared';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { getFirebase } from '../../firebase/create-firebase-app';
-import { gainUnitContext } from '../contexts/gain-unit-context';
+import { GainUnit, gainUnitContext } from '../contexts/gain-unit-context';
 import { UIPaneHeaderTemplate } from '../pane/ui-pane-header-template';
 import { UIPaneHeaderValues } from '../pane/ui-pane-header-values';
 
-const Symbol: React.FC = ({ children }) => <Box fontSize='1.4em' fontWeight={600}>{children}</Box>;
+type AppHeaderProps = {
+    desktopView?: boolean;
+};
 
-export const AppHeader: React.FC = () => {
+const useStyles = makeStyles(({ breakpoints }) => ({
+    root: ({ desktopView }: AppHeaderProps) => desktopView
+        ? {}
+        : {
+            boxShadow: '0px -2px 1px -1px rgba(0,0,0,0.2), 0px -1px 1px 0px rgba(0,0,0,0.14), 0px -1px 3px 0px rgba(0,0,0,0.12)'
+        }
+}));
+
+const getUnitSymbol = (unit: GainUnit) => <Box display='inline' fontSize='1.4rem'>{unit === 'euro' ? '€' : '%'}</Box>;
+
+export const AppHeader: React.FC<AppHeaderProps> = props => {
+    const classes = useStyles(props);
     const loading = useSelector(state => boardKindList.some(board => state.mainBoard.status[ board ].loading));
 
     const gainUnit = gainUnitContext.useValue();
     const setGainUnit = gainUnitContext.useDispatch();
 
     return <UIPaneHeaderTemplate
+        className={classes.root}
         title='Picsou'
         rightContent={<UIPaneHeaderValues />}
         loading={loading}
@@ -38,7 +52,7 @@ export const AppHeader: React.FC = () => {
                             </Box>
                             </Grid>
                             <Grid item>
-                                <Symbol>€</Symbol>
+                                {getUnitSymbol('euro')}
                             </Grid>
                             <Grid item>
                                 <Box mx={-1.5}>
@@ -49,7 +63,7 @@ export const AppHeader: React.FC = () => {
                                 </Box>
                             </Grid>
                             <Grid item>
-                                <Symbol>%</Symbol>
+                                {getUnitSymbol('percent')}
                             </Grid>
                         </Grid>
                     } />

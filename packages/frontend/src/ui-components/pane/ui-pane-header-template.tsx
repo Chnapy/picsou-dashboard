@@ -4,6 +4,7 @@ import React from 'react';
 import { UITypography } from '../typography/ui-typography';
 
 export type UIPaneHeaderTemplateProps = {
+    className?: string;
     title: string;
     extraLeftContent?: React.ReactNode;
     rightContent: React.ReactNode;
@@ -12,7 +13,7 @@ export type UIPaneHeaderTemplateProps = {
 };
 
 export const UIPaneHeaderTemplate: React.FC<UIPaneHeaderTemplateProps> = ({
-    title, extraLeftContent, rightContent, loading, getMenuContent
+    className, title, extraLeftContent, rightContent, loading, getMenuContent
 }) => {
     const [ anchorEl, setAnchorEl ] = React.useState<HTMLButtonElement | null>(null);
     const open = Boolean(anchorEl);
@@ -46,7 +47,7 @@ export const UIPaneHeaderTemplate: React.FC<UIPaneHeaderTemplateProps> = ({
             return child;
         })
 
-    return <Paper style={{ position: 'sticky', top: 0, zIndex: 1 }}>
+    return <Paper className={className} style={{ position: 'sticky', top: 0, zIndex: 1 }}>
         <Grid container item wrap='nowrap' alignItems='center' spacing={1} style={{
             height: 32,
             marginTop: 0,

@@ -12,6 +12,8 @@
   },
   "scripts": {
     "deploy": "firebase deploy",
+    "build-all": "yarn workspace @picsou/shared build && concurrently \"yarn workspace @picsou/functions build\" \"yarn workspace @picsou/frontend build\"",
+    "build-then-deploy": "yarn build-all && yarn deploy",
     "deploy:config": "firebase functions:config:set"
   },
   "engineStrict": true,

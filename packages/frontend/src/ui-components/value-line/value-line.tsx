@@ -1,10 +1,11 @@
-import { Box, ButtonBase, Divider, Grid, makeStyles } from '@material-ui/core';
-import React from 'react';
+import { Button, Divider, Grid, makeStyles } from '@material-ui/core';
 import { BoardValueInfos } from '@picsou/shared';
+import React from 'react';
 import { enumToString } from '../../util/enum-to-string';
 import { UIEuroValue } from '../misc/ui-euro-value';
 import { UIGain } from '../misc/ui-gain';
 import { UITypography } from '../typography/ui-typography';
+import { OldValueChip, PaddedValue } from './old-value-chip';
 
 export type ValueLineProps = {
     valueLine: BoardValueInfos;
@@ -14,7 +15,6 @@ export type ValueLineProps = {
 const useStyles = makeStyles(({ palette, spacing }) => ({
     root: {
         display: 'flex',
-        width: '100%',
         textAlign: 'left',
         backgroundColor: palette.background.level1,
         padding: spacing(1),
@@ -39,7 +39,7 @@ export const ValueLine: React.FC<ValueLineProps> = ({
 
     const showDetails = enumToString.shouldShowQuantity(quantityTotal, quantityUnit);
 
-    return <ButtonBase className={classes.root} onClick={onClick}>
+    return <Button className={classes.root} onClick={onClick} fullWidth disableElevation>
         <Grid container spacing={1}>
 
             <Grid item xs={8}>
@@ -52,33 +52,39 @@ export const ValueLine: React.FC<ValueLineProps> = ({
             </Grid>
 
             <Grid item xs={12}>
-                <Divider />
+                <Divider variant='middle' />
             </Grid>
 
-            <Grid container item wrap='nowrap' xs={4}>
-                <UIEuroValue value={oldValueAverage} variant='body1' disabled />
-                {showDetails && <Box ml={1}>
-                    <UITypography variant='body1'>
-                        {enumToString.quantity(quantityTotal, quantityUnit)}
-                    </UITypography>
-                </Box>}
-            </Grid>
-            <Grid container item justify='center' xs={4}>
-                <UIGain oldValue={oldValueAverage} newValue={currentValue} variant='body1' />
-            </Grid>
-            <Grid container item justify='flex-end' xs={4}>
-                <UIEuroValue value={currentValue} variant='body1' color='primary' />
+            <Grid item container spacing={1} wrap='nowrap'>
+                <Grid container item wrap='nowrap'>
+                    <OldValueChip
+                        board={board}
+                        oldValueList={oldValueList}
+                    />
+                </Grid>
+                <Grid container item justify='center'>
+                    <UIGain oldValue={oldValueAverage} newValue={currentValue} variant='body1' />
+                </Grid>
+                <Grid container item justify='flex-end'>
+                    <PaddedValue mr>
+                        <UIEuroValue value={currentValue} variant='body1' color='primary' />
+                    </PaddedValue>
+                </Grid>
             </Grid>
 
             {showDetails && <>
                 <Grid container item xs={6}>
-                    <UIEuroValue value={oldValueFull} variant='body1' disabled />
+                    <PaddedValue ml>
+                        <UIEuroValue value={oldValueFull} variant='body1' disabled />
+                    </PaddedValue>
                 </Grid>
                 <Grid container item justify='flex-end' xs={6}>
-                    <UIEuroValue value={currentValueFull} variant='body1' />
+                    <PaddedValue mr>
+                        <UIEuroValue value={currentValueFull} variant='body1' />
+                    </PaddedValue>
                 </Grid>
             </>}
 
         </Grid>
-    </ButtonBase>;
+    </Button>;
 };
