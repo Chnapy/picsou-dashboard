@@ -16,6 +16,7 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
     root: {
         display: 'flex',
         textAlign: 'left',
+        textTransform: 'initial',
         backgroundColor: palette.background.level1,
         padding: spacing(1),
         marginBottom: 2

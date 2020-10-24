@@ -15,9 +15,9 @@ export const createView = ({ storeManager }: ViewProps) => {
         <Provider store={storeManager.store}>
             <UIThemeProvider>
 
-                <Container style={{height: '100vh'}}>
+                <Container style={{ height: '100vh', overflow: 'auto' }}>
 
-                <AppStepRouter />
+                    <AppStepRouter />
 
                 </Container>
 
