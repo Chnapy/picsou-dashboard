@@ -9,8 +9,10 @@ type MainChartProps = Pick<UIChartProps, 'height'> & {
 export const MainChart: React.FC<MainChartProps> = ({ valueId, height }) => {
 
     const { board, id, history } = useSelector(state => state.mainBoard.values[ valueId ]);
+    const loading = useSelector(state => state.mainBoard.status[ board ].loading);
 
     return <UIChart
+        loading={loading}
         paneColor={board}
         height={height}
         data={[ {

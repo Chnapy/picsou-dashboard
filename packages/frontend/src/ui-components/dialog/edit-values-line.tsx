@@ -24,7 +24,7 @@ export const EditValuesLine: React.FC<EditValuesLineProps> = ({
 
     const oldValueList = infos.oldValueList.length
         ? infos.oldValueList
-        : [getEmptyOldValue()]
+        : [ getEmptyOldValue() ]
 
     const [ open, setOpen ] = React.useState(false);
     const [ loading, setLoading ] = React.useState(false);
@@ -107,6 +107,8 @@ export const EditValuesLine: React.FC<EditValuesLineProps> = ({
                         setOpen(false);
                     }}
                     freeSolo
+                    selectOnFocus
+                    size='small'
                     value={{ name: search, id }}
                     onChange={(e, option, reason) => {
                         if (option && typeof option === 'object') {
@@ -142,6 +144,7 @@ export const EditValuesLine: React.FC<EditValuesLineProps> = ({
                             {...params}
                             label='Name'
                             required
+                            autoFocus
                             InputProps={{
                                 ...params.InputProps,
                                 endAdornment: (
@@ -186,54 +189,57 @@ export const EditValuesLine: React.FC<EditValuesLineProps> = ({
                 <Grid item xs={12}>
                     <Divider />
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                    <UITextField
-                        label='Value'
-                        type='number'
-                        defaultValue={oldValue}
-                        required
-                        onBlur={e => {
-                            const oldValues = [ ...oldValueList ];
-                            oldValues[ i ] = {
-                                ...oldValues[ i ],
-                                oldValue: +e.currentTarget.value,
-                            };
+                <Grid item container xs={12} wrap='nowrap' alignItems='center' spacing={1}>
+                    <Grid item xs={6} sm={6}>
+                        <UITextField
+                            label='Value'
+                            type='number'
+                            defaultValue={oldValue}
+                            required
+                            onBlur={e => {
+                                const oldValues = [ ...oldValueList ];
+                                oldValues[ i ] = {
+                                    ...oldValues[ i ],
+                                    oldValue: +e.currentTarget.value,
+                                };
 
-                            onChange({
-                                ...infos,
-                                oldValueList: oldValues
-                            });
-                        }}
-                    />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                    <UITextField
-                        label='Quantity'
-                        type='number'
-                        defaultValue={quantity}
-                        required
-                        onBlur={e => {
-                            const oldValues = [ ...oldValueList ];
-                            oldValues[ i ] = {
-                                ...oldValues[ i ],
-                                quantity: +e.currentTarget.value,
-                            };
+                                onChange({
+                                    ...infos,
+                                    oldValueList: oldValues
+                                });
+                            }}
+                        />
+                    </Grid>
+                    <Grid item xs sm={4}>
+                        <UITextField
+                            label='Quantity'
+                            type='number'
+                            defaultValue={quantity}
+                            required
+                            onBlur={e => {
+                                const oldValues = [ ...oldValueList ];
+                                oldValues[ i ] = {
+                                    ...oldValues[ i ],
+                                    quantity: +e.currentTarget.value,
+                                };
 
-                            onChange({
+                                onChange({
+                                    ...infos,
+                                    oldValueList: oldValues
+                                });
+                            }}
+                        />
+                    </Grid>
+                    <Grid item>
+                        <IconButton
+                            size='small'
+                            onClick={() => onChange({
                                 ...infos,
-                                oldValueList: oldValues
-                            });
-                        }}
-                    />
-                </Grid>
-                <Grid item container justify='center' alignItems='center' xs={12} sm={2}>
-                    <IconButton
-                        onClick={() => onChange({
-                            ...infos,
-                            oldValueList: oldValueList.filter((v, index) => index !== i)
-                        })}>
-                        <DeleteIcon />
-                    </IconButton>
+                                oldValueList: oldValueList.filter((v, index) => index !== i)
+                            })}>
+                            <DeleteIcon />
+                        </IconButton>
+                    </Grid>
                 </Grid>
             </React.Fragment>
         ))}

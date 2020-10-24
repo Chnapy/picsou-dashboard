@@ -1,4 +1,4 @@
-import { Box, Divider, Paper, Theme, useTheme } from '@material-ui/core';
+import { Box, CircularProgress, Divider, Paper, Theme, useTheme } from '@material-ui/core';
 import { PointTooltip, ResponsiveLine, Serie } from '@nivo/line';
 import { BoardKind } from '@picsou/shared';
 import format from 'date-fns/format';
@@ -7,32 +7,41 @@ import { UIEuroValue } from '../misc/ui-euro-value';
 import { UITypography } from '../typography/ui-typography';
 
 export type UIChartProps = {
+    loading?: boolean;
     height: number;
     paneColor: BoardKind;
     data: Serie[];
 };
 
-export const UIChart: React.FC<UIChartProps> = ({ height, paneColor, data }) => {
+export const UIChart: React.FC<UIChartProps> = ({ loading, height, paneColor, data }) => {
 
     const { palette } = useTheme<Theme>();
 
     const color = palette.investment[ paneColor ];
 
     return <Box height={height}>
-        <ResponsiveLine
-            data={data}
-            enablePoints={false}
-            enableArea
-            enableGridX={false}
-            enableGridY={false}
-            margin={{ top: 3 }}
-            xScale={{ type: 'linear', min: 'auto' }}
-            yScale={{ type: 'linear', min: 'auto', max: 'auto' }}
-            xFormat={x => format(x as number, 'dd/MM/yyyy')}
-            useMesh
-            colors={color}
-            tooltip={Tooltip}
-        />
+        {loading
+            ? (
+                <Box height='100%' display='flex' justifyContent='center' alignItems='center' color={color}>
+                    <CircularProgress color='inherit' thickness={2} />
+                </Box>
+            )
+            : (
+                <ResponsiveLine
+                    data={data}
+                    enablePoints={false}
+                    enableArea
+                    enableGridX={false}
+                    enableGridY={false}
+                    margin={{ top: 3 }}
+                    xScale={{ type: 'linear', min: 'auto' }}
+                    yScale={{ type: 'linear', min: 'auto', max: 'auto' }}
+                    xFormat={x => format(x as number, 'dd/MM/yyyy')}
+                    useMesh
+                    colors={color}
+                    tooltip={Tooltip}
+                />
+            )}
     </Box>;
 };
 

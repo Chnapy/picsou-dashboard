@@ -1,9 +1,11 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, IconButton, Tab, Tabs } from '@material-ui/core';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, ListItemIcon, ListItemText, MenuItem, Tab, Tabs } from '@material-ui/core';
 import AddBoxIcon from '@material-ui/icons/AddBox';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { BoardKind, BoardValueInfos } from '@picsou/shared';
 import React from 'react';
 import { enumToString } from '../../util/enum-to-string';
 import { NormalizeObject } from '../../util/normalize';
+import { UIMenuIcon } from '../menu-icon/ui-menu-icon';
 import { EditValuesLine, EditValuesLineProps } from './edit-values-line';
 
 export type InputBoardValueInfos = Omit<BoardValueInfos, 'currentValue'>;
@@ -68,13 +70,15 @@ const EditvaluesDialogContent: React.FC<EditvaluesDialogContentProps> = ({
 
     const canSubmit = canAdd;
 
+    const canDelete = infosIds.length > 1 || infosIds[ 0 ] !== 0;
+
     return <>
         <DialogTitle>
             <div>
                 {enumToString.boardKind(board)} - Edit values
             </div>
 
-            <Grid container xs={12}>
+            <Grid container alignItems='center' xs={12}>
                 <Grid item xs style={{ overflow: 'hidden' }}>
                     <Tabs
                         variant='scrollable'
@@ -87,18 +91,49 @@ const EditvaluesDialogContent: React.FC<EditvaluesDialogContentProps> = ({
                     </Tabs>
                 </Grid>
                 <Grid item>
-                    <IconButton
-                        onClick={() => {
-                            setAllInfos(allInfos => ({
-                                ...allInfos,
-                                ...getEmptyAllInfos()
-                            }));
-                            setCurrentId(0);
-                        }}
-                        disabled={!canAdd}
-                    >
-                        <AddBoxIcon />
-                    </IconButton>
+                    <UIMenuIcon>
+                        {closeMenu => (
+                            <>
+                                <MenuItem
+                                    onClick={() => {
+                                        setAllInfos(allInfos => ({
+                                            ...allInfos,
+                                            ...getEmptyAllInfos()
+                                        }));
+                                        setCurrentId(0);
+                                        closeMenu();
+                                    }}
+                                    disabled={!canAdd}
+                                >
+                                    <ListItemIcon>
+                                        <AddBoxIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary='Add new' />
+                                </MenuItem>
+
+                                <MenuItem
+                                    onClick={() => {
+                                        setAllInfos(allInfos => {
+                                            if (infosIds.length === 1) {
+                                                return getEmptyAllInfos();
+                                            }
+                                            const newInfos = { ...allInfos };
+                                            delete newInfos[ currentId ];
+                                            return newInfos;
+                                        });
+                                        setCurrentId(infosIds.find(id => id !== currentId) ?? 0);
+                                        closeMenu();
+                                    }}
+                                    disabled={!canDelete}
+                                >
+                                    <ListItemIcon>
+                                        <DeleteIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary='Delete' />
+                                </MenuItem>
+                            </>
+                        )}
+                    </UIMenuIcon>
                 </Grid>
             </Grid>
         </DialogTitle>
