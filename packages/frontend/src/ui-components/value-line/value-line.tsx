@@ -2,7 +2,7 @@ import { Box, Button, Divider, Grid, makeStyles } from '@material-ui/core';
 import { BoardValueInfos } from '@picsou/shared';
 import React from 'react';
 import { enumToString } from '../../util/enum-to-string';
-import { UIEuroValue } from '../misc/ui-euro-value';
+import { UIEuroValue, UIEuroValueProps } from '../misc/ui-euro-value';
 import { UIGain } from '../misc/ui-gain';
 import { UITypography } from '../typography/ui-typography';
 import { OldValueChip, PaddedValue } from './old-value-chip';
@@ -40,6 +40,19 @@ export const ValueLine: React.FC<ValueLineProps> = ({
 
     const showDetails = enumToString.shouldShowQuantity(quantityTotal, quantityUnit);
 
+    const renderValue = ({ color, oldValue, currentValue }: Pick<UIEuroValueProps, 'color'> & { oldValue: number; currentValue: number; }) => (
+        <PaddedValue mr>
+            <Grid container direction='column' alignItems='flex-end'>
+                <Grid item>
+                    <UIEuroValue value={currentValue} variant='body1' color={color} />
+                </Grid>
+                <Grid item style={{ marginTop: -4 }}>
+                    <UIGain unit='euro' variant='labelMini' oldValue={oldValue} newValue={currentValue} style={{ fontWeight: 400 }} />
+                </Grid>
+            </Grid>
+        </PaddedValue>
+    );
+
     return <Button className={classes.root} onClick={onClick} fullWidth disableElevation>
         <Grid container>
 
@@ -69,16 +82,11 @@ export const ValueLine: React.FC<ValueLineProps> = ({
                 </Grid>
 
                 <Grid item>
-                    <PaddedValue mr>
-                        <Grid container direction='column' alignItems='flex-end'>
-                            <Grid item>
-                                <UIEuroValue value={currentValue} variant='body1' color='primary' />
-                            </Grid>
-                            <Grid item style={{ marginTop: -4 }}>
-                                <UIGain unit='euro' variant='labelMini' oldValue={oldValueAverage} newValue={currentValue} style={{ fontWeight: 400 }} />
-                            </Grid>
-                        </Grid>
-                    </PaddedValue>
+                    {renderValue({
+                        color: 'primary',
+                        oldValue: oldValueAverage,
+                        currentValue
+                    })}
                 </Grid>
             </Grid>
 
@@ -90,16 +98,10 @@ export const ValueLine: React.FC<ValueLineProps> = ({
                 </Grid>
 
                 <Grid container item justify='flex-end'>
-                    <PaddedValue mr>
-                        <Grid container direction='column' alignItems='flex-end'>
-                            <Grid item>
-                                <UIEuroValue variant='body1' value={currentValueFull} />
-                            </Grid>
-                            <Grid item style={{ marginTop: -6 }}>
-                                <UIGain unit='euro' variant='labelMini' oldValue={oldValueFull} newValue={currentValueFull} style={{ fontWeight: 400 }} />
-                            </Grid>
-                        </Grid>
-                    </PaddedValue>
+                    {renderValue({
+                        oldValue: oldValueFull,
+                        currentValue: currentValueFull
+                    })}
                 </Grid>
             </Grid>}
 
