@@ -8,7 +8,7 @@ import { switchUtil } from '../../util/util';
 type UITypographyVariant = Extract<Variant, 'h1' | 'h2' | 'h3' | 'h4' | 'body1' | 'body2'>
     | 'labelMini';
 
-type UITypographyColor = 'default' | 'primary' | 'positive' | 'negative';
+type UITypographyColor = 'default' | 'primary' | 'positive' | 'negative' | 'zero';
 
 export type UITypographyProps = Omit<TypographyProps, 'variant' | 'color'> & {
     variant: UITypographyVariant;
@@ -27,6 +27,7 @@ const useStyles = makeStyles(({ palette }) => ({
             primary: palette.primary.main,
             positive: palette.progress.positive,
             negative: palette.progress.negative,
+            zero: palette.progress.zero,
         }),
         opacity: disabled ? 0.5 : undefined,
     }),

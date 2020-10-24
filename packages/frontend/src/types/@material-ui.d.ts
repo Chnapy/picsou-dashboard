@@ -17,6 +17,7 @@ declare module '@material-ui/core/styles/createPalette' {
   export interface PaletteProgress {
     positive: string;
     negative: string;
+    zero: string;
   }
 
   interface Palette {

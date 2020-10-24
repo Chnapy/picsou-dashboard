@@ -1,17 +1,19 @@
 import React from 'react';
 import { switchUtil } from '../../util/util';
-import { gainUnitContext } from '../contexts/gain-unit-context';
+import { GainUnit, gainUnitContext } from '../contexts/gain-unit-context';
 import { UITypography, UITypographyProps } from '../typography/ui-typography';
 import { UIEuroValue } from './ui-euro-value';
 import { UISpacedNumber } from './ui-spaced-number';
 
 export type UIGainProps = Omit<UITypographyProps, 'color' | 'children'> & {
+    unit: GainUnit | 'auto';
     oldValue: number;
     newValue: number;
     children?: never;
 };
 
 export const UIGain: React.FC<UIGainProps> = ({
+    unit,
     oldValue,
     newValue,
     ...rest
@@ -26,10 +28,12 @@ export const UIGain: React.FC<UIGainProps> = ({
     const finalProps: Omit<UITypographyProps, 'children'> = {
         ...rest,
         prefix,
-        color: isGain ? 'positive' : 'negative'
+        color: isGain ? (diff === 0 ? 'zero' : 'positive') : 'negative'
     };
 
-    const gainUnit = gainUnitContext.useValue();
+    const gainUnitFromContext = gainUnitContext.useValue();
+
+    const gainUnit = unit === 'auto' ? gainUnitFromContext : unit;
 
     return switchUtil(gainUnit, {
         euro: () => <UIEuroValue {...finalProps} value={diff} />,

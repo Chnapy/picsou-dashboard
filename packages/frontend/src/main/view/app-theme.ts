@@ -40,7 +40,8 @@ export const appTheme: Theme = createMuiTheme({
         },
         progress: {
             positive: '#6FCF97',
-            negative: '#EB5757'
+            negative: '#EB5757',
+            zero: '#888',
         }
     },
     shape: {

@@ -1,4 +1,4 @@
-import { Button, Divider, Grid, makeStyles } from '@material-ui/core';
+import { Box, Button, Divider, Grid, makeStyles } from '@material-ui/core';
 import { BoardValueInfos } from '@picsou/shared';
 import React from 'react';
 import { enumToString } from '../../util/enum-to-string';
@@ -41,50 +41,67 @@ export const ValueLine: React.FC<ValueLineProps> = ({
     const showDetails = enumToString.shouldShowQuantity(quantityTotal, quantityUnit);
 
     return <Button className={classes.root} onClick={onClick} fullWidth disableElevation>
-        <Grid container spacing={1}>
+        <Grid container>
 
-            <Grid item xs={8}>
-                <UITypography variant='h4' color='primary'>
-                    {name}
-                </UITypography>
-            </Grid>
-            <Grid container item justify='flex-end' xs={4}>
-                <UIGain oldValue={oldValueFull} newValue={currentValueFull} variant='h4' />
+            <Grid item container spacing={1} wrap='nowrap' xs={12}>
+                <Grid item xs>
+                    <UITypography variant='h4' color='primary'>
+                        {name}
+                    </UITypography>
+                </Grid>
+                <Grid item>
+                    <UIGain unit='percent' oldValue={oldValueFull} newValue={currentValueFull} variant='h4' />
+                </Grid>
             </Grid>
 
             <Grid item xs={12}>
-                <Divider variant='middle' />
+                <Box my={0.5}>
+                    <Divider />
+                </Box>
             </Grid>
 
-            <Grid item container spacing={1} wrap='nowrap'>
-                <Grid container item wrap='nowrap'>
+            <Grid item container spacing={1} wrap='nowrap' alignItems='center'>
+                <Grid item xs>
                     <OldValueChip
                         board={board}
                         oldValueList={oldValueList}
                     />
                 </Grid>
-                <Grid container item justify='center'>
-                    <UIGain oldValue={oldValueAverage} newValue={currentValue} variant='body1' />
-                </Grid>
-                <Grid container item justify='flex-end'>
+
+                <Grid item>
                     <PaddedValue mr>
-                        <UIEuroValue value={currentValue} variant='body1' color='primary' />
+                        <Grid container direction='column' alignItems='flex-end'>
+                            <Grid item>
+                                <UIEuroValue value={currentValue} variant='body1' color='primary' />
+                            </Grid>
+                            <Grid item style={{ marginTop: -4 }}>
+                                <UIGain unit='euro' variant='labelMini' oldValue={oldValueAverage} newValue={currentValue} style={{ fontWeight: 400 }} />
+                            </Grid>
+                        </Grid>
                     </PaddedValue>
                 </Grid>
             </Grid>
 
-            {showDetails && <>
-                <Grid container item xs={6}>
+            {showDetails && <Grid container item wrap='nowrap' alignItems='center' spacing={1}>
+                <Grid item>
                     <PaddedValue ml>
                         <UIEuroValue value={oldValueFull} variant='body1' disabled />
                     </PaddedValue>
                 </Grid>
-                <Grid container item justify='flex-end' xs={6}>
+
+                <Grid container item justify='flex-end'>
                     <PaddedValue mr>
-                        <UIEuroValue value={currentValueFull} variant='body1' />
+                        <Grid container direction='column' alignItems='flex-end'>
+                            <Grid item>
+                                <UIEuroValue variant='body1' value={currentValueFull} />
+                            </Grid>
+                            <Grid item style={{ marginTop: -6 }}>
+                                <UIGain unit='euro' variant='labelMini' oldValue={oldValueFull} newValue={currentValueFull} style={{ fontWeight: 400 }} />
+                            </Grid>
+                        </Grid>
                     </PaddedValue>
                 </Grid>
-            </>}
+            </Grid>}
 
         </Grid>
     </Button>;
