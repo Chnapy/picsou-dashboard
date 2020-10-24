@@ -45,6 +45,8 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
 export const OldValueChip: React.FC<OldValueChipProps> = ({ board, oldValueList }) => {
     const [ open, setOpen ] = React.useState(false);
 
+    const containerRef = React.useRef<HTMLDivElement>();
+
     const singleOldValue = oldValueList.length === 1;
 
     const { rootOpen: rootOpenClass, ...classes } = useStyles({ open, singleOldValue });
@@ -61,14 +63,48 @@ export const OldValueChip: React.FC<OldValueChipProps> = ({ board, oldValueList 
 
     const isHTMLElement = (e: any): e is HTMLElement => 'classList' in e;
 
-    const disableRippleOnChipClick = singleOldValue ? undefined : (e: React.SyntheticEvent) => {
+    const isTargetingChip = (e: Event) => e.composedPath && e.composedPath().some(el => isHTMLElement(el) && el.classList.contains('MuiChip-clickable'));
+
+    const stopPropagationFn = (e: Event) => {
+        if (singleOldValue) {
+            return;
+        }
+
+        if (isTargetingChip(e)) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            return false;
+        }
+    };
+
+    const stopPropagationReactFn = (e: React.SyntheticEvent) => {
+        if (singleOldValue) {
+            return;
+        }
+
         const { nativeEvent } = e;
-        if (nativeEvent.composedPath && nativeEvent.composedPath().some(el => isHTMLElement(el) && el.classList.contains('MuiChip-clickable'))) {
+        if (isTargetingChip(nativeEvent)) {
             e.preventDefault();
             e.stopPropagation();
             return false;
         }
     };
+
+    // stop propagation for mobile
+    React.useEffect(() => {
+        const containerEl = containerRef.current;
+        if (containerEl && !singleOldValue && onClick) {
+            containerEl.addEventListener('touchstart', stopPropagationFn, { passive: false });
+            containerEl.addEventListener('touchend', onClick, { passive: false });
+
+            return () => {
+                containerEl.removeEventListener('touchstart', stopPropagationFn);
+                containerEl.removeEventListener('touchend', onClick);
+            };
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [ containerRef.current, singleOldValue ]);
 
     const rootLabel = (
         <Box display='flex' flexWrap='nowrap'>
@@ -105,10 +141,11 @@ export const OldValueChip: React.FC<OldValueChipProps> = ({ board, oldValueList 
     return (
         <Box>
             <Box
+                /* @ts-expect-error need to fix #17010 (TODO upgrade to MUI v5) */
+                ref={containerRef}
                 display='inline-flex'
-                onMouseDown={disableRippleOnChipClick}
-                onClick={disableRippleOnChipClick}
-                onTouchStart={disableRippleOnChipClick}
+                onMouseDown={stopPropagationReactFn}
+                onClick={stopPropagationReactFn}
             >
                 <Chip
                     classes={classes}
