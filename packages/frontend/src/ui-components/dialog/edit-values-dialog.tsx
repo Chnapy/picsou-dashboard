@@ -78,7 +78,7 @@ const EditvaluesDialogContent: React.FC<EditvaluesDialogContentProps> = ({
                 {enumToString.boardKind(board)} - Edit values
             </div>
 
-            <Grid container alignItems='center' xs={12}>
+            <Grid container alignItems='center'>
                 <Grid item xs style={{ overflow: 'hidden' }}>
                     <Tabs
                         variant='scrollable'

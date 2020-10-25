@@ -1,5 +1,7 @@
 import { Box } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
 import { BoardKind } from '@picsou/shared';
+import isToday from 'date-fns/isToday';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
@@ -25,6 +27,7 @@ export const MainPane = React.memo<MainPaneProps>(({ board }) => {
     const isEditable = useSelector(state => state.mainBoard.settings[ board ].editable) || undefined;
 
     const loading = useSelector(state => state.mainBoard.status[ board ].loading);
+    const lastFetchTime = useSelector(state => state.mainBoard.status[ board ].lastFetchTime);
 
     const { dispatchSubmit, dispatchSelectValue } = useAppDispatch({
         dispatchSubmit: MainBoardEditLocalAction,
@@ -68,6 +71,18 @@ export const MainPane = React.memo<MainPaneProps>(({ board }) => {
         </>;
     };
 
+    const renderAlert = () => {
+        if (loading || isToday(lastFetchTime!)) {
+            return null;
+        }
+
+        return (
+            <Alert severity='warning'>
+                Data not fetched today.
+            </Alert>
+        );
+    };
+
     return <>
         <UIPane
             title={enumToString.boardKind(board)}
@@ -75,6 +90,7 @@ export const MainPane = React.memo<MainPaneProps>(({ board }) => {
             paneColor={board}
             loading={loading}
             onEdit={isEditable && onEditOpen}
+            alert={renderAlert()}
         >
             {renderPaneContent()}
         </UIPane>

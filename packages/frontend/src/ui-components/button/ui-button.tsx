@@ -3,13 +3,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import clsx from 'clsx';
 
-export type UIButtonProps = Omit<ButtonProps, 'variant' | 'color'> & {
+export type UIButtonProps = Omit<ButtonProps, 'variant'> & {
     variant?: Extract<PropTypes.Color, 'primary' | 'secondary'>;
 };
 
 const useStyles = makeStyles(() => ({
     root: {
-        borderWidth: '2px !important'
+        borderColor: 'currentColor'
     }
 }));
 

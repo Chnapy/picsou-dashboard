@@ -13,7 +13,7 @@ export type UIPaneHeaderTemplateProps = {
 };
 
 export const UIPaneHeaderTemplate: React.FC<UIPaneHeaderTemplateProps> = ({
-    className, title, extraLeftContent, rightContent, loading, getMenuContent
+    className, title, extraLeftContent, rightContent, loading, getMenuContent, children
 }) => {
 
     return <Paper className={className} style={{ position: 'sticky', top: 0, zIndex: 1 }}>
@@ -54,6 +54,8 @@ export const UIPaneHeaderTemplate: React.FC<UIPaneHeaderTemplateProps> = ({
             </Grid>
 
         </Grid>
+
+        {children}
     </Paper>;
 };
 

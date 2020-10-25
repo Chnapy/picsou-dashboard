@@ -2,14 +2,12 @@ import { Box, ListItemIcon, ListItemText, MenuItem, Paper, Theme, useTheme } fro
 import EditIcon from '@material-ui/icons/Edit';
 import { BoardKind } from '@picsou/shared';
 import React from 'react';
-import { UIPaneHeaderTemplate } from './ui-pane-header-template';
+import { UIPaneHeaderTemplate, UIPaneHeaderTemplateProps } from './ui-pane-header-template';
 
-export type UIPaneProps = {
-    title: string;
-    rightContent: React.ReactNode;
+export type UIPaneProps = Pick<UIPaneHeaderTemplateProps, 'title' | 'rightContent' | 'loading'> & {
     paneColor: BoardKind;
-    loading: boolean;
     onEdit?: () => void;
+    alert?: React.ReactNode;
     children: React.ReactNode;
 };
 
@@ -23,7 +21,7 @@ export const UIPane: React.FC<UIPaneProps> = props => {
     </Paper>;
 };
 
-const UIPaneHeader: React.FC<UIPaneProps> = ({ title, rightContent, paneColor, loading, onEdit }) => {
+const UIPaneHeader: React.FC<UIPaneProps> = ({ title, rightContent, paneColor, loading, onEdit, alert }) => {
 
     const { palette } = useTheme<Theme>();
 
@@ -41,5 +39,7 @@ const UIPaneHeader: React.FC<UIPaneProps> = ({ title, rightContent, paneColor, l
             </ListItemIcon>
             <ListItemText primary="Edit values" />
         </MenuItem>}
-    />;
+    >
+        {alert}
+    </UIPaneHeaderTemplate>;
 };

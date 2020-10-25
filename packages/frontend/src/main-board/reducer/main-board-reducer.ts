@@ -14,6 +14,7 @@ export type MainBoardState = {
         [ k in BoardKind ]: {
             loading: boolean;
             selectedValue?: number;
+            lastFetchTime?: number;
         };
     };
     settings: {
@@ -59,6 +60,8 @@ export const mainBoardReducer = createRichReducer(getInitialState(), () => ({
             const { price } = currentValue;
             state.values[ id ].currentValue = price;
         });
+        const status = state.status[ payload.board ];
+        status.lastFetchTime = Date.now();
     },
     [ MainBoardEditSuccessAction.type ]: (state, { payload }: MainBoardEditSuccessAction) => {
         const { board, data } = payload;
@@ -77,7 +80,9 @@ export const mainBoardReducer = createRichReducer(getInitialState(), () => ({
             state.values[ +k ] = { ...v };
         });
 
-        state.status[ board ].loading = false;
+        const status = state.status[ board ];
+        status.loading = false;
+        status.lastFetchTime = Date.now();
     },
     [ MainBoardValueSelectAction.type ]: (state, { payload }: MainBoardValueSelectAction) => {
         const status = state.status[ payload.board ];
@@ -90,6 +95,9 @@ export const mainBoardReducer = createRichReducer(getInitialState(), () => ({
         const value = state.values[ valueId ];
         value.history = history.history;
         value.currentValue = history.history[ 0 ].price;
-        state.status[ value.board ].loading = false;
+
+        const status = state.status[ value.board ];
+        status.loading = false;
+        status.lastFetchTime = Date.now();
     }
 }));

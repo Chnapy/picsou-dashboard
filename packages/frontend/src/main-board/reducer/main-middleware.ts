@@ -1,9 +1,11 @@
 import { BoardKind, boardKindList, BoardValueInfos } from '@picsou/shared';
 import { AuthSuccessAction } from '../../auth/reducer/auth-actions';
+import { Fetcher } from '../../data-fetcher/fetcher-types';
 import { createMainFetcher } from '../../data-fetcher/main-fetcher';
 import { getFirebase } from '../../firebase/create-firebase-app';
 import { createMiddleware } from '../../main/create-middleware';
 import { normalize, NormalizeObject } from '../../util/normalize';
+import { createIntervalHandler } from './interval-handler';
 import { MainBoardEditLocalAction, MainBoardEditSuccessAction, MainBoardHistorySuccessAction, MainBoardRefreshAction, MainBoardValueSelectAction } from './main-board-actions';
 
 type DBValueLine = Omit<BoardValueInfos, 'currentValue'>;
@@ -26,6 +28,57 @@ export const mainMiddleware = createMiddleware(() => api => next => {
     const mainFetcher = createMainFetcher();
 
     const getDBValues = (board: BoardKind) => getFirebase().database().ref('values').child(board);
+
+    const handleVisibilityAndInterval = (board: BoardKind, fetcher: Fetcher) => {
+        const visibilityChangeFn = () => {
+            const appIsActive = document.visibilityState === "visible";
+
+            if (appIsActive) {
+                intervalHandler.createOrReplace();
+                return intervalHandler.triggerFunction();
+            } else {
+                intervalHandler.clearIfAny();
+            }
+        };
+
+        const clearVisibilityChangeListener = () => document.removeEventListener("visibilitychange", visibilityChangeFn);
+        document.addEventListener("visibilitychange", visibilityChangeFn);
+
+        const intervalHandler = createIntervalHandler(async ({ clearIfAny, delay }) => {
+
+            const { isAuth } = api.getState().auth;
+            if (!isAuth) {
+                clearIfAny();
+                clearVisibilityChangeListener();
+                return;
+            }
+
+            const { loading, lastFetchTime, selectedValue } = api.getState().mainBoard.status[ board ];
+
+            if (loading || (lastFetchTime && (Date.now() - lastFetchTime < delay))) {
+                return;
+            }
+
+            const boardList = api.getState().mainBoard.valuesList[ board ];
+
+            if (boardList.length) {
+                if (!selectedValue) {
+
+                    const data = await fetcher.fetchCurrentValue(boardList);
+
+                    api.dispatch(MainBoardRefreshAction({
+                        board,
+                        data
+                    }));
+                } else {
+
+                    return chartRefresh(selectedValue, board);
+                }
+            }
+        });
+
+        intervalHandler.createOrReplace();
+    };
 
     const onAuthSuccess = async () => {
 
@@ -64,37 +117,7 @@ export const mainMiddleware = createMiddleware(() => api => next => {
                 }));
             });
 
-            const interval = setInterval(async () => {
-
-                const { isAuth } = api.getState().auth;
-                if (!isAuth) {
-                    clearInterval(interval);
-                    return;
-                }
-
-                const boardList = api.getState().mainBoard.valuesList[ board ];
-
-                if (boardList.length) {
-
-                    const { selectedValue } = api.getState().mainBoard.status[ board ];
-
-                    if (!selectedValue) {
-
-                        const data = await fetcher.fetchCurrentValue(boardList);
-
-                        api.dispatch(MainBoardRefreshAction({
-                            board,
-                            data
-                        }));
-                    } else {
-
-                        return chartRefresh(selectedValue, board);
-                    }
-                }
-            },
-                // every 5 min
-                5 * 60 * 1000
-            );
+            handleVisibilityAndInterval(board, fetcher);
         });
     };
 

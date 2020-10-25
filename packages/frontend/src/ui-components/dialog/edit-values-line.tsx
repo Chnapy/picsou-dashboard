@@ -190,7 +190,7 @@ export const EditValuesLine: React.FC<EditValuesLineProps> = ({
                     <Divider />
                 </Grid>
                 <Grid item container xs={12} wrap='nowrap' alignItems='center' spacing={1}>
-                    <Grid item xs={6} sm={6}>
+                    <Grid item xs={6} sm>
                         <UITextField
                             label='Value'
                             type='number'
