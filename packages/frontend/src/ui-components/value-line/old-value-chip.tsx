@@ -1,6 +1,6 @@
 import { Box, Chip, Divider, Grid, makeStyles } from '@material-ui/core';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLessSharp';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMoreSharp';
 import { BoardKind, BoardValueInfos } from '@picsou/shared';
 import clsx from 'clsx';
 import React from 'react';

@@ -1,6 +1,6 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, ListItemIcon, ListItemText, MenuItem, Tab, Tabs } from '@material-ui/core';
-import AddBoxIcon from '@material-ui/icons/AddBox';
-import DeleteIcon from '@material-ui/icons/Delete';
+import AddBoxIcon from '@material-ui/icons/AddBoxSharp';
+import DeleteIcon from '@material-ui/icons/DeleteSharp';
 import { BoardKind, BoardValueInfos } from '@picsou/shared';
 import React from 'react';
 import { enumToString } from '../../util/enum-to-string';

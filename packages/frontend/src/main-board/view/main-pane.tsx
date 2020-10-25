@@ -1,4 +1,3 @@
-import { Box } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import { BoardKind } from '@picsou/shared';
 import isToday from 'date-fns/isToday';
@@ -65,9 +64,7 @@ export const MainPane = React.memo<MainPaneProps>(({ board }) => {
                 valueId: null
             })} />
 
-            <Box mt={6}>
-                <MainChart valueId={selectedValue} height={300} />
-            </Box>
+            <MainChart valueId={selectedValue} height={300} />
         </>;
     };
 

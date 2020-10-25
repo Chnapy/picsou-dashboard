@@ -1,5 +1,5 @@
 import { IconButton, Menu } from '@material-ui/core';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import MoreVertIcon from '@material-ui/icons/MoreVertSharp';
 import React from 'react';
 
 type UIMenuIconProps = {

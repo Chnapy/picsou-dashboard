@@ -1,6 +1,6 @@
 import { CircularProgress, Divider, Grid, IconButton } from '@material-ui/core';
-import AddBoxIcon from '@material-ui/icons/AddBox';
-import DeleteIcon from '@material-ui/icons/Delete';
+import AddBoxIcon from '@material-ui/icons/AddBoxSharp';
+import DeleteIcon from '@material-ui/icons/DeleteSharp';
 import { Autocomplete } from '@material-ui/lab';
 import React from 'react';
 import { UITextField } from '../text-field/ui-text-field';

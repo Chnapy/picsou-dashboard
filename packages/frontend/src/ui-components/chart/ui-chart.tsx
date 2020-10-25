@@ -1,7 +1,8 @@
-import { Box, CircularProgress, Divider, Paper, Theme, useTheme } from '@material-ui/core';
+import { Box, Chip, CircularProgress, Divider, Paper, Theme, useTheme } from '@material-ui/core';
+import DateRangeSharpIcon from '@material-ui/icons/DateRangeSharp';
 import { PointTooltip, ResponsiveLine, Serie } from '@nivo/line';
 import { BoardKind } from '@picsou/shared';
-import format from 'date-fns/format';
+import formatRawFn from 'date-fns/format';
 import React from 'react';
 import { UIEuroValue } from '../misc/ui-euro-value';
 import { UITypography } from '../typography/ui-typography';
@@ -13,20 +14,31 @@ export type UIChartProps = {
     data: Serie[];
 };
 
+const dateFormat = (time: any) => formatRawFn(time, 'dd/MM/yyyy');
+
 export const UIChart: React.FC<UIChartProps> = ({ loading, height, paneColor, data }) => {
 
     const { palette } = useTheme<Theme>();
 
     const color = palette.investment[ paneColor ];
 
-    return <Box height={height}>
-        {loading
-            ? (
+    const renderContent = () => {
+
+        if (loading) {
+            return (
                 <Box height='100%' display='flex' justifyContent='center' alignItems='center' color={color}>
                     <CircularProgress color='inherit' thickness={2} />
                 </Box>
-            )
-            : (
+            );
+        }
+
+        const innerData = data[ 0 ]?.data;
+
+        const firstTime = innerData && innerData[ 0 ].x as number | undefined;
+        const lastTime = innerData && innerData[ innerData.length - 1 ].x as number | undefined;
+
+        return (
+            <>
                 <ResponsiveLine
                     data={data}
                     enablePoints={false}
@@ -36,12 +48,28 @@ export const UIChart: React.FC<UIChartProps> = ({ loading, height, paneColor, da
                     margin={{ top: 3 }}
                     xScale={{ type: 'linear', min: 'auto' }}
                     yScale={{ type: 'linear', min: 'auto', max: 'auto' }}
-                    xFormat={x => format(x as number, 'dd/MM/yyyy')}
+                    xFormat={dateFormat}
                     useMesh
                     colors={color}
                     tooltip={Tooltip}
                 />
-            )}
+
+                <Box position='absolute' left={0} top={0} m={1}>
+                    {firstTime && lastTime && <Chip
+                        variant='outlined'
+                        icon={<DateRangeSharpIcon />}
+                        label={<>
+                            {dateFormat(lastTime)} - {dateFormat(firstTime)}
+                        </>}
+                        style={{ borderRadius: 0 }}
+                    />}
+                </Box>
+            </>
+        );
+    };
+
+    return <Box position='relative' height={height} pt={6}>
+        {renderContent()}
     </Box>;
 };
 

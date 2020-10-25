@@ -1,5 +1,5 @@
 import { Box, ListItemIcon, ListItemText, MenuItem, Paper, Theme, useTheme } from '@material-ui/core';
-import EditIcon from '@material-ui/icons/Edit';
+import EditIcon from '@material-ui/icons/EditSharp';
 import { BoardKind } from '@picsou/shared';
 import React from 'react';
 import { UIPaneHeaderTemplate, UIPaneHeaderTemplateProps } from './ui-pane-header-template';

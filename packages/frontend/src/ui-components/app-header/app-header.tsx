@@ -1,6 +1,6 @@
 import { Box, Grid, ListItemIcon, ListItemText, makeStyles, MenuItem, Switch } from '@material-ui/core';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import TrendingUpIcon from '@material-ui/icons/TrendingUp';
+import ExitToAppIcon from '@material-ui/icons/ExitToAppSharp';
+import TrendingUpIcon from '@material-ui/icons/TrendingUpSharp';
 import { boardKindList } from '@picsou/shared';
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -13,7 +13,7 @@ type AppHeaderProps = {
     desktopView?: boolean;
 };
 
-const useStyles = makeStyles(({ breakpoints }) => ({
+const useStyles = makeStyles(() => ({
     root: ({ desktopView }: AppHeaderProps) => desktopView
         ? {}
         : {
