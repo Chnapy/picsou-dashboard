@@ -1,4 +1,5 @@
 import { BoardKind, boardKindList, BoardValueInfos } from '@picsou/shared';
+import isToday from 'date-fns/isToday';
 import { AuthSuccessAction } from '../../auth/reducer/auth-actions';
 import { Fetcher } from '../../data-fetcher/fetcher-types';
 import { createMainFetcher } from '../../data-fetcher/main-fetcher';
@@ -149,7 +150,11 @@ export const mainMiddleware = createMiddleware(() => api => next => {
             return;
         }
 
-        return chartRefresh(valueId, board);
+        const { lastHistoryFetchTimes } = api.getState().mainBoard.status[ board ];
+
+        if (!isToday(lastHistoryFetchTimes[ valueId ]!)) {
+            return chartRefresh(valueId, board);
+        }
     };
 
     return async action => {

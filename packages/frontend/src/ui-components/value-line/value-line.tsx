@@ -56,7 +56,7 @@ export const ValueLine: React.FC<ValueLineProps> = ({
     return <Button className={classes.root} onClick={onClick} fullWidth disableElevation>
         <Grid container>
 
-            <Grid item container spacing={1} wrap='nowrap' xs={12}>
+            <Grid item container wrap='nowrap' xs={12}>
                 <Grid item xs>
                     <UITypography variant='h4' color='primary'>
                         {name}

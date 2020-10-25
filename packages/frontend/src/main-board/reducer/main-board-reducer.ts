@@ -1,4 +1,5 @@
 import { BoardKind, BoardValueInfos } from '@picsou/shared';
+import isToday from 'date-fns/isToday';
 import { AuthLogoutAction } from '../../auth/reducer/auth-actions';
 import { createRichReducer } from '../../main/create-rich-reducer';
 import { NormalizeArray, NormalizeObject } from '../../util/normalize';
@@ -15,6 +16,7 @@ export type MainBoardState = {
             loading: boolean;
             selectedValue?: number;
             lastFetchTime?: number;
+            lastHistoryFetchTimes: { [ k in number ]?: number };
         };
     };
     settings: {
@@ -33,13 +35,16 @@ const getInitialState = (): MainBoardState => ({
     },
     status: {
         cash: {
-            loading: true
+            loading: true,
+            lastHistoryFetchTimes: {}
         },
         market: {
-            loading: true
+            loading: true,
+            lastHistoryFetchTimes: {}
         },
         gold: {
-            loading: true
+            loading: true,
+            lastHistoryFetchTimes: {}
         },
     },
     settings: {
@@ -85,9 +90,12 @@ export const mainBoardReducer = createRichReducer(getInitialState(), () => ({
         status.lastFetchTime = Date.now();
     },
     [ MainBoardValueSelectAction.type ]: (state, { payload }: MainBoardValueSelectAction) => {
-        const status = state.status[ payload.board ];
-        status.loading = !!payload.valueId;
-        status.selectedValue = payload.valueId ?? undefined;
+        const { board, valueId } = payload;
+        const status = state.status[ board ];
+        status.selectedValue = valueId ?? undefined;
+
+        const { lastHistoryFetchTimes } = state.status[ board ];
+        status.loading = !!valueId && !isToday(lastHistoryFetchTimes[ valueId ]!);
     },
     [ MainBoardHistorySuccessAction.type ]: (state, { payload }: MainBoardHistorySuccessAction) => {
         const { valueId, history } = payload;
@@ -99,5 +107,6 @@ export const mainBoardReducer = createRichReducer(getInitialState(), () => ({
         const status = state.status[ value.board ];
         status.loading = false;
         status.lastFetchTime = Date.now();
+        status.lastHistoryFetchTimes[ valueId ] = status.lastFetchTime;
     }
 }));
