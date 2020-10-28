@@ -22,7 +22,7 @@ export type EditValuesDialogProps = EditvaluesDialogContentProps & {
 export const EditValuesDialog: React.FC<EditValuesDialogProps> = ({
     open, ...rest
 }) => (
-        <Dialog open={open} onClose={rest.onClose} fullWidth maxWidth='sm' PaperProps={{ elevation: 4 }}>
+        <Dialog open={open} onClose={rest.onClose} fullWidth maxWidth='sm' PaperProps={{ elevation: 4 }} disableBackdropClick>
             {open && <EditvaluesDialogContent {...rest} />}
         </Dialog>
     );

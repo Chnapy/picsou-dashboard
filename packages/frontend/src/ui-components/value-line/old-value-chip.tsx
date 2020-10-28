@@ -10,7 +10,7 @@ import { UITypography } from '../typography/ui-typography';
 
 type OldValueChipProps = {
     board: BoardKind;
-    oldValueList: BoardValueInfos[ 'oldValueList' ];
+    oldValueList: BoardValueInfos['oldValueList'];
 };
 
 type StyleProps = {
@@ -43,7 +43,9 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
 }));
 
 export const OldValueChip: React.FC<OldValueChipProps> = ({ board, oldValueList }) => {
-    const [ open, setOpen ] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
+    const openRef = React.useRef(false);
+    openRef.current = open;
 
     const containerRef = React.useRef<HTMLDivElement>();
 
@@ -59,7 +61,11 @@ export const OldValueChip: React.FC<OldValueChipProps> = ({ board, oldValueList 
     const quantityUnit = enumToString.quantityUnit(board);
     const showDetails = enumToString.shouldShowQuantity(quantityTotal, quantityUnit);
 
-    const onClick = singleOldValue ? undefined : () => setOpen(!open);
+    const onClick = () => {
+        if (!singleOldValue) {
+            setOpen(!openRef.current);
+        }
+    };
 
     const isHTMLElement = (e: any): e is HTMLElement => 'classList' in e;
 
@@ -94,7 +100,7 @@ export const OldValueChip: React.FC<OldValueChipProps> = ({ board, oldValueList 
     // stop propagation for mobile
     React.useEffect(() => {
         const containerEl = containerRef.current;
-        if (containerEl && !singleOldValue && onClick) {
+        if (containerEl) {
             containerEl.addEventListener('touchstart', stopPropagationFn, { passive: false });
             containerEl.addEventListener('touchend', onClick, { passive: false });
 
@@ -104,7 +110,7 @@ export const OldValueChip: React.FC<OldValueChipProps> = ({ board, oldValueList 
             };
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [ containerRef.current, singleOldValue ]);
+    }, []);
 
     const rootLabel = (
         <Box display='flex' flexWrap='nowrap'>
@@ -149,7 +155,7 @@ export const OldValueChip: React.FC<OldValueChipProps> = ({ board, oldValueList 
             >
                 <Chip
                     classes={classes}
-                    className={clsx({ [ rootOpenClass ]: open })}
+                    className={clsx({ [rootOpenClass]: open })}
                     variant='outlined'
                     label={label}
                     clickable={!singleOldValue}
