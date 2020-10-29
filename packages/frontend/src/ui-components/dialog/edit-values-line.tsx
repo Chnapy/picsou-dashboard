@@ -120,16 +120,10 @@ export const EditValuesLine: React.FC<EditValuesLineProps> = ({
                                 name: option.name
                             });
                         }
-                        if (reason !== 'blur') {
-                            // setLoading(false);
-                        }
                     }}
                     inputValue={search}
                     onInputChange={(e, newInputValue) => {
                         setSearch(newInputValue);
-                        if (canSearch(newInputValue)) {
-                            // setLoading(true);
-                        }
                     }}
                     onBlur={e => onChange({
                         ...infos,

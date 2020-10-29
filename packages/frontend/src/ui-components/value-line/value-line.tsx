@@ -73,12 +73,14 @@ export const ValueLine: React.FC<ValueLineProps> = ({
                 </Box>
             </Grid>
 
-            <Grid item container spacing={1} wrap='nowrap' alignItems='center'>
+            <Grid item container spacing={1} wrap='nowrap'>
                 <Grid item xs>
-                    <OldValueChip
-                        board={board}
-                        oldValueList={oldValueList}
-                    />
+                    <Box mt={0.5}>
+                        <OldValueChip
+                            board={board}
+                            oldValueList={oldValueList}
+                        />
+                    </Box>
                 </Grid>
 
                 <Grid item>
