@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { AppTitle } from '../../app-step/view/app-loading';
 import { firebaseAuthClientID } from '../../firebase/create-firebase-app';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { GithubRepoButton } from '../../ui-components/app-header/github-repo-button';
 import { UIButton } from '../../ui-components/button/ui-button';
 import { actVisitEnter } from '../../visit/visit-act';
 import { AuthErrorRemoveAction, AuthSuccessAction } from '../reducer/auth-actions';
@@ -59,15 +60,24 @@ export const AuthView: React.FC = () => {
         </Snackbar>
     );
 
-    return <Box display='flex' flexDirection='column' height='100%' justifyContent='center' alignItems='center'>
-        <Card>
+    return <Box
+        position='relative' display='flex' flexDirection='column'
+        height='100%' py={8}
+        justifyContent='center' alignItems='center'
+    >
+
+        <Box position='absolute' bottom={0} right={0} mb={1}>
+            <GithubRepoButton />
+        </Box>
+
+        <Card style={{ overflow: 'auto' }}>
             <CardContent>
                 <Grid container direction='column' alignItems='center' spacing={2}>
                     <Grid item>
                         <AppTitle withFilter />
                     </Grid>
 
-                    <Grid item>
+                    <Grid item xs>
                         <img src={process.env.PUBLIC_URL + '/logo192.png'} alt='Logo' style={{ filter: 'drop-shadow(-15px 10px 0 rgba(0,0,0,0.25))' }} />
                     </Grid>
 

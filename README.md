@@ -6,17 +6,24 @@
 <h1 align="center">Picsou dashboard</h1>
 
 <h6 align="center">
-    <a href="https://picsou-dashboard.web.app" target="_blank">PREVIEW</a>
+    <a href="https://picsou-dashboard.web.app">PREVIEW</a>
 </h6>
 
-A dashboard to see all your personal financial investments on a single-page, for mobile & desktop.
+A dashboard to see all your financial investments on a single-page, for mobile & desktop.
 
-Check current values, always up-to-date, with gains and losses. Add and edit them at any time. Check values in time with charts.
-
-Kind of investments handled:
-- Cash (banks)
-- Market (stock actions)
-- Gold ([Bullion Vault](https://www.bullionvault.com/))
+- Handle these kind of value:
+  - :bank: **cash** (banks)
+  - :chart_with_upwards_trend: **market** (stock actions)
+  - :stars: **gold** ([Bullion Vault](https://www.bullionvault.com/))
+- Show values evolution in time: **gains & losses**
+- See estimation of total of your investments
+- :chart: Check values histories with **charts**
+- Add and edit values at any time
+- :lock: **Security & confidentiality**: check below
+- :iphone: **Mobile first**, but also for desktop
+- **PWA compliant**, you can install this app then use it like a mobile app, or desktop one
+- Preview mode with fake data, to show the concept to your best friends
+- Used by Balthazar Picsou himself
 
 <p align="center">
 <span style="padding: 10px">
@@ -27,7 +34,7 @@ Kind of investments handled:
     </span>
 </p>
 
-## Security & confidentiality
+## :lock: Security & confidentiality
 
 This app shows and store sensitive personal data.
 To avoid any security risk some choices were made:
@@ -51,7 +58,7 @@ Some external services are used to get some fresh data (current stock price, gol
 - security concerns (rules, whitelist)
 
 
-## External API & services used
+## :scroll: External API & services used
 
 ### Market: investing.com (unofficial API)
 
@@ -72,6 +79,6 @@ Note that using this feature requires a Linxo account, and to put credentials in
 Data that can be send:
 - Linxo credentials (used only for authentication)
 
-## I have questions
+## :penguin: I have questions
 
 Don't be shy, [fill an issue](https://github.com/Chnapy/picsou-dashboard/issues/new/choose) !

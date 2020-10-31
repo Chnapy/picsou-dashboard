@@ -16,7 +16,6 @@ jest.mock('firebase-admin', () => {
             }),
             set: async (val: any) => {
                 dbSettedValues[ basepath ] = val;
-                // console.log('SET', basepath, '=>', val);
             },
         };
     };

@@ -8,6 +8,7 @@ import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { GainUnit, gainUnitContext } from '../contexts/gain-unit-context';
 import { UIPaneHeaderTemplate } from '../pane/ui-pane-header-template';
 import { UIPaneHeaderValues } from '../pane/ui-pane-header-values';
+import { GithubRepoMenuItem } from './github-repo-button';
 import { logOutAct } from './log-out-act';
 
 type AppHeaderProps = {
@@ -80,6 +81,8 @@ export const AppHeader: React.FC<AppHeaderProps> = props => {
                     </ListItemIcon>
                     <ListItemText primary='Log out' />
                 </MenuItem>
+
+                <GithubRepoMenuItem />
             </>;
         }}
     />;
