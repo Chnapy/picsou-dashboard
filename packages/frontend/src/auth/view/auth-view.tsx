@@ -1,11 +1,17 @@
-import { Box, Card, CardContent, SvgIcon, SvgIconProps } from '@material-ui/core';
+import { Box, Card, CardContent, Grid, Snackbar, SvgIcon, SvgIconProps } from '@material-ui/core';
+import PersonIcon from '@material-ui/icons/PersonSharp';
+import { Alert, AlertTitle } from '@material-ui/lab';
 import firebase from 'firebase/app';
 import * as firebaseui from 'firebaseui';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { AppTitle } from '../../app-step/view/app-loading';
 import { firebaseAuthClientID } from '../../firebase/create-firebase-app';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
-import { AuthSuccessAction } from '../reducer/auth-actions';
+import { UIButton } from '../../ui-components/button/ui-button';
+import { actVisitEnter } from '../../visit/visit-act';
+import { AuthErrorRemoveAction, AuthSuccessAction } from '../reducer/auth-actions';
+import { AuthError } from '../reducer/auth-reducer';
 import { FirebaseAuthButton } from './firebase-auth-button';
 
 const GoogleIcon: React.FC<SvgIconProps> = props => (
@@ -34,27 +40,52 @@ const getFirebaseUIConfig = (dispatchAuthSuccess: () => void): firebaseui.auth.C
 
 export const AuthView: React.FC = () => {
 
-    const { dispatchAuthSuccess } = useAppDispatch({
-        dispatchAuthSuccess: AuthSuccessAction
+    const currentError = useSelector(state => state.auth.errors[ 0 ]);
+
+    const { dispatchAuthSuccess, dispatchErrorRemove, dispatchActVisitEnter } = useAppDispatch({
+        dispatchAuthSuccess: AuthSuccessAction,
+        dispatchErrorRemove: AuthErrorRemoveAction,
+        dispatchActVisitEnter: actVisitEnter
     });
 
     const uiConfig = getFirebaseUIConfig(dispatchAuthSuccess);
 
+    const renderError = ({ id, title, content }: AuthError) => (
+        <Snackbar open>
+            <Alert severity='error' variant='outlined' onClose={() => dispatchErrorRemove({ id })}>
+                <AlertTitle>{title}</AlertTitle>
+                {content.map((line, i) => <React.Fragment key={i}>{i > 0 && <br />}{line}</React.Fragment>)}
+            </Alert>
+        </Snackbar>
+    );
+
     return <Box display='flex' flexDirection='column' height='100%' justifyContent='center' alignItems='center'>
         <Card>
             <CardContent>
-                <Box display='flex' flexDirection='column' alignItems='center'>
-                    <AppTitle withFilter />
+                <Grid container direction='column' alignItems='center' spacing={2}>
+                    <Grid item>
+                        <AppTitle withFilter />
+                    </Grid>
 
-                    <Box display='inline-block' mb={2}>
+                    <Grid item>
                         <img src={process.env.PUBLIC_URL + '/logo192.png'} alt='Logo' style={{ filter: 'drop-shadow(-15px 10px 0 rgba(0,0,0,0.25))' }} />
-                    </Box>
+                    </Grid>
 
-                    <FirebaseAuthButton uiConfig={uiConfig} variant='primary' startIcon={<GoogleIcon style={{ width: '0.8em', height: '0.8em' }} />}>
-                        Enter secret room
+                    <Grid item>
+                        <FirebaseAuthButton uiConfig={uiConfig} variant='primary' startIcon={<GoogleIcon style={{ width: '0.8em', height: '0.8em' }} />}>
+                            Enter secret room
                         </FirebaseAuthButton>
-                </Box>
+                    </Grid>
+
+                    <Grid item>
+                        <UIButton startIcon={<PersonIcon />} onClick={() => dispatchActVisitEnter()}>
+                            Visit as a guest
+                    </UIButton>
+                    </Grid>
+                </Grid>
             </CardContent>
         </Card>
+
+        {currentError && renderError(currentError)}
     </Box>;
 };

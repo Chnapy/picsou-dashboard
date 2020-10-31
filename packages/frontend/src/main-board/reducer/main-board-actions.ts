@@ -26,6 +26,7 @@ export type MainBoardValueSelectAction = ReturnType<typeof MainBoardValueSelectA
 export const MainBoardValueSelectAction = createAction<{
     board: BoardKind;
     valueId: number | null;
+    loading: boolean;
 }>('main-board/value/select');
 
 export type MainBoardHistorySuccessAction = ReturnType<typeof MainBoardHistorySuccessAction>;

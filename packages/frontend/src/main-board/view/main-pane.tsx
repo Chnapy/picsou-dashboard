@@ -1,6 +1,4 @@
-import { Alert } from '@material-ui/lab';
 import { BoardKind } from '@picsou/shared';
-import isToday from 'date-fns/isToday';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
@@ -9,7 +7,9 @@ import { UIPane } from '../../ui-components/pane/ui-pane';
 import { UIPaneHeaderValues } from '../../ui-components/pane/ui-pane-header-values';
 import { enumToString } from '../../util/enum-to-string';
 import { NormalizeObject } from '../../util/normalize';
-import { MainBoardEditLocalAction, MainBoardValueSelectAction } from '../reducer/main-board-actions';
+import { selectValueAct } from '../acts/select-value-act';
+import { useBoardAlert } from '../hooks/use-board-alert';
+import { MainBoardEditLocalAction } from '../reducer/main-board-actions';
 import { MainChart } from './main-chart';
 import { MainEditValuesDialog } from './main-edit-values-dialog';
 import { MainValueLine } from './main-value-line';
@@ -26,11 +26,12 @@ export const MainPane = React.memo<MainPaneProps>(({ board }) => {
     const isEditable = useSelector(state => state.mainBoard.settings[ board ].editable) || undefined;
 
     const loading = useSelector(state => state.mainBoard.status[ board ].loading);
-    const lastFetchTime = useSelector(state => state.mainBoard.status[ board ].lastFetchTime);
+
+    const alertIfAny = useBoardAlert(board);
 
     const { dispatchSubmit, dispatchSelectValue } = useAppDispatch({
         dispatchSubmit: MainBoardEditLocalAction,
-        dispatchSelectValue: MainBoardValueSelectAction
+        dispatchSelectValue: selectValueAct
     });
 
     const [ editOpen, setEditOpen ] = React.useState(false);
@@ -68,18 +69,6 @@ export const MainPane = React.memo<MainPaneProps>(({ board }) => {
         </>;
     };
 
-    const renderAlert = () => {
-        if (loading || isToday(lastFetchTime!)) {
-            return null;
-        }
-
-        return (
-            <Alert severity='warning'>
-                Data not fetched today.
-            </Alert>
-        );
-    };
-
     return <>
         <UIPane
             title={enumToString.boardKind(board)}
@@ -87,7 +76,7 @@ export const MainPane = React.memo<MainPaneProps>(({ board }) => {
             paneColor={board}
             loading={loading}
             onEdit={isEditable && onEditOpen}
-            alert={renderAlert()}
+            alert={alertIfAny}
         >
             {renderPaneContent()}
         </UIPane>

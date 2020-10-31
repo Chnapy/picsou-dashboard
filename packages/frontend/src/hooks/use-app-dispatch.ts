@@ -1,8 +1,11 @@
 import { PayloadActionCreator } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
+import { Act } from '../main/create-act';
 
 type Params = {
-    [ K in string ]: PayloadActionCreator<any> | (
+    [ K in string ]: PayloadActionCreator<any>
+    | Act<any>
+    | (
         (...args: unknown[]) => ReturnType<PayloadActionCreator<any>>
     );
 };

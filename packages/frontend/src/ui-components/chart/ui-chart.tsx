@@ -34,8 +34,8 @@ export const UIChart: React.FC<UIChartProps> = ({ loading, height, paneColor, da
 
         const innerData = data[ 0 ]?.data;
 
-        const firstTime = innerData && innerData[ 0 ].x as number | undefined;
-        const lastTime = innerData && innerData[ innerData.length - 1 ].x as number | undefined;
+        const firstTime = innerData?.length > 0 && innerData[ 0 ].x as number | undefined;
+        const lastTime = innerData?.length > 0 && innerData[ innerData.length - 1 ].x as number | undefined;
 
         return (
             <>

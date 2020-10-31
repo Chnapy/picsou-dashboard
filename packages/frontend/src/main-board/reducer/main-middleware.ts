@@ -150,9 +150,10 @@ export const mainMiddleware = createMiddleware(() => api => next => {
             return;
         }
 
-        const { lastHistoryFetchTimes } = api.getState().mainBoard.status[ board ];
+        const { auth, mainBoard } = api.getState();
+        const { lastHistoryFetchTimes } = mainBoard.status[ board ];
 
-        if (!isToday(lastHistoryFetchTimes[ valueId ]!)) {
+        if (!auth.isVisitor && !isToday(lastHistoryFetchTimes[ valueId ]!)) {
             return chartRefresh(valueId, board);
         }
     };

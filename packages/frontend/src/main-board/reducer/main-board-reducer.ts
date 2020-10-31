@@ -1,8 +1,8 @@
 import { BoardKind, BoardValueInfos } from '@picsou/shared';
-import isToday from 'date-fns/isToday';
 import { AuthLogoutAction } from '../../auth/reducer/auth-actions';
 import { createRichReducer } from '../../main/create-rich-reducer';
 import { NormalizeArray, NormalizeObject } from '../../util/normalize';
+import { VisitLoadDataAction } from '../../visit/visit-actions';
 import { MainBoardEditSuccessAction, MainBoardHistorySuccessAction, MainBoardRefreshAction, MainBoardValueSelectAction } from './main-board-actions';
 
 
@@ -90,12 +90,10 @@ export const mainBoardReducer = createRichReducer(getInitialState(), () => ({
         status.lastFetchTime = Date.now();
     },
     [ MainBoardValueSelectAction.type ]: (state, { payload }: MainBoardValueSelectAction) => {
-        const { board, valueId } = payload;
+        const { board, valueId, loading } = payload;
         const status = state.status[ board ];
         status.selectedValue = valueId ?? undefined;
-
-        const { lastHistoryFetchTimes } = state.status[ board ];
-        status.loading = !!valueId && !isToday(lastHistoryFetchTimes[ valueId ]!);
+        status.loading = loading;
     },
     [ MainBoardHistorySuccessAction.type ]: (state, { payload }: MainBoardHistorySuccessAction) => {
         const { valueId, history } = payload;
@@ -108,5 +106,14 @@ export const mainBoardReducer = createRichReducer(getInitialState(), () => ({
         status.loading = false;
         status.lastFetchTime = Date.now();
         status.lastHistoryFetchTimes[ valueId ] = status.lastFetchTime;
-    }
+    },
+    [ VisitLoadDataAction.type ]: (state, { payload }: VisitLoadDataAction): MainBoardState => ({
+        ...state,
+        ...payload,
+        settings: {
+            cash: {},
+            gold: {},
+            market: {}
+        }
+    })
 }));

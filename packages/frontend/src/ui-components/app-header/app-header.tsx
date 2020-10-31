@@ -4,10 +4,11 @@ import TrendingUpIcon from '@material-ui/icons/TrendingUpSharp';
 import { boardKindList } from '@picsou/shared';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { getFirebase } from '../../firebase/create-firebase-app';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { GainUnit, gainUnitContext } from '../contexts/gain-unit-context';
 import { UIPaneHeaderTemplate } from '../pane/ui-pane-header-template';
 import { UIPaneHeaderValues } from '../pane/ui-pane-header-values';
+import { logOutAct } from './log-out-act';
 
 type AppHeaderProps = {
     desktopView?: boolean;
@@ -26,6 +27,10 @@ const getUnitSymbol = (unit: GainUnit) => <Box display='inline' fontSize='1.4rem
 export const AppHeader: React.FC<AppHeaderProps> = props => {
     const classes = useStyles(props);
     const loading = useSelector(state => boardKindList.some(board => state.mainBoard.status[ board ].loading));
+
+    const { dispatchLogOut } = useAppDispatch({
+        dispatchLogOut: logOutAct
+    });
 
     const gainUnit = gainUnitContext.useValue();
     const setGainUnit = gainUnitContext.useDispatch();
@@ -69,7 +74,7 @@ export const AppHeader: React.FC<AppHeaderProps> = props => {
                     } />
                 </MenuItem>
 
-                <MenuItem onClick={() => getFirebase().auth().signOut()}>
+                <MenuItem onClick={() => dispatchLogOut()}>
                     <ListItemIcon>
                         <ExitToAppIcon />
                     </ListItemIcon>

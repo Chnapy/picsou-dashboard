@@ -31,7 +31,7 @@ export const getFullStoreMiddlewareList = (middlewareList: Middleware[] = defaul
 
     return [
         ...getDefaultMiddleware({
-            thunk: false,
+            thunk: true,
             immutableCheck: process.env.NODE_ENV === 'test',
             serializableCheck: process.env.NODE_ENV === 'test'
         }),
