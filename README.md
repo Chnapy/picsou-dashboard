@@ -5,6 +5,10 @@
 
 <h1 align="center">Picsou dashboard</h1>
 
+<h6 align="center">
+    <a href="https://picsou-dashboard.web.app" target="_blank">PREVIEW</a>
+</h6>
+
 A dashboard to see all your personal financial investments on a single-page, for mobile & desktop.
 
 Check current values, always up-to-date, with gains and losses. Add and edit them at any time. Check values in time with charts.
