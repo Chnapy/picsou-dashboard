@@ -1,9 +1,10 @@
+import { Container } from '@material-ui/core';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { StoreManager } from '../store-manager';
-import { UIThemeProvider } from './ui-theme-provider';
 import { AppStepRouter } from '../../app-step/view/app-step-router';
-import { Container } from '@material-ui/core';
+import { StoreManager } from '../store-manager';
+import { HeadContent } from './head-content';
+import { UIThemeProvider } from './ui-theme-provider';
 
 type ViewProps = {
     storeManager: StoreManager;
@@ -12,6 +13,9 @@ type ViewProps = {
 export const createView = ({ storeManager }: ViewProps) => {
 
     return <React.StrictMode>
+
+        <HeadContent />
+
         <Provider store={storeManager.store}>
             <UIThemeProvider>
 
