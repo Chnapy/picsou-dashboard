@@ -1,212 +1,5215 @@
+import { BoardValueInfos } from '../../../shared/lib';
 import { MainBoardState } from '../main-board/reducer/main-board-reducer';
 
 export const getVisitFakeMainBoardData = (): Pick<MainBoardState, 'values' | 'valuesList' | 'status'> => {
 
-    return {
-        values: {
-            '3851': {
-                board: 'cash',
-                currentValue: 2164.21,
-                id: 3851,
-                name: 'Compte d\'épargne',
-                oldValueList: [
-                    {
-                        oldValue: 2164.21,
-                        quantity: 1
-                    }
-                ],
-                history: []
-            },
-            '5381': {
-                board: 'cash',
-                currentValue: 14891.31,
-                id: 5381,
-                name: 'PEL',
-                oldValueList: [
-                    {
-                        oldValue: 14891.31,
-                        quantity: 1
-                    }
-                ],
-                history: []
-            },
-            '997026': {
-                board: 'market',
-                currentValue: 159.66,
-                id: 997026,
-                name: 'Lyxor Euro Stoxx 300 DR UCITS C',
-                oldValueList: [
-                    {
-                        oldValue: 173.83,
-                        quantity: 6
-                    }
-                ],
-                history: []
-            },
-            '997053': {
-                board: 'market',
-                currentValue: 14.6,
-                id: 997053,
-                name: 'Lyxor PEA MSCI Emerging Markets UCITS C',
-                oldValueList: [
-                    {
-                        oldValue: 14.568,
-                        quantity: 32
-                    }
-                ],
-                history: []
-            },
-            '997057': {
-                board: 'market',
-                currentValue: 17.87,
-                id: 997057,
-                name: 'Lyxor PEA MSCI World UCITS C',
-                oldValueList: [
-                    {
-                        oldValue: 19.078,
-                        quantity: 24
-                    }
-                ],
-                history: []
-            },
-            '997058': {
-                board: 'market',
-                currentValue: 37.6,
-                id: 997058,
-                name: 'Lyxor PEA Nasdaq 100 UCITS C',
-                oldValueList: [
-                    {
-                        oldValue: 40.798,
-                        quantity: 36
-                    }
-                ],
-                history: []
-            },
-            '1155481': {
-                board: 'market',
-                currentValue: 32.18,
-                id: 1155481,
-                name: 'La Francaise Des Jeux Sa',
-                oldValueList: [
-                    {
-                        oldValue: 0,
-                        quantity: 0
-                    }
-                ],
-                history: []
-            },
-            '704271126': {
-                board: 'cash',
-                currentValue: 22950,
-                id: 704271126,
-                name: 'LIVRET A',
-                oldValueList: [
-                    {
-                        oldValue: 22950,
-                        quantity: 1
-                    }
-                ],
-                history: []
-            },
-            '1223007322': {
-                board: 'cash',
-                currentValue: 10,
-                id: 1223007322,
-                name: 'LIVRET B',
-                oldValueList: [
-                    {
-                        oldValue: 10,
-                        quantity: 1
-                    }
-                ],
-                history: []
-            },
-            '4192453871': {
-                board: 'cash',
-                currentValue: 1492.08,
-                id: 4192453871,
-                name: 'CPT DEPOT PART.',
-                oldValueList: [
-                    {
-                        oldValue: 6078.25,
-                        quantity: 1
-                    }
-                ],
-                history: []
-            },
-            '11193481112': {
-                board: 'cash',
-                currentValue: 15300,
-                id: 11193481112,
-                name: 'LEL',
-                oldValueList: [
-                    {
-                        oldValue: 11310.27,
-                        quantity: 1
-                    }
-                ],
-                history: []
-            },
-            '6163835900': {
-                board: 'cash',
-                currentValue: 12000,
-                id: 6163835900,
-                name: 'LDD Solidaire',
-                oldValueList: [
-                    {
-                        oldValue: 12000,
-                        quantity: 1
-                    }
-                ],
-                history: []
-            },
-            '-1': {
-                board: 'gold',
-                currentValue: 51863.58,
-                id: -1,
-                name: 'Gold',
-                oldValueList: [
-                    {
-                        oldValue: 47200,
-                        quantity: 0.21
-                    },
-                    {
-                        oldValue: 47000,
-                        quantity: 0.106
-                    },
-                    {
-                        oldValue: 47260,
-                        quantity: 0.209
-                    },
-                    {
-                        oldValue: 47200,
-                        quantity: 0.042
-                    }
-                ],
-                history: []
-            }
-        },
-        valuesList: {
-            cash: [
-                3851,
-                5381,
-                704271126,
-                1223007322,
-                4192453871,
-                11193481112,
-                6163835900
+    const values: MainBoardState[ 'values' ] = {
+        '3851': {
+            board: 'cash',
+            currentValue: 2164.21,
+            id: 3851,
+            name: 'Compte d\'épargne',
+            oldValueList: [
+                {
+                    oldValue: 2023.94,
+                    quantity: 1
+                }
             ],
-            gold: [
-                -1
-            ],
-            market: [
-                997026,
-                997053,
-                997057,
-                997058,
-                1155481
+            history: [
+                {
+                    time: 1604034017117,
+                    price: 2164.21
+                },
+                {
+                    time: 1603947615527,
+                    price: 2164.21
+                },
+                {
+                    time: 1603861216342,
+                    price: 2164.21
+                },
+                {
+                    time: 1603688416080,
+                    price: 2164.21
+                },
+                {
+                    time: 1603602015009,
+                    price: 2164.21
+                },
+                {
+                    time: 1603512020629,
+                    price: 2164.21
+                },
+                {
+                    time: 1603425618924,
+                    price: 2164.21
+                },
+                {
+                    time: 1603339215776,
+                    price: 2023.94
+                },
+                {
+                    time: 1603252825546,
+                    price: 2023.94
+                },
+                {
+                    time: 1603166417489,
+                    price: 2023.94
+                },
+                {
+                    time: 1603144609910,
+                    price: 2023.94
+                }
             ]
         },
+        '5381': {
+            board: 'cash',
+            currentValue: 6891.31,
+            id: 5381,
+            name: 'PEL',
+            oldValueList: [
+                {
+                    oldValue: 6500,
+                    quantity: 1
+                }
+            ],
+            history: [
+                {
+                    time: 1604034017117,
+                    price: 6891.31
+                },
+                {
+                    time: 1603947615527,
+                    price: 6891.31
+                },
+                {
+                    time: 1603861216342,
+                    price: 6891.31
+                },
+                {
+                    time: 1603688416080,
+                    price: 6891.31
+                },
+                {
+                    time: 1603602015009,
+                    price: 6891.31
+                },
+                {
+                    time: 1603512020629,
+                    price: 6500
+                },
+                {
+                    time: 1603425618924,
+                    price: 6500
+                },
+                {
+                    time: 1603339215776,
+                    price: 6500
+                },
+                {
+                    time: 1603252825546,
+                    price: 6500
+                },
+                {
+                    time: 1603166417489,
+                    price: 6500
+                },
+                {
+                    time: 1603144609910,
+                    price: 6500
+                }
+            ]
+        },
+        '997026': {
+            board: 'market',
+            currentValue: 159.66,
+            id: 997026,
+            name: 'Lyxor Euro Stoxx 300 DR UCITS C',
+            oldValueList: [
+                {
+                    oldValue: 173.83,
+                    quantity: 6
+                }
+            ],
+            history: [
+                {
+                    time: 1604016000000,
+                    price: 159.66
+                },
+                {
+                    time: 1603929600000,
+                    price: 159.62
+                },
+                {
+                    time: 1603843200000,
+                    price: 159.62
+                },
+                {
+                    time: 1603756800000,
+                    price: 164.98
+                },
+                {
+                    time: 1603670400000,
+                    price: 166.96
+                },
+                {
+                    time: 1603411200000,
+                    price: 171.08
+                },
+                {
+                    time: 1603324800000,
+                    price: 169.56
+                },
+                {
+                    time: 1603238400000,
+                    price: 170.04
+                },
+                {
+                    time: 1603152000000,
+                    price: 172.7
+                },
+                {
+                    time: 1603065600000,
+                    price: 174
+                },
+                {
+                    time: 1602806400000,
+                    price: 173.42
+                },
+                {
+                    time: 1602720000000,
+                    price: 171.1
+                },
+                {
+                    time: 1602633600000,
+                    price: 174.78
+                },
+                {
+                    time: 1602547200000,
+                    price: 174.7
+                },
+                {
+                    time: 1602460800000,
+                    price: 175.9
+                },
+                {
+                    time: 1602201600000,
+                    price: 174.58
+                },
+                {
+                    time: 1602115200000,
+                    price: 173.86
+                },
+                {
+                    time: 1602028800000,
+                    price: 172.52
+                },
+                {
+                    time: 1601942400000,
+                    price: 172.44
+                },
+                {
+                    time: 1601856000000,
+                    price: 171.76
+                },
+                {
+                    time: 1601596800000,
+                    price: 169.94
+                },
+                {
+                    time: 1601510400000,
+                    price: 169.94
+                },
+                {
+                    time: 1601424000000,
+                    price: 169.44
+                },
+                {
+                    time: 1601337600000,
+                    price: 169.96
+                },
+                {
+                    time: 1601251200000,
+                    price: 170.6
+                },
+                {
+                    time: 1600992000000,
+                    price: 166.4
+                },
+                {
+                    time: 1600905600000,
+                    price: 167.38
+                },
+                {
+                    time: 1600819200000,
+                    price: 168.48
+                },
+                {
+                    time: 1600732800000,
+                    price: 167.82
+                },
+                {
+                    time: 1600646400000,
+                    price: 167.32
+                },
+                {
+                    time: 1600387200000,
+                    price: 173.56
+                },
+                {
+                    time: 1600300800000,
+                    price: 174.96
+                },
+                {
+                    time: 1600214400000,
+                    price: 175.92
+                },
+                {
+                    time: 1600128000000,
+                    price: 175.36
+                },
+                {
+                    time: 1600041600000,
+                    price: 174.62
+                },
+                {
+                    time: 1599782400000,
+                    price: 174.38
+                },
+                {
+                    time: 1599696000000,
+                    price: 174.36
+                },
+                {
+                    time: 1599609600000,
+                    price: 174.78
+                },
+                {
+                    time: 1599523200000,
+                    price: 171.8
+                },
+                {
+                    time: 1599436800000,
+                    price: 174.16
+                },
+                {
+                    time: 1599177600000,
+                    price: 171.28
+                },
+                {
+                    time: 1599091200000,
+                    price: 173.34
+                },
+                {
+                    time: 1599004800000,
+                    price: 175.5
+                },
+                {
+                    time: 1598918400000,
+                    price: 172.68
+                },
+                {
+                    time: 1598832000000,
+                    price: 172.56
+                },
+                {
+                    time: 1598572800000,
+                    price: 174.34
+                },
+                {
+                    time: 1598486400000,
+                    price: 174.94
+                },
+                {
+                    time: 1598400000000,
+                    price: 176.34
+                },
+                {
+                    time: 1598313600000,
+                    price: 174.74
+                },
+                {
+                    time: 1598227200000,
+                    price: 174.8
+                },
+                {
+                    time: 1597968000000,
+                    price: 171.32
+                },
+                {
+                    time: 1597881600000,
+                    price: 171.74
+                },
+                {
+                    time: 1597795200000,
+                    price: 173.82
+                },
+                {
+                    time: 1597708800000,
+                    price: 172.72
+                },
+                {
+                    time: 1597622400000,
+                    price: 173.6
+                },
+                {
+                    time: 1597363200000,
+                    price: 173.3
+                },
+                {
+                    time: 1597276800000,
+                    price: 175.28
+                },
+                {
+                    time: 1597190400000,
+                    price: 176.3
+                },
+                {
+                    time: 1597104000000,
+                    price: 174.68
+                },
+                {
+                    time: 1597017600000,
+                    price: 171.2
+                },
+                {
+                    time: 1596758400000,
+                    price: 170.86
+                },
+                {
+                    time: 1596672000000,
+                    price: 170.22
+                },
+                {
+                    time: 1596585600000,
+                    price: 171.48
+                },
+                {
+                    time: 1596499200000,
+                    price: 170.5
+                },
+                {
+                    time: 1596412800000,
+                    price: 170.3
+                },
+                {
+                    time: 1596153600000,
+                    price: 166.72
+                },
+                {
+                    time: 1596067200000,
+                    price: 168.18
+                },
+                {
+                    time: 1595980800000,
+                    price: 172.62
+                },
+                {
+                    time: 1595894400000,
+                    price: 172.74
+                },
+                {
+                    time: 1595808000000,
+                    price: 172.54
+                },
+                {
+                    time: 1595548800000,
+                    price: 172.86
+                },
+                {
+                    time: 1595462400000,
+                    price: 176.12
+                },
+                {
+                    time: 1595376000000,
+                    price: 175.88
+                },
+                {
+                    time: 1595289600000,
+                    price: 177.34
+                },
+                {
+                    time: 1595203200000,
+                    price: 176.56
+                },
+                {
+                    time: 1594944000000,
+                    price: 175.02
+                },
+                {
+                    time: 1594857600000,
+                    price: 175.08
+                },
+                {
+                    time: 1594771200000,
+                    price: 175.54
+                },
+                {
+                    time: 1594684800000,
+                    price: 172.94
+                },
+                {
+                    time: 1594598400000,
+                    price: 174.4
+                },
+                {
+                    time: 1594339200000,
+                    price: 171.9
+                },
+                {
+                    time: 1594252800000,
+                    price: 170.34
+                },
+                {
+                    time: 1594166400000,
+                    price: 171.62
+                },
+                {
+                    time: 1594080000000,
+                    price: 173.14
+                },
+                {
+                    time: 1593993600000,
+                    price: 174.28
+                },
+                {
+                    time: 1593734400000,
+                    price: 171.38
+                },
+                {
+                    time: 1593648000000,
+                    price: 172.42
+                },
+                {
+                    time: 1593561600000,
+                    price: 168.2
+                },
+                {
+                    time: 1593475200000,
+                    price: 168.18
+                },
+                {
+                    time: 1593388800000,
+                    price: 168.02
+                },
+                {
+                    time: 1593129600000,
+                    price: 166.62
+                },
+                {
+                    time: 1593043200000,
+                    price: 167.32
+                },
+                {
+                    time: 1592956800000,
+                    price: 166
+                },
+                {
+                    time: 1592870400000,
+                    price: 171.14
+                },
+                {
+                    time: 1592784000000,
+                    price: 168.44
+                },
+                {
+                    time: 1592524800000,
+                    price: 169.52
+                },
+                {
+                    time: 1592438400000,
+                    price: 168.86
+                },
+                {
+                    time: 1592352000000,
+                    price: 169.8
+                },
+                {
+                    time: 1592265600000,
+                    price: 168.78
+                },
+                {
+                    time: 1592179200000,
+                    price: 163.72
+                },
+                {
+                    time: 1591920000000,
+                    price: 164
+                },
+                {
+                    time: 1591833600000,
+                    price: 163.58
+                },
+                {
+                    time: 1591747200000,
+                    price: 170.9
+                },
+                {
+                    time: 1591660800000,
+                    price: 172.1
+                },
+                {
+                    time: 1591574400000,
+                    price: 174.58
+                },
+                {
+                    time: 1591315200000,
+                    price: 175.3
+                },
+                {
+                    time: 1591228800000,
+                    price: 170.38
+                },
+                {
+                    time: 1591142400000,
+                    price: 170.5
+                },
+                {
+                    time: 1591056000000,
+                    price: 165.48
+                },
+                {
+                    time: 1590969600000,
+                    price: 162.86
+                },
+                {
+                    time: 1590710400000,
+                    price: 160.16
+                },
+                {
+                    time: 1590624000000,
+                    price: 162.28
+                },
+                {
+                    time: 1590537600000,
+                    price: 159.8
+                },
+                {
+                    time: 1590451200000,
+                    price: 158.22
+                },
+                {
+                    time: 1590364800000,
+                    price: 156.2
+                },
+                {
+                    time: 1590105600000,
+                    price: 152.94
+                },
+                {
+                    time: 1590019200000,
+                    price: 152.36
+                },
+                {
+                    time: 1589932800000,
+                    price: 153.96
+                },
+                {
+                    time: 1589846400000,
+                    price: 152.06
+                },
+                {
+                    time: 1589760000000,
+                    price: 153.1
+                },
+                {
+                    time: 1589500800000,
+                    price: 146.32
+                },
+                {
+                    time: 1589414400000,
+                    price: 145.58
+                },
+                {
+                    time: 1589328000000,
+                    price: 148.46
+                },
+                {
+                    time: 1589241600000,
+                    price: 151.68
+                },
+                {
+                    time: 1589155200000,
+                    price: 151.54
+                },
+                {
+                    time: 1588896000000,
+                    price: 152.74
+                },
+                {
+                    time: 1588809600000,
+                    price: 151.08
+                },
+                {
+                    time: 1588723200000,
+                    price: 148.92
+                },
+                {
+                    time: 1588636800000,
+                    price: 150.1
+                },
+                {
+                    time: 1588550400000,
+                    price: 146.86
+                },
+                {
+                    time: 1588204800000,
+                    price: 152.1
+                },
+                {
+                    time: 1588118400000,
+                    price: 155.18
+                },
+                {
+                    time: 1588032000000,
+                    price: 151.68
+                },
+                {
+                    time: 1587945600000,
+                    price: 149.42
+                },
+                {
+                    time: 1587686400000,
+                    price: 145.98
+                },
+                {
+                    time: 1587600000000,
+                    price: 147.82
+                },
+                {
+                    time: 1587513600000,
+                    price: 146.62
+                },
+                {
+                    time: 1587427200000,
+                    price: 144.12
+                },
+                {
+                    time: 1587340800000,
+                    price: 149.26
+                },
+                {
+                    time: 1587081600000,
+                    price: 148.54
+                },
+                {
+                    time: 1586995200000,
+                    price: 144.72
+                },
+                {
+                    time: 1586908800000,
+                    price: 144.42
+                },
+                {
+                    time: 1586822400000,
+                    price: 150.12
+                },
+                {
+                    time: 1586390400000,
+                    price: 148.78
+                },
+                {
+                    time: 1586304000000,
+                    price: 146.72
+                },
+                {
+                    time: 1586217600000,
+                    price: 146.54
+                },
+                {
+                    time: 1586131200000,
+                    price: 143.24
+                },
+                {
+                    time: 1585872000000,
+                    price: 136.98
+                },
+                {
+                    time: 1585785600000,
+                    price: 138.48
+                },
+                {
+                    time: 1585699200000,
+                    price: 137.62
+                },
+                {
+                    time: 1585612800000,
+                    price: 143.38
+                },
+                {
+                    time: 1585526400000,
+                    price: 141.04
+                },
+                {
+                    time: 1585267200000,
+                    price: 140.24
+                },
+                {
+                    time: 1585180800000,
+                    price: 145.42
+                },
+                {
+                    time: 1585094400000,
+                    price: 143.36
+                },
+                {
+                    time: 1585008000000,
+                    price: 135.44
+                },
+                {
+                    time: 1584921600000,
+                    price: 128.8
+                },
+                {
+                    time: 1584662400000,
+                    price: 132
+                },
+                {
+                    time: 1584576000000,
+                    price: 126.54
+                },
+                {
+                    time: 1584489600000,
+                    price: 122.82
+                },
+                {
+                    time: 1584403200000,
+                    price: 129.14
+                },
+                {
+                    time: 1584316800000,
+                    price: 125.28
+                },
+                {
+                    time: 1584057600000,
+                    price: 133.74
+                },
+                {
+                    time: 1583971200000,
+                    price: 133.26
+                },
+                {
+                    time: 1583884800000,
+                    price: 150.42
+                },
+                {
+                    time: 1583798400000,
+                    price: 151
+                },
+                {
+                    time: 1583712000000,
+                    price: 153.08
+                },
+                {
+                    time: 1583452800000,
+                    price: 166.62
+                },
+                {
+                    time: 1583366400000,
+                    price: 172.72
+                },
+                {
+                    time: 1583280000000,
+                    price: 175.96
+                },
+                {
+                    time: 1583193600000,
+                    price: 173.88
+                },
+                {
+                    time: 1583107200000,
+                    price: 171.96
+                },
+                {
+                    time: 1582848000000,
+                    price: 171.84
+                },
+                {
+                    time: 1582761600000,
+                    price: 178.44
+                },
+                {
+                    time: 1582675200000,
+                    price: 184.52
+                },
+                {
+                    time: 1582588800000,
+                    price: 183.62
+                },
+                {
+                    time: 1582502400000,
+                    price: 187.58
+                },
+                {
+                    time: 1582243200000,
+                    price: 195.18
+                },
+                {
+                    time: 1582156800000,
+                    price: 196.38
+                },
+                {
+                    time: 1582070400000,
+                    price: 198.16
+                },
+                {
+                    time: 1581984000000,
+                    price: 196.64
+                },
+                {
+                    time: 1581897600000,
+                    price: 197.5
+                },
+                {
+                    time: 1581638400000,
+                    price: 196.98
+                },
+                {
+                    time: 1581552000000,
+                    price: 197.02
+                },
+                {
+                    time: 1581465600000,
+                    price: 197.04
+                },
+                {
+                    time: 1581379200000,
+                    price: 195.7
+                },
+                {
+                    time: 1581292800000,
+                    price: 193.9
+                },
+                {
+                    time: 1581033600000,
+                    price: 194.12
+                },
+                {
+                    time: 1580947200000,
+                    price: 194.6
+                },
+                {
+                    time: 1580860800000,
+                    price: 193.26
+                },
+                {
+                    time: 1580774400000,
+                    price: 190.84
+                },
+                {
+                    time: 1580688000000,
+                    price: 187.62
+                },
+                {
+                    time: 1580428800000,
+                    price: 186.56
+                },
+                {
+                    time: 1580342400000,
+                    price: 188.8
+                },
+                {
+                    time: 1580256000000,
+                    price: 191.04
+                },
+                {
+                    time: 1580169600000,
+                    price: 190.24
+                },
+                {
+                    time: 1580083200000,
+                    price: 188.12
+                },
+                {
+                    time: 1579824000000,
+                    price: 192.82
+                },
+                {
+                    time: 1579737600000,
+                    price: 190.96
+                },
+                {
+                    time: 1579651200000,
+                    price: 192.32
+                },
+                {
+                    time: 1579564800000,
+                    price: 192.98
+                },
+                {
+                    time: 1579478400000,
+                    price: 193.62
+                },
+                {
+                    time: 1579219200000,
+                    price: 193.72
+                },
+                {
+                    time: 1579132800000,
+                    price: 192.22
+                },
+                {
+                    time: 1579046400000,
+                    price: 191.82
+                },
+                {
+                    time: 1578960000000,
+                    price: 192.2
+                },
+                {
+                    time: 1578873600000,
+                    price: 192.1
+                },
+                {
+                    time: 1578614400000,
+                    price: 192.34
+                },
+                {
+                    time: 1578528000000,
+                    price: 192.24
+                },
+                {
+                    time: 1578441600000,
+                    price: 191.22
+                },
+                {
+                    time: 1578355200000,
+                    price: 190.58
+                },
+                {
+                    time: 1578268800000,
+                    price: 189.9
+                },
+                {
+                    time: 1578009600000,
+                    price: 190.96
+                },
+                {
+                    time: 1577923200000,
+                    price: 191.92
+                },
+                {
+                    time: 1577750400000,
+                    price: 189.36
+                },
+                {
+                    time: 1577664000000,
+                    price: 189.36
+                },
+                {
+                    time: 1577404800000,
+                    price: 191.5
+                },
+                {
+                    time: 1577145600000,
+                    price: 191.22
+                },
+                {
+                    time: 1577059200000,
+                    price: 191.18
+                },
+                {
+                    time: 1576800000000,
+                    price: 191.86
+                },
+                {
+                    time: 1576713600000,
+                    price: 189.6
+                },
+                {
+                    time: 1576627200000,
+                    price: 189.42
+                },
+                {
+                    time: 1576540800000,
+                    price: 189.66
+                },
+                {
+                    time: 1576454400000,
+                    price: 190.5
+                },
+                {
+                    time: 1576195200000,
+                    price: 188.44
+                },
+                {
+                    time: 1576108800000,
+                    price: 187.48
+                },
+                {
+                    time: 1576022400000,
+                    price: 186.54
+                },
+                {
+                    time: 1575936000000,
+                    price: 186.04
+                },
+                {
+                    time: 1575849600000,
+                    price: 186.2
+                },
+                {
+                    time: 1575590400000,
+                    price: 187
+                },
+                {
+                    time: 1575504000000,
+                    price: 184.9
+                },
+                {
+                    time: 1575417600000,
+                    price: 185.3
+                },
+                {
+                    time: 1575331200000,
+                    price: 183.04
+                },
+                {
+                    time: 1575244800000,
+                    price: 183.98
+                },
+                {
+                    time: 1574985600000,
+                    price: 187.28
+                },
+                {
+                    time: 1574899200000,
+                    price: 187.52
+                },
+                {
+                    time: 1574812800000,
+                    price: 188
+                },
+                {
+                    time: 1574726400000,
+                    price: 187.74
+                },
+                {
+                    time: 1574640000000,
+                    price: 187.38
+                },
+                {
+                    time: 1574380800000,
+                    price: 186.28
+                },
+                {
+                    time: 1574294400000,
+                    price: 185.82
+                },
+                {
+                    time: 1574208000000,
+                    price: 186.38
+                },
+                {
+                    time: 1574121600000,
+                    price: 186.94
+                },
+                {
+                    time: 1574035200000,
+                    price: 187.3
+                },
+                {
+                    time: 1573776000000,
+                    price: 187.5
+                },
+                {
+                    time: 1573689600000,
+                    price: 186.42
+                },
+                {
+                    time: 1573603200000,
+                    price: 186.88
+                },
+                {
+                    time: 1573516800000,
+                    price: 187.74
+                },
+                {
+                    time: 1573430400000,
+                    price: 187
+                },
+                {
+                    time: 1573171200000,
+                    price: 187.06
+                },
+                {
+                    time: 1573084800000,
+                    price: 187.56
+                },
+                {
+                    time: 1572998400000,
+                    price: 186.64
+                },
+                {
+                    time: 1572912000000,
+                    price: 186.24
+                },
+                {
+                    time: 1572825600000,
+                    price: 185.68
+                },
+                {
+                    time: 1572566400000,
+                    price: 183.58
+                },
+                {
+                    time: 1572480000000,
+                    price: 182.38
+                }
+            ]
+        },
+        '997053': {
+            board: 'market',
+            currentValue: 14.6,
+            id: 997053,
+            name: 'Lyxor PEA MSCI Emerging Markets UCITS C',
+            oldValueList: [
+                {
+                    oldValue: 14.568,
+                    quantity: 32
+                }
+            ],
+            history: [
+                {
+                    time: 1604016000000,
+                    price: 14.6
+                },
+                {
+                    time: 1603929600000,
+                    price: 14.73
+                },
+                {
+                    time: 1603843200000,
+                    price: 14.58
+                },
+                {
+                    time: 1603756800000,
+                    price: 14.79
+                },
+                {
+                    time: 1603670400000,
+                    price: 14.72
+                },
+                {
+                    time: 1603411200000,
+                    price: 14.81
+                },
+                {
+                    time: 1603324800000,
+                    price: 14.82
+                },
+                {
+                    time: 1603238400000,
+                    price: 14.83
+                },
+                {
+                    time: 1603152000000,
+                    price: 14.79
+                },
+                {
+                    time: 1603065600000,
+                    price: 14.8
+                },
+                {
+                    time: 1602806400000,
+                    price: 14.82
+                },
+                {
+                    time: 1602720000000,
+                    price: 14.73
+                },
+                {
+                    time: 1602633600000,
+                    price: 14.94
+                },
+                {
+                    time: 1602547200000,
+                    price: 14.92
+                },
+                {
+                    time: 1602460800000,
+                    price: 14.91
+                },
+                {
+                    time: 1602201600000,
+                    price: 14.8
+                },
+                {
+                    time: 1602115200000,
+                    price: 14.68
+                },
+                {
+                    time: 1602028800000,
+                    price: 14.63
+                },
+                {
+                    time: 1601942400000,
+                    price: 14.51
+                },
+                {
+                    time: 1601856000000,
+                    price: 14.38
+                },
+                {
+                    time: 1601596800000,
+                    price: 14.4
+                },
+                {
+                    time: 1601510400000,
+                    price: 14.41
+                },
+                {
+                    time: 1601424000000,
+                    price: 14.32
+                },
+                {
+                    time: 1601337600000,
+                    price: 14.09
+                },
+                {
+                    time: 1601251200000,
+                    price: 14.19
+                },
+                {
+                    time: 1600992000000,
+                    price: 13.98
+                },
+                {
+                    time: 1600905600000,
+                    price: 14.02
+                },
+                {
+                    time: 1600819200000,
+                    price: 14.17
+                },
+                {
+                    time: 1600732800000,
+                    price: 14.17
+                },
+                {
+                    time: 1600646400000,
+                    price: 14.15
+                },
+                {
+                    time: 1600387200000,
+                    price: 14.39
+                },
+                {
+                    time: 1600300800000,
+                    price: 14.44
+                },
+                {
+                    time: 1600214400000,
+                    price: 14.6
+                },
+                {
+                    time: 1600128000000,
+                    price: 14.52
+                },
+                {
+                    time: 1600041600000,
+                    price: 14.31
+                },
+                {
+                    time: 1599782400000,
+                    price: 14.18
+                },
+                {
+                    time: 1599696000000,
+                    price: 14.14
+                },
+                {
+                    time: 1599609600000,
+                    price: 14.2
+                },
+                {
+                    time: 1599523200000,
+                    price: 14.13
+                },
+                {
+                    time: 1599436800000,
+                    price: 14.23
+                },
+                {
+                    time: 1599177600000,
+                    price: 14.16
+                },
+                {
+                    time: 1599091200000,
+                    price: 14.25
+                },
+                {
+                    time: 1599004800000,
+                    price: 14.49
+                },
+                {
+                    time: 1598918400000,
+                    price: 14.36
+                },
+                {
+                    time: 1598832000000,
+                    price: 14.14
+                },
+                {
+                    time: 1598572800000,
+                    price: 14.53
+                },
+                {
+                    time: 1598486400000,
+                    price: 14.52
+                },
+                {
+                    time: 1598400000000,
+                    price: 14.59
+                },
+                {
+                    time: 1598313600000,
+                    price: 14.52
+                },
+                {
+                    time: 1598227200000,
+                    price: 14.4
+                },
+                {
+                    time: 1597968000000,
+                    price: 14.3
+                },
+                {
+                    time: 1597881600000,
+                    price: 14.03
+                },
+                {
+                    time: 1597795200000,
+                    price: 14.25
+                },
+                {
+                    time: 1597708800000,
+                    price: 14.24
+                },
+                {
+                    time: 1597622400000,
+                    price: 14.39
+                },
+                {
+                    time: 1597363200000,
+                    price: 14.26
+                },
+                {
+                    time: 1597276800000,
+                    price: 14.3
+                },
+                {
+                    time: 1597190400000,
+                    price: 14.39
+                },
+                {
+                    time: 1597104000000,
+                    price: 14.35
+                },
+                {
+                    time: 1597017600000,
+                    price: 14.2
+                },
+                {
+                    time: 1596758400000,
+                    price: 14.26
+                },
+                {
+                    time: 1596672000000,
+                    price: 14.31
+                },
+                {
+                    time: 1596585600000,
+                    price: 14.37
+                },
+                {
+                    time: 1596499200000,
+                    price: 14.22
+                },
+                {
+                    time: 1596412800000,
+                    price: 14.17
+                },
+                {
+                    time: 1596153600000,
+                    price: 13.96
+                },
+                {
+                    time: 1596067200000,
+                    price: 14.06
+                },
+                {
+                    time: 1595980800000,
+                    price: 14.24
+                },
+                {
+                    time: 1595894400000,
+                    price: 14.18
+                },
+                {
+                    time: 1595808000000,
+                    price: 14.13
+                },
+                {
+                    time: 1595548800000,
+                    price: 14.1
+                },
+                {
+                    time: 1595462400000,
+                    price: 14.35
+                },
+                {
+                    time: 1595376000000,
+                    price: 14.33
+                },
+                {
+                    time: 1595289600000,
+                    price: 14.58
+                },
+                {
+                    time: 1595203200000,
+                    price: 14.39
+                },
+                {
+                    time: 1594944000000,
+                    price: 14.25
+                },
+                {
+                    time: 1594857600000,
+                    price: 14.17
+                },
+                {
+                    time: 1594771200000,
+                    price: 14.4
+                },
+                {
+                    time: 1594684800000,
+                    price: 14.32
+                },
+                {
+                    time: 1594598400000,
+                    price: 14.68
+                },
+                {
+                    time: 1594339200000,
+                    price: 14.53
+                },
+                {
+                    time: 1594252800000,
+                    price: 14.6
+                },
+                {
+                    time: 1594166400000,
+                    price: 14.49
+                },
+                {
+                    time: 1594080000000,
+                    price: 14.41
+                },
+                {
+                    time: 1593993600000,
+                    price: 14.52
+                },
+                {
+                    time: 1593734400000,
+                    price: 14.12
+                },
+                {
+                    time: 1593648000000,
+                    price: 14.01
+                },
+                {
+                    time: 1593561600000,
+                    price: 13.63
+                },
+                {
+                    time: 1593475200000,
+                    price: 13.56
+                },
+                {
+                    time: 1593388800000,
+                    price: 13.56
+                },
+                {
+                    time: 1593129600000,
+                    price: 13.57
+                },
+                {
+                    time: 1593043200000,
+                    price: 13.63
+                },
+                {
+                    time: 1592956800000,
+                    price: 13.59
+                },
+                {
+                    time: 1592870400000,
+                    price: 13.79
+                },
+                {
+                    time: 1592784000000,
+                    price: 13.65
+                },
+                {
+                    time: 1592524800000,
+                    price: 13.71
+                },
+                {
+                    time: 1592438400000,
+                    price: 13.58
+                },
+                {
+                    time: 1592352000000,
+                    price: 13.55
+                },
+                {
+                    time: 1592265600000,
+                    price: 13.42
+                },
+                {
+                    time: 1592179200000,
+                    price: 13.13
+                },
+                {
+                    time: 1591920000000,
+                    price: 13.35
+                },
+                {
+                    time: 1591833600000,
+                    price: 13.21
+                },
+                {
+                    time: 1591747200000,
+                    price: 13.62
+                },
+                {
+                    time: 1591660800000,
+                    price: 13.57
+                },
+                {
+                    time: 1591574400000,
+                    price: 13.66
+                },
+                {
+                    time: 1591315200000,
+                    price: 13.76
+                },
+                {
+                    time: 1591228800000,
+                    price: 13.35
+                },
+                {
+                    time: 1591142400000,
+                    price: 13.62
+                },
+                {
+                    time: 1591056000000,
+                    price: 13.31
+                },
+                {
+                    time: 1590969600000,
+                    price: 13.05
+                },
+                {
+                    time: 1590710400000,
+                    price: 12.67
+                },
+                {
+                    time: 1590624000000,
+                    price: 12.82
+                },
+                {
+                    time: 1590537600000,
+                    price: 12.84
+                },
+                {
+                    time: 1590451200000,
+                    price: 12.95
+                },
+                {
+                    time: 1590364800000,
+                    price: 12.88
+                },
+                {
+                    time: 1590105600000,
+                    price: 12.7
+                },
+                {
+                    time: 1590019200000,
+                    price: 12.86
+                },
+                {
+                    time: 1589932800000,
+                    price: 13.05
+                },
+                {
+                    time: 1589846400000,
+                    price: 13.01
+                },
+                {
+                    time: 1589760000000,
+                    price: 13
+                },
+                {
+                    time: 1589500800000,
+                    price: 12.59
+                },
+                {
+                    time: 1589414400000,
+                    price: 12.66
+                },
+                {
+                    time: 1589328000000,
+                    price: 12.81
+                },
+                {
+                    time: 1589241600000,
+                    price: 12.93
+                },
+                {
+                    time: 1589155200000,
+                    price: 12.87
+                },
+                {
+                    time: 1588896000000,
+                    price: 12.89
+                },
+                {
+                    time: 1588809600000,
+                    price: 12.68
+                },
+                {
+                    time: 1588723200000,
+                    price: 12.61
+                },
+                {
+                    time: 1588636800000,
+                    price: 12.65
+                },
+                {
+                    time: 1588550400000,
+                    price: 12.32
+                },
+                {
+                    time: 1588204800000,
+                    price: 12.82
+                },
+                {
+                    time: 1588118400000,
+                    price: 12.97
+                },
+                {
+                    time: 1588032000000,
+                    price: 12.77
+                },
+                {
+                    time: 1587945600000,
+                    price: 12.65
+                },
+                {
+                    time: 1587686400000,
+                    price: 12.42
+                },
+                {
+                    time: 1587600000000,
+                    price: 12.69
+                },
+                {
+                    time: 1587513600000,
+                    price: 12.55
+                },
+                {
+                    time: 1587427200000,
+                    price: 12.17
+                },
+                {
+                    time: 1587340800000,
+                    price: 12.61
+                },
+                {
+                    time: 1587081600000,
+                    price: 12.56
+                },
+                {
+                    time: 1586995200000,
+                    price: 12.47
+                },
+                {
+                    time: 1586908800000,
+                    price: 12.24
+                },
+                {
+                    time: 1586822400000,
+                    price: 12.53
+                },
+                {
+                    time: 1586390400000,
+                    price: 12.45
+                },
+                {
+                    time: 1586304000000,
+                    price: 12.34
+                },
+                {
+                    time: 1586217600000,
+                    price: 12.41
+                },
+                {
+                    time: 1586131200000,
+                    price: 12.2
+                },
+                {
+                    time: 1585872000000,
+                    price: 11.7
+                },
+                {
+                    time: 1585785600000,
+                    price: 11.76
+                },
+                {
+                    time: 1585699200000,
+                    price: 11.49
+                },
+                {
+                    time: 1585612800000,
+                    price: 11.9
+                },
+                {
+                    time: 1585526400000,
+                    price: 11.59
+                },
+                {
+                    time: 1585267200000,
+                    price: 11.45
+                },
+                {
+                    time: 1585180800000,
+                    price: 12.07
+                },
+                {
+                    time: 1585094400000,
+                    price: 11.9
+                },
+                {
+                    time: 1585008000000,
+                    price: 11.53
+                },
+                {
+                    time: 1584921600000,
+                    price: 10.75
+                },
+                {
+                    time: 1584662400000,
+                    price: 11.46
+                },
+                {
+                    time: 1584576000000,
+                    price: 11.1
+                },
+                {
+                    time: 1584489600000,
+                    price: 10.89
+                },
+                {
+                    time: 1584403200000,
+                    price: 11.53
+                },
+                {
+                    time: 1584316800000,
+                    price: 11.12
+                },
+                {
+                    time: 1584057600000,
+                    price: 12.12
+                },
+                {
+                    time: 1583971200000,
+                    price: 11.62
+                },
+                {
+                    time: 1583884800000,
+                    price: 12.77
+                },
+                {
+                    time: 1583798400000,
+                    price: 12.82
+                },
+                {
+                    time: 1583712000000,
+                    price: 12.46
+                },
+                {
+                    time: 1583452800000,
+                    price: 13.46
+                },
+                {
+                    time: 1583366400000,
+                    price: 14.12
+                },
+                {
+                    time: 1583280000000,
+                    price: 14.2
+                },
+                {
+                    time: 1583193600000,
+                    price: 14.13
+                },
+                {
+                    time: 1583107200000,
+                    price: 13.85
+                },
+                {
+                    time: 1582848000000,
+                    price: 13.79
+                },
+                {
+                    time: 1582761600000,
+                    price: 14.19
+                },
+                {
+                    time: 1582675200000,
+                    price: 14.7
+                },
+                {
+                    time: 1582588800000,
+                    price: 14.61
+                },
+                {
+                    time: 1582502400000,
+                    price: 14.61
+                },
+                {
+                    time: 1582243200000,
+                    price: 15.21
+                },
+                {
+                    time: 1582156800000,
+                    price: 15.29
+                },
+                {
+                    time: 1582070400000,
+                    price: 15.57
+                },
+                {
+                    time: 1581984000000,
+                    price: 15.39
+                },
+                {
+                    time: 1581897600000,
+                    price: 15.6
+                },
+                {
+                    time: 1581638400000,
+                    price: 15.5
+                },
+                {
+                    time: 1581552000000,
+                    price: 15.51
+                },
+                {
+                    time: 1581465600000,
+                    price: 15.57
+                },
+                {
+                    time: 1581379200000,
+                    price: 15.38
+                },
+                {
+                    time: 1581292800000,
+                    price: 15.14
+                },
+                {
+                    time: 1581033600000,
+                    price: 15.08
+                },
+                {
+                    time: 1580947200000,
+                    price: 15.26
+                },
+                {
+                    time: 1580860800000,
+                    price: 15.19
+                },
+                {
+                    time: 1580774400000,
+                    price: 15.1
+                },
+                {
+                    time: 1580688000000,
+                    price: 14.61
+                },
+                {
+                    time: 1580428800000,
+                    price: 14.4
+                },
+                {
+                    time: 1580342400000,
+                    price: 14.68
+                },
+                {
+                    time: 1580256000000,
+                    price: 15.06
+                },
+                {
+                    time: 1580169600000,
+                    price: 15.02
+                },
+                {
+                    time: 1580083200000,
+                    price: 14.86
+                },
+                {
+                    time: 1579824000000,
+                    price: 15.47
+                },
+                {
+                    time: 1579737600000,
+                    price: 15.35
+                },
+                {
+                    time: 1579651200000,
+                    price: 15.59
+                },
+                {
+                    time: 1579564800000,
+                    price: 15.53
+                },
+                {
+                    time: 1579478400000,
+                    price: 15.78
+                },
+                {
+                    time: 1579219200000,
+                    price: 15.8
+                },
+                {
+                    time: 1579132800000,
+                    price: 15.69
+                },
+                {
+                    time: 1579046400000,
+                    price: 15.61
+                },
+                {
+                    time: 1578960000000,
+                    price: 15.7
+                },
+                {
+                    time: 1578873600000,
+                    price: 15.72
+                },
+                {
+                    time: 1578614400000,
+                    price: 15.61
+                },
+                {
+                    time: 1578528000000,
+                    price: 15.55
+                },
+                {
+                    time: 1578441600000,
+                    price: 15.38
+                },
+                {
+                    time: 1578355200000,
+                    price: 15.31
+                },
+                {
+                    time: 1578268800000,
+                    price: 15.23
+                },
+                {
+                    time: 1578009600000,
+                    price: 15.38
+                },
+                {
+                    time: 1577923200000,
+                    price: 15.46
+                },
+                {
+                    time: 1577750400000,
+                    price: 15.15
+                },
+                {
+                    time: 1577664000000,
+                    price: 15.24
+                },
+                {
+                    time: 1577404800000,
+                    price: 15.36
+                },
+                {
+                    time: 1577145600000,
+                    price: 15.31
+                },
+                {
+                    time: 1577059200000,
+                    price: 15.29
+                },
+                {
+                    time: 1576800000000,
+                    price: 15.32
+                },
+                {
+                    time: 1576713600000,
+                    price: 15.2
+                },
+                {
+                    time: 1576627200000,
+                    price: 15.18
+                },
+                {
+                    time: 1576540800000,
+                    price: 15.07
+                },
+                {
+                    time: 1576454400000,
+                    price: 15
+                },
+                {
+                    time: 1576195200000,
+                    price: 14.84
+                },
+                {
+                    time: 1576108800000,
+                    price: 14.8
+                },
+                {
+                    time: 1576022400000,
+                    price: 14.55
+                },
+                {
+                    time: 1575936000000,
+                    price: 14.43
+                },
+                {
+                    time: 1575849600000,
+                    price: 14.47
+                },
+                {
+                    time: 1575590400000,
+                    price: 14.48
+                },
+                {
+                    time: 1575504000000,
+                    price: 14.34
+                },
+                {
+                    time: 1575417600000,
+                    price: 14.31
+                },
+                {
+                    time: 1575331200000,
+                    price: 14.13
+                },
+                {
+                    time: 1575244800000,
+                    price: 14.25
+                },
+                {
+                    time: 1574985600000,
+                    price: 14.38
+                },
+                {
+                    time: 1574899200000,
+                    price: 14.57
+                },
+                {
+                    time: 1574812800000,
+                    price: 14.58
+                },
+                {
+                    time: 1574726400000,
+                    price: 14.51
+                },
+                {
+                    time: 1574640000000,
+                    price: 14.62
+                },
+                {
+                    time: 1574380800000,
+                    price: 14.45
+                },
+                {
+                    time: 1574294400000,
+                    price: 14.37
+                },
+                {
+                    time: 1574208000000,
+                    price: 14.47
+                },
+                {
+                    time: 1574121600000,
+                    price: 14.48
+                },
+                {
+                    time: 1574035200000,
+                    price: 14.48
+                },
+                {
+                    time: 1573776000000,
+                    price: 14.53
+                },
+                {
+                    time: 1573689600000,
+                    price: 14.41
+                },
+                {
+                    time: 1573603200000,
+                    price: 14.43
+                },
+                {
+                    time: 1573516800000,
+                    price: 14.59
+                },
+                {
+                    time: 1573430400000,
+                    price: 14.58
+                },
+                {
+                    time: 1573171200000,
+                    price: 14.75
+                },
+                {
+                    time: 1573084800000,
+                    price: 14.85
+                },
+                {
+                    time: 1572998400000,
+                    price: 14.74
+                },
+                {
+                    time: 1572912000000,
+                    price: 14.72
+                },
+                {
+                    time: 1572825600000,
+                    price: 14.56
+                },
+                {
+                    time: 1572566400000,
+                    price: 14.36
+                },
+                {
+                    time: 1572480000000,
+                    price: 14.17
+                }
+            ]
+        },
+        '997057': {
+            board: 'market',
+            currentValue: 17.87,
+            id: 997057,
+            name: 'Lyxor PEA MSCI World UCITS C',
+            oldValueList: [
+                {
+                    oldValue: 19.078,
+                    quantity: 24
+                }
+            ],
+            history: [
+                {
+                    time: 1604016000000,
+                    price: 17.87
+                },
+                {
+                    time: 1603929600000,
+                    price: 18.01
+                },
+                {
+                    time: 1603843200000,
+                    price: 17.9
+                },
+                {
+                    time: 1603756800000,
+                    price: 18.28
+                },
+                {
+                    time: 1603670400000,
+                    price: 18.29
+                },
+                {
+                    time: 1603411200000,
+                    price: 18.58
+                },
+                {
+                    time: 1603324800000,
+                    price: 18.5
+                },
+                {
+                    time: 1603238400000,
+                    price: 18.5
+                },
+                {
+                    time: 1603152000000,
+                    price: 18.59
+                },
+                {
+                    time: 1603065600000,
+                    price: 18.86
+                },
+                {
+                    time: 1602806400000,
+                    price: 18.98
+                },
+                {
+                    time: 1602720000000,
+                    price: 18.8
+                },
+                {
+                    time: 1602633600000,
+                    price: 19
+                },
+                {
+                    time: 1602547200000,
+                    price: 19.08
+                },
+                {
+                    time: 1602460800000,
+                    price: 19.02
+                },
+                {
+                    time: 1602201600000,
+                    price: 18.76
+                },
+                {
+                    time: 1602115200000,
+                    price: 18.68
+                },
+                {
+                    time: 1602028800000,
+                    price: 18.54
+                },
+                {
+                    time: 1601942400000,
+                    price: 18.5
+                },
+                {
+                    time: 1601856000000,
+                    price: 18.45
+                },
+                {
+                    time: 1601596800000,
+                    price: 18.33
+                },
+                {
+                    time: 1601510400000,
+                    price: 18.4
+                },
+                {
+                    time: 1601424000000,
+                    price: 18.35
+                },
+                {
+                    time: 1601337600000,
+                    price: 18.25
+                },
+                {
+                    time: 1601251200000,
+                    price: 18.4
+                },
+                {
+                    time: 1600992000000,
+                    price: 18.03
+                },
+                {
+                    time: 1600905600000,
+                    price: 17.9
+                },
+                {
+                    time: 1600819200000,
+                    price: 18.11
+                },
+                {
+                    time: 1600732800000,
+                    price: 17.96
+                },
+                {
+                    time: 1600646400000,
+                    price: 17.74
+                },
+                {
+                    time: 1600387200000,
+                    price: 18.13
+                },
+                {
+                    time: 1600300800000,
+                    price: 18.3
+                },
+                {
+                    time: 1600214400000,
+                    price: 18.53
+                },
+                {
+                    time: 1600128000000,
+                    price: 18.47
+                },
+                {
+                    time: 1600041600000,
+                    price: 18.32
+                },
+                {
+                    time: 1599782400000,
+                    price: 18.16
+                },
+                {
+                    time: 1599696000000,
+                    price: 18.29
+                },
+                {
+                    time: 1599609600000,
+                    price: 18.36
+                },
+                {
+                    time: 1599523200000,
+                    price: 18.16
+                },
+                {
+                    time: 1599436800000,
+                    price: 18.49
+                },
+                {
+                    time: 1599177600000,
+                    price: 18.23
+                },
+                {
+                    time: 1599091200000,
+                    price: 18.63
+                },
+                {
+                    time: 1599004800000,
+                    price: 18.97
+                },
+                {
+                    time: 1598918400000,
+                    price: 18.64
+                },
+                {
+                    time: 1598832000000,
+                    price: 18.58
+                },
+                {
+                    time: 1598572800000,
+                    price: 18.65
+                },
+                {
+                    time: 1598486400000,
+                    price: 18.8
+                },
+                {
+                    time: 1598400000000,
+                    price: 18.67
+                },
+                {
+                    time: 1598313600000,
+                    price: 18.52
+                },
+                {
+                    time: 1598227200000,
+                    price: 18.52
+                },
+                {
+                    time: 1597968000000,
+                    price: 18.34
+                },
+                {
+                    time: 1597881600000,
+                    price: 18.23
+                },
+                {
+                    time: 1597795200000,
+                    price: 18.31
+                },
+                {
+                    time: 1597708800000,
+                    price: 18.21
+                },
+                {
+                    time: 1597622400000,
+                    price: 18.27
+                },
+                {
+                    time: 1597363200000,
+                    price: 18.25
+                },
+                {
+                    time: 1597276800000,
+                    price: 18.32
+                },
+                {
+                    time: 1597190400000,
+                    price: 18.37
+                },
+                {
+                    time: 1597104000000,
+                    price: 18.32
+                },
+                {
+                    time: 1597017600000,
+                    price: 18.13
+                },
+                {
+                    time: 1596758400000,
+                    price: 18.08
+                },
+                {
+                    time: 1596672000000,
+                    price: 17.92
+                },
+                {
+                    time: 1596585600000,
+                    price: 17.93
+                },
+                {
+                    time: 1596499200000,
+                    price: 17.95
+                },
+                {
+                    time: 1596412800000,
+                    price: 17.95
+                },
+                {
+                    time: 1596153600000,
+                    price: 17.56
+                },
+                {
+                    time: 1596067200000,
+                    price: 17.63
+                },
+                {
+                    time: 1595980800000,
+                    price: 17.8
+                },
+                {
+                    time: 1595894400000,
+                    price: 17.83
+                },
+                {
+                    time: 1595808000000,
+                    price: 17.72
+                },
+                {
+                    time: 1595548800000,
+                    price: 17.83
+                },
+                {
+                    time: 1595462400000,
+                    price: 18.19
+                },
+                {
+                    time: 1595376000000,
+                    price: 18.14
+                },
+                {
+                    time: 1595289600000,
+                    price: 18.35
+                },
+                {
+                    time: 1595203200000,
+                    price: 18.23
+                },
+                {
+                    time: 1594944000000,
+                    price: 18.13
+                },
+                {
+                    time: 1594857600000,
+                    price: 18.08
+                },
+                {
+                    time: 1594771200000,
+                    price: 18.2
+                },
+                {
+                    time: 1594684800000,
+                    price: 17.92
+                },
+                {
+                    time: 1594598400000,
+                    price: 18.27
+                },
+                {
+                    time: 1594339200000,
+                    price: 17.98
+                },
+                {
+                    time: 1594252800000,
+                    price: 17.82
+                },
+                {
+                    time: 1594166400000,
+                    price: 17.89
+                },
+                {
+                    time: 1594080000000,
+                    price: 18.09
+                },
+                {
+                    time: 1593993600000,
+                    price: 18.1
+                },
+                {
+                    time: 1593734400000,
+                    price: 17.87
+                },
+                {
+                    time: 1593648000000,
+                    price: 17.99
+                },
+                {
+                    time: 1593561600000,
+                    price: 17.71
+                },
+                {
+                    time: 1593475200000,
+                    price: 17.61
+                },
+                {
+                    time: 1593388800000,
+                    price: 17.47
+                },
+                {
+                    time: 1593129600000,
+                    price: 17.44
+                },
+                {
+                    time: 1593043200000,
+                    price: 17.53
+                },
+                {
+                    time: 1592956800000,
+                    price: 17.46
+                },
+                {
+                    time: 1592870400000,
+                    price: 17.92
+                },
+                {
+                    time: 1592784000000,
+                    price: 17.75
+                },
+                {
+                    time: 1592524800000,
+                    price: 17.97
+                },
+                {
+                    time: 1592438400000,
+                    price: 17.82
+                },
+                {
+                    time: 1592352000000,
+                    price: 17.9
+                },
+                {
+                    time: 1592265600000,
+                    price: 17.8
+                },
+                {
+                    time: 1592179200000,
+                    price: 17.21
+                },
+                {
+                    time: 1591920000000,
+                    price: 17.33
+                },
+                {
+                    time: 1591833600000,
+                    price: 17.35
+                },
+                {
+                    time: 1591747200000,
+                    price: 18.03
+                },
+                {
+                    time: 1591660800000,
+                    price: 18.08
+                },
+                {
+                    time: 1591574400000,
+                    price: 18.21
+                },
+                {
+                    time: 1591315200000,
+                    price: 18.19
+                },
+                {
+                    time: 1591228800000,
+                    price: 17.7
+                },
+                {
+                    time: 1591142400000,
+                    price: 17.88
+                },
+                {
+                    time: 1591056000000,
+                    price: 17.59
+                },
+                {
+                    time: 1590969600000,
+                    price: 17.55
+                },
+                {
+                    time: 1590710400000,
+                    price: 17.29
+                },
+                {
+                    time: 1590624000000,
+                    price: 17.63
+                },
+                {
+                    time: 1590537600000,
+                    price: 17.38
+                },
+                {
+                    time: 1590451200000,
+                    price: 17.43
+                },
+                {
+                    time: 1590364800000,
+                    price: 17.43
+                },
+                {
+                    time: 1590105600000,
+                    price: 17.09
+                },
+                {
+                    time: 1590019200000,
+                    price: 17.05
+                },
+                {
+                    time: 1589932800000,
+                    price: 17.21
+                },
+                {
+                    time: 1589846400000,
+                    price: 17.15
+                },
+                {
+                    time: 1589760000000,
+                    price: 17.22
+                },
+                {
+                    time: 1589500800000,
+                    price: 16.61
+                },
+                {
+                    time: 1589414400000,
+                    price: 16.51
+                },
+                {
+                    time: 1589328000000,
+                    price: 16.7
+                },
+                {
+                    time: 1589241600000,
+                    price: 17.1
+                },
+                {
+                    time: 1589155200000,
+                    price: 17.14
+                },
+                {
+                    time: 1588896000000,
+                    price: 17.07
+                },
+                {
+                    time: 1588809600000,
+                    price: 16.98
+                },
+                {
+                    time: 1588723200000,
+                    price: 16.8
+                },
+                {
+                    time: 1588636800000,
+                    price: 16.87
+                },
+                {
+                    time: 1588550400000,
+                    price: 16.36
+                },
+                {
+                    time: 1588204800000,
+                    price: 16.89
+                },
+                {
+                    time: 1588118400000,
+                    price: 17.21
+                },
+                {
+                    time: 1588032000000,
+                    price: 16.91
+                },
+                {
+                    time: 1587945600000,
+                    price: 16.8
+                },
+                {
+                    time: 1587686400000,
+                    price: 16.41
+                },
+                {
+                    time: 1587600000000,
+                    price: 16.57
+                },
+                {
+                    time: 1587513600000,
+                    price: 16.35
+                },
+                {
+                    time: 1587427200000,
+                    price: 15.99
+                },
+                {
+                    time: 1587340800000,
+                    price: 16.65
+                },
+                {
+                    time: 1587081600000,
+                    price: 16.53
+                },
+                {
+                    time: 1586995200000,
+                    price: 16.28
+                },
+                {
+                    time: 1586908800000,
+                    price: 16.1
+                },
+                {
+                    time: 1586822400000,
+                    price: 16.38
+                },
+                {
+                    time: 1586390400000,
+                    price: 16.27
+                },
+                {
+                    time: 1586304000000,
+                    price: 15.93
+                },
+                {
+                    time: 1586217600000,
+                    price: 15.94
+                },
+                {
+                    time: 1586131200000,
+                    price: 15.45
+                },
+                {
+                    time: 1585872000000,
+                    price: 14.84
+                },
+                {
+                    time: 1585785600000,
+                    price: 14.88
+                },
+                {
+                    time: 1585699200000,
+                    price: 14.77
+                },
+                {
+                    time: 1585612800000,
+                    price: 15.41
+                },
+                {
+                    time: 1585526400000,
+                    price: 15.17
+                },
+                {
+                    time: 1585267200000,
+                    price: 14.86
+                },
+                {
+                    time: 1585180800000,
+                    price: 15.23
+                },
+                {
+                    time: 1585094400000,
+                    price: 14.96
+                },
+                {
+                    time: 1585008000000,
+                    price: 14.55
+                },
+                {
+                    time: 1584921600000,
+                    price: 13.41
+                },
+                {
+                    time: 1584662400000,
+                    price: 14.23
+                },
+                {
+                    time: 1584576000000,
+                    price: 14.18
+                },
+                {
+                    time: 1584489600000,
+                    price: 13.85
+                },
+                {
+                    time: 1584403200000,
+                    price: 14.44
+                },
+                {
+                    time: 1584316800000,
+                    price: 14.17
+                },
+                {
+                    time: 1584057600000,
+                    price: 14.61
+                },
+                {
+                    time: 1583971200000,
+                    price: 14.47
+                },
+                {
+                    time: 1583884800000,
+                    price: 15.82
+                },
+                {
+                    time: 1583798400000,
+                    price: 15.75
+                },
+                {
+                    time: 1583712000000,
+                    price: 15.82
+                },
+                {
+                    time: 1583452800000,
+                    price: 16.96
+                },
+                {
+                    time: 1583366400000,
+                    price: 17.75
+                },
+                {
+                    time: 1583280000000,
+                    price: 17.84
+                },
+                {
+                    time: 1583193600000,
+                    price: 17.69
+                },
+                {
+                    time: 1583107200000,
+                    price: 17.49
+                },
+                {
+                    time: 1582848000000,
+                    price: 17.28
+                },
+                {
+                    time: 1582761600000,
+                    price: 18.01
+                },
+                {
+                    time: 1582675200000,
+                    price: 18.85
+                },
+                {
+                    time: 1582588800000,
+                    price: 18.92
+                },
+                {
+                    time: 1582502400000,
+                    price: 19.23
+                },
+                {
+                    time: 1582243200000,
+                    price: 19.89
+                },
+                {
+                    time: 1582156800000,
+                    price: 20
+                },
+                {
+                    time: 1582070400000,
+                    price: 20.23
+                },
+                {
+                    time: 1581984000000,
+                    price: 20.03
+                },
+                {
+                    time: 1581897600000,
+                    price: 20.15
+                },
+                {
+                    time: 1581638400000,
+                    price: 20.09
+                },
+                {
+                    time: 1581552000000,
+                    price: 20.1
+                },
+                {
+                    time: 1581465600000,
+                    price: 20.03
+                },
+                {
+                    time: 1581379200000,
+                    price: 19.92
+                },
+                {
+                    time: 1581292800000,
+                    price: 19.77
+                },
+                {
+                    time: 1581033600000,
+                    price: 19.71
+                },
+                {
+                    time: 1580947200000,
+                    price: 19.73
+                },
+                {
+                    time: 1580860800000,
+                    price: 19.58
+                },
+                {
+                    time: 1580774400000,
+                    price: 19.4
+                },
+                {
+                    time: 1580688000000,
+                    price: 19.06
+                },
+                {
+                    time: 1580428800000,
+                    price: 18.95
+                },
+                {
+                    time: 1580342400000,
+                    price: 19.16
+                },
+                {
+                    time: 1580256000000,
+                    price: 19.38
+                },
+                {
+                    time: 1580169600000,
+                    price: 19.32
+                },
+                {
+                    time: 1580083200000,
+                    price: 19.13
+                },
+                {
+                    time: 1579824000000,
+                    price: 19.53
+                },
+                {
+                    time: 1579737600000,
+                    price: 19.44
+                },
+                {
+                    time: 1579651200000,
+                    price: 19.51
+                },
+                {
+                    time: 1579564800000,
+                    price: 19.47
+                },
+                {
+                    time: 1579478400000,
+                    price: 19.5
+                },
+                {
+                    time: 1579219200000,
+                    price: 19.48
+                },
+                {
+                    time: 1579132800000,
+                    price: 19.32
+                },
+                {
+                    time: 1579046400000,
+                    price: 19.24
+                },
+                {
+                    time: 1578960000000,
+                    price: 19.24
+                },
+                {
+                    time: 1578873600000,
+                    price: 19.17
+                },
+                {
+                    time: 1578614400000,
+                    price: 19.19
+                },
+                {
+                    time: 1578528000000,
+                    price: 19.2
+                },
+                {
+                    time: 1578441600000,
+                    price: 19.07
+                },
+                {
+                    time: 1578355200000,
+                    price: 19
+                },
+                {
+                    time: 1578268800000,
+                    price: 18.89
+                },
+                {
+                    time: 1578009600000,
+                    price: 18.93
+                },
+                {
+                    time: 1577923200000,
+                    price: 18.94
+                },
+                {
+                    time: 1577750400000,
+                    price: 18.74
+                },
+                {
+                    time: 1577664000000,
+                    price: 18.78
+                },
+                {
+                    time: 1577404800000,
+                    price: 18.98
+                },
+                {
+                    time: 1577145600000,
+                    price: 19.01
+                },
+                {
+                    time: 1577059200000,
+                    price: 18.98
+                },
+                {
+                    time: 1576800000000,
+                    price: 19.02
+                },
+                {
+                    time: 1576713600000,
+                    price: 18.82
+                },
+                {
+                    time: 1576627200000,
+                    price: 18.8
+                },
+                {
+                    time: 1576540800000,
+                    price: 18.75
+                },
+                {
+                    time: 1576454400000,
+                    price: 18.81
+                },
+                {
+                    time: 1576195200000,
+                    price: 18.61
+                },
+                {
+                    time: 1576108800000,
+                    price: 18.58
+                },
+                {
+                    time: 1576022400000,
+                    price: 18.5
+                },
+                {
+                    time: 1575936000000,
+                    price: 18.49
+                },
+                {
+                    time: 1575849600000,
+                    price: 18.56
+                },
+                {
+                    time: 1575590400000,
+                    price: 18.63
+                },
+                {
+                    time: 1575504000000,
+                    price: 18.34
+                },
+                {
+                    time: 1575417600000,
+                    price: 18.39
+                },
+                {
+                    time: 1575331200000,
+                    price: 18.17
+                },
+                {
+                    time: 1575244800000,
+                    price: 18.33
+                },
+                {
+                    time: 1574985600000,
+                    price: 18.63
+                },
+                {
+                    time: 1574899200000,
+                    price: 18.7
+                },
+                {
+                    time: 1574812800000,
+                    price: 18.71
+                },
+                {
+                    time: 1574726400000,
+                    price: 18.62
+                },
+                {
+                    time: 1574640000000,
+                    price: 18.6
+                },
+                {
+                    time: 1574380800000,
+                    price: 18.41
+                },
+                {
+                    time: 1574294400000,
+                    price: 18.32
+                },
+                {
+                    time: 1574208000000,
+                    price: 18.41
+                },
+                {
+                    time: 1574121600000,
+                    price: 18.43
+                },
+                {
+                    time: 1574035200000,
+                    price: 18.44
+                },
+                {
+                    time: 1573776000000,
+                    price: 18.46
+                },
+                {
+                    time: 1573689600000,
+                    price: 18.38
+                },
+                {
+                    time: 1573603200000,
+                    price: 18.41
+                },
+                {
+                    time: 1573516800000,
+                    price: 18.45
+                },
+                {
+                    time: 1573430400000,
+                    price: 18.33
+                },
+                {
+                    time: 1573171200000,
+                    price: 18.36
+                },
+                {
+                    time: 1573084800000,
+                    price: 18.39
+                },
+                {
+                    time: 1572998400000,
+                    price: 18.25
+                },
+                {
+                    time: 1572912000000,
+                    price: 18.25
+                },
+                {
+                    time: 1572825600000,
+                    price: 18.16
+                },
+                {
+                    time: 1572566400000,
+                    price: 17.99
+                },
+                {
+                    time: 1572480000000,
+                    price: 17.84
+                }
+            ]
+        },
+        '997058': {
+            board: 'market',
+            currentValue: 37.6,
+            id: 997058,
+            name: 'Lyxor PEA Nasdaq 100 UCITS C',
+            oldValueList: [
+                {
+                    oldValue: 40.798,
+                    quantity: 36
+                }
+            ],
+            history: [
+                {
+                    time: 1604016000000,
+                    price: 37.6
+                },
+                {
+                    time: 1603929600000,
+                    price: 38.38
+                },
+                {
+                    time: 1603843200000,
+                    price: 37.85
+                },
+                {
+                    time: 1603756800000,
+                    price: 38.66
+                },
+                {
+                    time: 1603670400000,
+                    price: 38.38
+                },
+                {
+                    time: 1603411200000,
+                    price: 38.72
+                },
+                {
+                    time: 1603324800000,
+                    price: 38.76
+                },
+                {
+                    time: 1603238400000,
+                    price: 38.94
+                },
+                {
+                    time: 1603152000000,
+                    price: 38.96
+                },
+                {
+                    time: 1603065600000,
+                    price: 40
+                },
+                {
+                    time: 1602806400000,
+                    price: 40.28
+                },
+                {
+                    time: 1602720000000,
+                    price: 40.01
+                },
+                {
+                    time: 1602633600000,
+                    price: 40.55
+                },
+                {
+                    time: 1602547200000,
+                    price: 41.03
+                },
+                {
+                    time: 1602460800000,
+                    price: 40.31
+                },
+                {
+                    time: 1602201600000,
+                    price: 39.08
+                },
+                {
+                    time: 1602115200000,
+                    price: 38.75
+                },
+                {
+                    time: 1602028800000,
+                    price: 38.49
+                },
+                {
+                    time: 1601942400000,
+                    price: 38.31
+                },
+                {
+                    time: 1601856000000,
+                    price: 38.38
+                },
+                {
+                    time: 1601596800000,
+                    price: 38.33
+                },
+                {
+                    time: 1601510400000,
+                    price: 38.88
+                },
+                {
+                    time: 1601424000000,
+                    price: 38.63
+                },
+                {
+                    time: 1601337600000,
+                    price: 38.26
+                },
+                {
+                    time: 1601251200000,
+                    price: 38.33
+                },
+                {
+                    time: 1600992000000,
+                    price: 37.56
+                },
+                {
+                    time: 1600905600000,
+                    price: 37.16
+                },
+                {
+                    time: 1600819200000,
+                    price: 37.38
+                },
+                {
+                    time: 1600732800000,
+                    price: 37.1
+                },
+                {
+                    time: 1600646400000,
+                    price: 36.16
+                },
+                {
+                    time: 1600387200000,
+                    price: 36.44
+                },
+                {
+                    time: 1600300800000,
+                    price: 37.1
+                },
+                {
+                    time: 1600214400000,
+                    price: 38.19
+                },
+                {
+                    time: 1600128000000,
+                    price: 38.27
+                },
+                {
+                    time: 1600041600000,
+                    price: 37.74
+                },
+                {
+                    time: 1599782400000,
+                    price: 37.25
+                },
+                {
+                    time: 1599696000000,
+                    price: 38.12
+                },
+                {
+                    time: 1599609600000,
+                    price: 38
+                },
+                {
+                    time: 1599523200000,
+                    price: 37.65
+                },
+                {
+                    time: 1599436800000,
+                    price: 38.47
+                },
+                {
+                    time: 1599177600000,
+                    price: 38.06
+                },
+                {
+                    time: 1599091200000,
+                    price: 39.6
+                },
+                {
+                    time: 1599004800000,
+                    price: 40.97
+                },
+                {
+                    time: 1598918400000,
+                    price: 40.44
+                },
+                {
+                    time: 1598832000000,
+                    price: 39.86
+                },
+                {
+                    time: 1598572800000,
+                    price: 39.83
+                },
+                {
+                    time: 1598486400000,
+                    price: 40.24
+                },
+                {
+                    time: 1598400000000,
+                    price: 39.71
+                },
+                {
+                    time: 1598313600000,
+                    price: 39.01
+                },
+                {
+                    time: 1598227200000,
+                    price: 38.78
+                },
+                {
+                    time: 1597968000000,
+                    price: 38.63
+                },
+                {
+                    time: 1597881600000,
+                    price: 38.03
+                },
+                {
+                    time: 1597795200000,
+                    price: 37.93
+                },
+                {
+                    time: 1597708800000,
+                    price: 37.63
+                },
+                {
+                    time: 1597622400000,
+                    price: 37.47
+                },
+                {
+                    time: 1597363200000,
+                    price: 37.3
+                },
+                {
+                    time: 1597276800000,
+                    price: 37.54
+                },
+                {
+                    time: 1597190400000,
+                    price: 37.26
+                },
+                {
+                    time: 1597104000000,
+                    price: 37.06
+                },
+                {
+                    time: 1597017600000,
+                    price: 37.01
+                },
+                {
+                    time: 1596758400000,
+                    price: 37.62
+                },
+                {
+                    time: 1596672000000,
+                    price: 37.16
+                },
+                {
+                    time: 1596585600000,
+                    price: 36.9
+                },
+                {
+                    time: 1596499200000,
+                    price: 37.08
+                },
+                {
+                    time: 1596412800000,
+                    price: 37.15
+                },
+                {
+                    time: 1596153600000,
+                    price: 36.17
+                },
+                {
+                    time: 1596067200000,
+                    price: 35.68
+                },
+                {
+                    time: 1595980800000,
+                    price: 35.69
+                },
+                {
+                    time: 1595894400000,
+                    price: 35.85
+                },
+                {
+                    time: 1595808000000,
+                    price: 35.44
+                },
+                {
+                    time: 1595548800000,
+                    price: 35.72
+                },
+                {
+                    time: 1595462400000,
+                    price: 36.88
+                },
+                {
+                    time: 1595376000000,
+                    price: 36.97
+                },
+                {
+                    time: 1595289600000,
+                    price: 37.45
+                },
+                {
+                    time: 1595203200000,
+                    price: 37.31
+                },
+                {
+                    time: 1594944000000,
+                    price: 36.69
+                },
+                {
+                    time: 1594857600000,
+                    price: 36.37
+                },
+                {
+                    time: 1594771200000,
+                    price: 36.91
+                },
+                {
+                    time: 1594684800000,
+                    price: 36.68
+                },
+                {
+                    time: 1594598400000,
+                    price: 38.46
+                },
+                {
+                    time: 1594339200000,
+                    price: 37.47
+                },
+                {
+                    time: 1594252800000,
+                    price: 37.17
+                },
+                {
+                    time: 1594166400000,
+                    price: 36.84
+                },
+                {
+                    time: 1594080000000,
+                    price: 37.34
+                },
+                {
+                    time: 1593993600000,
+                    price: 37.08
+                },
+                {
+                    time: 1593734400000,
+                    price: 36.37
+                },
+                {
+                    time: 1593648000000,
+                    price: 36.44
+                },
+                {
+                    time: 1593561600000,
+                    price: 35.85
+                },
+                {
+                    time: 1593475200000,
+                    price: 35.4
+                },
+                {
+                    time: 1593388800000,
+                    price: 34.78
+                },
+                {
+                    time: 1593129600000,
+                    price: 35.01
+                },
+                {
+                    time: 1593043200000,
+                    price: 35.1
+                },
+                {
+                    time: 1592956800000,
+                    price: 35.1
+                },
+                {
+                    time: 1592870400000,
+                    price: 35.8
+                },
+                {
+                    time: 1592784000000,
+                    price: 35.33
+                },
+                {
+                    time: 1592524800000,
+                    price: 35.58
+                },
+                {
+                    time: 1592438400000,
+                    price: 35.17
+                },
+                {
+                    time: 1592352000000,
+                    price: 35.22
+                },
+                {
+                    time: 1592265600000,
+                    price: 34.85
+                },
+                {
+                    time: 1592179200000,
+                    price: 33.71
+                },
+                {
+                    time: 1591920000000,
+                    price: 33.91
+                },
+                {
+                    time: 1591833600000,
+                    price: 34.29
+                },
+                {
+                    time: 1591747200000,
+                    price: 34.99
+                },
+                {
+                    time: 1591660800000,
+                    price: 34.63
+                },
+                {
+                    time: 1591574400000,
+                    price: 34.33
+                },
+                {
+                    time: 1591315200000,
+                    price: 34.28
+                },
+                {
+                    time: 1591228800000,
+                    price: 33.72
+                },
+                {
+                    time: 1591142400000,
+                    price: 34.03
+                },
+                {
+                    time: 1591056000000,
+                    price: 33.73
+                },
+                {
+                    time: 1590969600000,
+                    price: 33.97
+                },
+                {
+                    time: 1590710400000,
+                    price: 33.42
+                },
+                {
+                    time: 1590624000000,
+                    price: 33.87
+                },
+                {
+                    time: 1590537600000,
+                    price: 33.28
+                },
+                {
+                    time: 1590451200000,
+                    price: 34.01
+                },
+                {
+                    time: 1590364800000,
+                    price: 34.56
+                },
+                {
+                    time: 1590105600000,
+                    price: 33.92
+                },
+                {
+                    time: 1590019200000,
+                    price: 33.85
+                },
+                {
+                    time: 1589932800000,
+                    price: 34.1
+                },
+                {
+                    time: 1589846400000,
+                    price: 33.97
+                },
+                {
+                    time: 1589760000000,
+                    price: 33.88
+                },
+                {
+                    time: 1589500800000,
+                    price: 32.81
+                },
+                {
+                    time: 1589414400000,
+                    price: 32.74
+                },
+                {
+                    time: 1589328000000,
+                    price: 33.08
+                },
+                {
+                    time: 1589241600000,
+                    price: 33.83
+                },
+                {
+                    time: 1589155200000,
+                    price: 33.83
+                },
+                {
+                    time: 1588896000000,
+                    price: 33.42
+                },
+                {
+                    time: 1588809600000,
+                    price: 33.25
+                },
+                {
+                    time: 1588723200000,
+                    price: 32.97
+                },
+                {
+                    time: 1588636800000,
+                    price: 32.69
+                },
+                {
+                    time: 1588550400000,
+                    price: 31.67
+                },
+                {
+                    time: 1588204800000,
+                    price: 32.38
+                },
+                {
+                    time: 1588118400000,
+                    price: 32.49
+                },
+                {
+                    time: 1588032000000,
+                    price: 31.89
+                },
+                {
+                    time: 1587945600000,
+                    price: 32.3
+                },
+                {
+                    time: 1587686400000,
+                    price: 31.57
+                },
+                {
+                    time: 1587600000000,
+                    price: 31.9
+                },
+                {
+                    time: 1587513600000,
+                    price: 31.38
+                },
+                {
+                    time: 1587427200000,
+                    price: 30.46
+                },
+                {
+                    time: 1587340800000,
+                    price: 32.03
+                },
+                {
+                    time: 1587081600000,
+                    price: 31.73
+                },
+                {
+                    time: 1586995200000,
+                    price: 31.82
+                },
+                {
+                    time: 1586908800000,
+                    price: 30.95
+                },
+                {
+                    time: 1586822400000,
+                    price: 30.93
+                },
+                {
+                    time: 1586390400000,
+                    price: 29.67
+                },
+                {
+                    time: 1586304000000,
+                    price: 29.69
+                },
+                {
+                    time: 1586217600000,
+                    price: 29.65
+                },
+                {
+                    time: 1586131200000,
+                    price: 28.75
+                },
+                {
+                    time: 1585872000000,
+                    price: 27.59
+                },
+                {
+                    time: 1585785600000,
+                    price: 27.51
+                },
+                {
+                    time: 1585699200000,
+                    price: 27.54
+                },
+                {
+                    time: 1585612800000,
+                    price: 28.6
+                },
+                {
+                    time: 1585526400000,
+                    price: 28.01
+                },
+                {
+                    time: 1585267200000,
+                    price: 27.24
+                },
+                {
+                    time: 1585180800000,
+                    price: 27.79
+                },
+                {
+                    time: 1585094400000,
+                    price: 27.74
+                },
+                {
+                    time: 1585008000000,
+                    price: 27.49
+                },
+                {
+                    time: 1584921600000,
+                    price: 25.49
+                },
+                {
+                    time: 1584662400000,
+                    price: 26.72
+                },
+                {
+                    time: 1584576000000,
+                    price: 27
+                },
+                {
+                    time: 1584489600000,
+                    price: 25.91
+                },
+                {
+                    time: 1584403200000,
+                    price: 26.6
+                },
+                {
+                    time: 1584316800000,
+                    price: 26.29
+                },
+                {
+                    time: 1584057600000,
+                    price: 26.58
+                },
+                {
+                    time: 1583971200000,
+                    price: 26.25
+                },
+                {
+                    time: 1583884800000,
+                    price: 28.37
+                },
+                {
+                    time: 1583798400000,
+                    price: 27.97
+                },
+                {
+                    time: 1583712000000,
+                    price: 28
+                },
+                {
+                    time: 1583452800000,
+                    price: 29.53
+                },
+                {
+                    time: 1583366400000,
+                    price: 31.11
+                },
+                {
+                    time: 1583280000000,
+                    price: 31.05
+                },
+                {
+                    time: 1583193600000,
+                    price: 31.11
+                },
+                {
+                    time: 1583107200000,
+                    price: 30.5
+                },
+                {
+                    time: 1582848000000,
+                    price: 29.91
+                },
+                {
+                    time: 1582761600000,
+                    price: 31.04
+                },
+                {
+                    time: 1582675200000,
+                    price: 32.57
+                },
+                {
+                    time: 1582588800000,
+                    price: 32.55
+                },
+                {
+                    time: 1582502400000,
+                    price: 33.05
+                },
+                {
+                    time: 1582243200000,
+                    price: 34.55
+                },
+                {
+                    time: 1582156800000,
+                    price: 34.85
+                },
+                {
+                    time: 1582070400000,
+                    price: 35.51
+                },
+                {
+                    time: 1581984000000,
+                    price: 34.93
+                },
+                {
+                    time: 1581897600000,
+                    price: 35.12
+                },
+                {
+                    time: 1581638400000,
+                    price: 34.98
+                },
+                {
+                    time: 1581552000000,
+                    price: 34.94
+                },
+                {
+                    time: 1581465600000,
+                    price: 34.72
+                },
+                {
+                    time: 1581379200000,
+                    price: 34.55
+                },
+                {
+                    time: 1581292800000,
+                    price: 34.16
+                },
+                {
+                    time: 1581033600000,
+                    price: 33.99
+                },
+                {
+                    time: 1580947200000,
+                    price: 33.84
+                },
+                {
+                    time: 1580860800000,
+                    price: 33.46
+                },
+                {
+                    time: 1580774400000,
+                    price: 33.24
+                },
+                {
+                    time: 1580688000000,
+                    price: 32.47
+                },
+                {
+                    time: 1580428800000,
+                    price: 32.09
+                },
+                {
+                    time: 1580342400000,
+                    price: 32.33
+                },
+                {
+                    time: 1580256000000,
+                    price: 32.6
+                },
+                {
+                    time: 1580169600000,
+                    price: 32.49
+                },
+                {
+                    time: 1580083200000,
+                    price: 31.96
+                },
+                {
+                    time: 1579824000000,
+                    price: 32.94
+                },
+                {
+                    time: 1579737600000,
+                    price: 32.72
+                },
+                {
+                    time: 1579651200000,
+                    price: 32.78
+                },
+                {
+                    time: 1579564800000,
+                    price: 32.59
+                },
+                {
+                    time: 1579478400000,
+                    price: 32.55
+                },
+                {
+                    time: 1579219200000,
+                    price: 32.41
+                },
+                {
+                    time: 1579132800000,
+                    price: 32.1
+                },
+                {
+                    time: 1579046400000,
+                    price: 32.01
+                },
+                {
+                    time: 1578960000000,
+                    price: 32.02
+                },
+                {
+                    time: 1578873600000,
+                    price: 31.88
+                },
+                {
+                    time: 1578614400000,
+                    price: 31.89
+                },
+                {
+                    time: 1578528000000,
+                    price: 31.87
+                },
+                {
+                    time: 1578441600000,
+                    price: 31.47
+                },
+                {
+                    time: 1578355200000,
+                    price: 31.32
+                },
+                {
+                    time: 1578268800000,
+                    price: 31.02
+                },
+                {
+                    time: 1578009600000,
+                    price: 31.03
+                },
+                {
+                    time: 1577923200000,
+                    price: 30.96
+                },
+                {
+                    time: 1577750400000,
+                    price: 30.49
+                },
+                {
+                    time: 1577664000000,
+                    price: 30.57
+                },
+                {
+                    time: 1577404800000,
+                    price: 30.99
+                },
+                {
+                    time: 1577145600000,
+                    price: 30.92
+                },
+                {
+                    time: 1577059200000,
+                    price: 30.91
+                },
+                {
+                    time: 1576800000000,
+                    price: 30.85
+                },
+                {
+                    time: 1576713600000,
+                    price: 30.52
+                },
+                {
+                    time: 1576627200000,
+                    price: 30.45
+                },
+                {
+                    time: 1576540800000,
+                    price: 30.26
+                },
+                {
+                    time: 1576454400000,
+                    price: 30.32
+                },
+                {
+                    time: 1576195200000,
+                    price: 29.95
+                },
+                {
+                    time: 1576108800000,
+                    price: 29.87
+                },
+                {
+                    time: 1576022400000,
+                    price: 29.73
+                },
+                {
+                    time: 1575936000000,
+                    price: 29.73
+                },
+                {
+                    time: 1575849600000,
+                    price: 29.86
+                },
+                {
+                    time: 1575590400000,
+                    price: 29.89
+                },
+                {
+                    time: 1575504000000,
+                    price: 29.37
+                },
+                {
+                    time: 1575417600000,
+                    price: 29.48
+                },
+                {
+                    time: 1575331200000,
+                    price: 29.07
+                },
+                {
+                    time: 1575244800000,
+                    price: 29.41
+                },
+                {
+                    time: 1574985600000,
+                    price: 30.07
+                },
+                {
+                    time: 1574899200000,
+                    price: 30.17
+                },
+                {
+                    time: 1574812800000,
+                    price: 30.14
+                },
+                {
+                    time: 1574726400000,
+                    price: 29.95
+                },
+                {
+                    time: 1574640000000,
+                    price: 29.86
+                },
+                {
+                    time: 1574380800000,
+                    price: 29.42
+                },
+                {
+                    time: 1574294400000,
+                    price: 29.34
+                },
+                {
+                    time: 1574208000000,
+                    price: 29.59
+                },
+                {
+                    time: 1574121600000,
+                    price: 29.61
+                },
+                {
+                    time: 1574035200000,
+                    price: 29.52
+                },
+                {
+                    time: 1573776000000,
+                    price: 29.6
+                },
+                {
+                    time: 1573689600000,
+                    price: 29.42
+                },
+                {
+                    time: 1573603200000,
+                    price: 29.53
+                },
+                {
+                    time: 1573516800000,
+                    price: 29.6
+                },
+                {
+                    time: 1573430400000,
+                    price: 29.32
+                },
+                {
+                    time: 1573171200000,
+                    price: 29.36
+                },
+                {
+                    time: 1573084800000,
+                    price: 29.42
+                },
+                {
+                    time: 1572998400000,
+                    price: 29.11
+                },
+                {
+                    time: 1572912000000,
+                    price: 29.21
+                },
+                {
+                    time: 1572825600000,
+                    price: 28.96
+                },
+                {
+                    time: 1572566400000,
+                    price: 28.61
+                },
+                {
+                    time: 1572480000000,
+                    price: 28.43
+                }
+            ]
+        },
+        '704271126': {
+            board: 'cash',
+            currentValue: 5251.45,
+            id: 704271126,
+            name: 'LIVRET A',
+            oldValueList: [
+                {
+                    oldValue: 3416,
+                    quantity: 1
+                }
+            ],
+            history: [
+                {
+                    time: 1604034017117,
+                    price: 5251.45
+                },
+                {
+                    time: 1603947615527,
+                    price: 5251.45
+                },
+                {
+                    time: 1603861216342,
+                    price: 4267
+                },
+                {
+                    time: 1603688416080,
+                    price: 4267
+                },
+                {
+                    time: 1603602015009,
+                    price: 4267
+                },
+                {
+                    time: 1603512020629,
+                    price: 4267
+                },
+                {
+                    time: 1603425618924,
+                    price: 4267
+                },
+                {
+                    time: 1603339215776,
+                    price: 4267
+                },
+                {
+                    time: 1603252825546,
+                    price: 3416
+                },
+                {
+                    time: 1603166417489,
+                    price: 3416
+                },
+                {
+                    time: 1603144609910,
+                    price: 3416
+                }
+            ]
+        },
+        '4192453871': {
+            board: 'cash',
+            currentValue: 1492.08,
+            id: 4192453871,
+            name: 'CPT DEPOT PART.',
+            oldValueList: [
+                {
+                    oldValue: 2078.25,
+                    quantity: 1
+                }
+            ],
+            history: [
+                {
+                    time: 1604034017117,
+                    price: 1492.08
+                },
+                {
+                    time: 1603947615527,
+                    price: 1492.08
+                },
+                {
+                    time: 1603861216342,
+                    price: 1681.81
+                },
+                {
+                    time: 1603688416080,
+                    price: 2078.81
+                },
+                {
+                    time: 1603602015009,
+                    price: 2078.81
+                },
+                {
+                    time: 1603512020629,
+                    price: 2078.81
+                },
+                {
+                    time: 1603425618924,
+                    price: 2078.81
+                },
+                {
+                    time: 1603339215776,
+                    price: 2078.81
+                },
+                {
+                    time: 1603252825546,
+                    price: 2078.81
+                },
+                {
+                    time: 1603166417489,
+                    price: 2078.25
+                },
+                {
+                    time: 1603144609910,
+                    price: 2078.25
+                }
+            ]
+        },
+        '11193481112': {
+            board: 'cash',
+            currentValue: 2300,
+            id: 11193481112,
+            name: 'LEL',
+            oldValueList: [
+                {
+                    oldValue: 3417.27,
+                    quantity: 1
+                }
+            ],
+            history: [
+                {
+                    time: 1604034017117,
+                    price: 2300
+                },
+                {
+                    time: 1603947615527,
+                    price: 2300
+                },
+                {
+                    time: 1603861216342,
+                    price: 2300
+                },
+                {
+                    time: 1603688416080,
+                    price: 3417.27
+                },
+                {
+                    time: 1603602015009,
+                    price: 3417.27
+                },
+                {
+                    time: 1603512020629,
+                    price: 3417.27
+                },
+                {
+                    time: 1603425618924,
+                    price: 3417.27
+                },
+                {
+                    time: 1603339215776,
+                    price: 3417.27
+                },
+                {
+                    time: 1603252825546,
+                    price: 3417.27
+                },
+                {
+                    time: 1603166417489,
+                    price: 3417.27
+                },
+                {
+                    time: 1603144609910,
+                    price: 3417.27
+                }
+            ]
+        },
+        '-1': {
+            board: 'gold',
+            currentValue: 51863.58,
+            id: -1,
+            name: 'Gold',
+            oldValueList: [
+                {
+                    oldValue: 47200,
+                    quantity: 0.011
+                },
+                {
+                    oldValue: 47000,
+                    quantity: 0.056
+                },
+                {
+                    oldValue: 47260,
+                    quantity: 0.109
+                },
+                {
+                    oldValue: 47200,
+                    quantity: 0.042
+                }
+            ],
+            history: [
+                {
+                    price: 51863.58,
+                    time: 1604102400000
+                },
+                {
+                    price: 51863.58,
+                    time: 1603929600000
+                },
+                {
+                    price: 51442.02,
+                    time: 1603756800000
+                },
+                {
+                    price: 51791.88,
+                    time: 1603584000000
+                },
+                {
+                    price: 51536.74,
+                    time: 1603411200000
+                },
+                {
+                    price: 51842.63,
+                    time: 1603238400000
+                },
+                {
+                    price: 51932.66,
+                    time: 1603065600000
+                },
+                {
+                    price: 52164.09,
+                    time: 1602892800000
+                },
+                {
+                    price: 52118.2,
+                    time: 1602720000000
+                },
+                {
+                    price: 51967.07,
+                    time: 1602547200000
+                },
+                {
+                    price: 52395.59,
+                    time: 1602374400000
+                },
+                {
+                    price: 52473.36,
+                    time: 1602201600000
+                },
+                {
+                    price: 51786.26,
+                    time: 1602028800000
+                },
+                {
+                    price: 51501.27,
+                    time: 1601856000000
+                },
+                {
+                    price: 52207.59,
+                    time: 1601683200000
+                },
+                {
+                    price: 52126.42,
+                    time: 1601510400000
+                },
+                {
+                    price: 51772.49,
+                    time: 1601337600000
+                },
+                {
+                    price: 51835.94,
+                    time: 1601164800000
+                },
+                {
+                    price: 51470.69,
+                    time: 1600992000000
+                },
+                {
+                    price: 51444.91,
+                    time: 1600819200000
+                },
+                {
+                    price: 52298.22,
+                    time: 1600646400000
+                },
+                {
+                    price: 52884.57,
+                    time: 1600473600000
+                },
+                {
+                    price: 52918.88,
+                    time: 1600300800000
+                },
+                {
+                    price: 53384.69,
+                    time: 1600128000000
+                },
+                {
+                    price: 53032.9,
+                    time: 1599955200000
+                },
+                {
+                    price: 52661.36,
+                    time: 1599782400000
+                },
+                {
+                    price: 52858.79,
+                    time: 1599609600000
+                },
+                {
+                    price: 52742.86,
+                    time: 1599436800000
+                },
+                {
+                    price: 52553.25,
+                    time: 1599264000000
+                },
+                {
+                    price: 52514.53,
+                    time: 1599091200000
+                },
+                {
+                    price: 52784.6,
+                    time: 1598918400000
+                },
+                {
+                    price: 53001.52,
+                    time: 1598745600000
+                },
+                {
+                    price: 53065.28,
+                    time: 1598572800000
+                },
+                {
+                    price: 52443.86,
+                    time: 1598400000000
+                },
+                {
+                    price: 52428.11,
+                    time: 1598227200000
+                },
+                {
+                    price: 52741.9,
+                    time: 1598054400000
+                },
+                {
+                    price: 52897.26,
+                    time: 1597881600000
+                },
+                {
+                    price: 52329.03,
+                    time: 1597708800000
+                },
+                {
+                    price: 53715.35,
+                    time: 1597536000000
+                },
+                {
+                    price: 52788.99,
+                    time: 1597363200000
+                },
+                {
+                    price: 53256.77,
+                    time: 1597190400000
+                },
+                {
+                    price: 52310.15,
+                    time: 1597017600000
+                },
+                {
+                    price: 55324.12,
+                    time: 1596844800000
+                },
+                {
+                    price: 55516.32,
+                    time: 1596672000000
+                },
+                {
+                    price: 55150.48,
+                    time: 1596499200000
+                },
+                {
+                    price: 54002.94,
+                    time: 1596326400000
+                },
+                {
+                    price: 53949.09,
+                    time: 1596153600000
+                },
+                {
+                    price: 53002.27,
+                    time: 1595980800000
+                },
+                {
+                    price: 53670.09,
+                    time: 1595808000000
+                },
+                {
+                    price: 52816.23,
+                    time: 1595635200000
+                },
+                {
+                    price: 52450.96,
+                    time: 1595462400000
+                },
+                {
+                    price: 51992.14,
+                    time: 1595289600000
+                },
+                {
+                    price: 51021.19,
+                    time: 1595116800000
+                },
+                {
+                    price: 50921.68,
+                    time: 1594944000000
+                },
+                {
+                    price: 50773.24,
+                    time: 1594771200000
+                },
+                {
+                    price: 50989.35,
+                    time: 1594598400000
+                },
+                {
+                    price: 51181.46,
+                    time: 1594425600000
+                },
+                {
+                    price: 51163.64,
+                    time: 1594252800000
+                },
+                {
+                    price: 51310.09,
+                    time: 1594080000000
+                },
+                {
+                    price: 50755.59,
+                    time: 1593907200000
+                },
+                {
+                    price: 50756.18,
+                    time: 1593734400000
+                },
+                {
+                    price: 50808.51,
+                    time: 1593561600000
+                },
+                {
+                    price: 51042.87,
+                    time: 1593388800000
+                },
+                {
+                    price: 50751.44,
+                    time: 1593216000000
+                },
+                {
+                    price: 50773.82,
+                    time: 1593043200000
+                },
+                {
+                    price: 50362.81,
+                    time: 1592870400000
+                },
+                {
+                    price: 50038.56,
+                    time: 1592697600000
+                },
+                {
+                    price: 50167.49,
+                    time: 1592524800000
+                },
+                {
+                    price: 49444.33,
+                    time: 1592352000000
+                },
+                {
+                    price: 49277.38,
+                    time: 1592179200000
+                },
+                {
+                    price: 49507.18,
+                    time: 1592006400000
+                },
+                {
+                    price: 49438.23,
+                    time: 1591833600000
+                },
+                {
+                    price: 49088.74,
+                    time: 1591660800000
+                },
+                {
+                    price: 48277.81,
+                    time: 1591488000000
+                },
+                {
+                    price: 47988.29,
+                    time: 1591315200000
+                },
+                {
+                    price: 48574.9,
+                    time: 1591142400000
+                },
+                {
+                    price: 49634.12,
+                    time: 1590969600000
+                },
+                {
+                    price: 50319.87,
+                    time: 1590796800000
+                },
+                {
+                    price: 50073.29,
+                    time: 1590624000000
+                },
+                {
+                    price: 49937.86,
+                    time: 1590451200000
+                },
+                {
+                    price: 50927.25,
+                    time: 1590278400000
+                },
+                {
+                    price: 51175.41,
+                    time: 1590105600000
+                },
+                {
+                    price: 50686.2,
+                    time: 1589932800000
+                },
+                {
+                    price: 51378.93,
+                    time: 1589760000000
+                },
+                {
+                    price: 52253.73,
+                    time: 1589587200000
+                },
+                {
+                    price: 51775.81,
+                    time: 1589414400000
+                },
+                {
+                    price: 51074.59,
+                    time: 1589241600000
+                },
+                {
+                    price: 50506.45,
+                    time: 1589068800000
+                },
+                {
+                    price: 50487.6,
+                    time: 1588896000000
+                },
+                {
+                    price: 50861.3,
+                    time: 1588723200000
+                },
+                {
+                    price: 50549.26,
+                    time: 1588550400000
+                },
+                {
+                    price: 49858.78,
+                    time: 1588377600000
+                },
+                {
+                    price: 49778.07,
+                    time: 1588204800000
+                },
+                {
+                    price: 50663.99,
+                    time: 1588032000000
+                },
+                {
+                    price: 50795.08,
+                    time: 1587859200000
+                },
+                {
+                    price: 51362.26,
+                    time: 1587686400000
+                },
+                {
+                    price: 51592.91,
+                    time: 1587513600000
+                },
+                {
+                    price: 49995.66,
+                    time: 1587340800000
+                },
+                {
+                    price: 49598.72,
+                    time: 1587168000000
+                },
+                {
+                    price: 49783.21,
+                    time: 1586995200000
+                },
+                {
+                    price: 50615.65,
+                    time: 1586822400000
+                },
+                {
+                    price: 50566.41,
+                    time: 1586649600000
+                },
+                {
+                    price: 49498.01,
+                    time: 1586476800000
+                },
+                {
+                    price: 49516.88,
+                    time: 1586304000000
+                },
+                {
+                    price: 48652.11,
+                    time: 1586131200000
+                },
+                {
+                    price: 48189,
+                    time: 1585958400000
+                },
+                {
+                    price: 48173.74,
+                    time: 1585785600000
+                },
+                {
+                    price: 46740.37,
+                    time: 1585612800000
+                },
+                {
+                    price: 47128.7,
+                    time: 1585440000000
+                },
+                {
+                    price: 46975.57,
+                    time: 1585267200000
+                },
+                {
+                    price: 47335.34,
+                    time: 1585094400000
+                },
+                {
+                    price: 48742.26,
+                    time: 1584921600000
+                },
+                {
+                    price: 44859.83,
+                    time: 1584748800000
+                },
+                {
+                    price: 45058.11,
+                    time: 1584576000000
+                },
+                {
+                    price: 44008.2,
+                    time: 1584403200000
+                },
+                {
+                    price: 43407.57,
+                    time: 1584230400000
+                },
+                {
+                    price: 44244.75,
+                    time: 1584057600000
+                },
+                {
+                    price: 45336.54,
+                    time: 1583884800000
+                },
+                {
+                    price: 46947.95,
+                    time: 1583712000000
+                },
+                {
+                    price: 47995.13,
+                    time: 1583539200000
+                },
+                {
+                    price: 47680.76,
+                    time: 1583366400000
+                },
+                {
+                    price: 47257.47,
+                    time: 1583193600000
+                },
+                {
+                    price: 45932.68,
+                    time: 1583020800000
+                },
+                {
+                    price: 46220.83,
+                    time: 1582848000000
+                },
+                {
+                    price: 48111.58,
+                    time: 1582675200000
+                },
+                {
+                    price: 48462.61,
+                    time: 1582502400000
+                },
+                {
+                    price: 49412.94,
+                    time: 1582329600000
+                },
+                {
+                    price: 48710.46,
+                    time: 1582156800000
+                },
+                {
+                    price: 47896.8,
+                    time: 1581984000000
+                },
+                {
+                    price: 47004.6,
+                    time: 1581811200000
+                },
+                {
+                    price: 47010.38,
+                    time: 1581638400000
+                },
+                {
+                    price: 46778.03,
+                    time: 1581465600000
+                },
+                {
+                    price: 46145.19,
+                    time: 1581292800000
+                },
+                {
+                    price: 46244.03,
+                    time: 1581120000000
+                },
+                {
+                    price: 46112.79,
+                    time: 1580947200000
+                },
+                {
+                    price: 45484.5,
+                    time: 1580774400000
+                },
+                {
+                    price: 45889.14,
+                    time: 1580601600000
+                },
+                {
+                    price: 46071.44,
+                    time: 1580428800000
+                },
+                {
+                    price: 45920.23,
+                    time: 1580256000000
+                },
+                {
+                    price: 45753.6,
+                    time: 1580083200000
+                },
+                {
+                    price: 46149.54,
+                    time: 1579910400000
+                },
+                {
+                    price: 45835.86,
+                    time: 1579737600000
+                },
+                {
+                    price: 45243.92,
+                    time: 1579564800000
+                },
+                {
+                    price: 45237.45,
+                    time: 1579392000000
+                },
+                {
+                    price: 45147.74,
+                    time: 1579219200000
+                },
+                {
+                    price: 44812.03,
+                    time: 1579046400000
+                },
+                {
+                    price: 44775.4,
+                    time: 1578873600000
+                },
+                {
+                    price: 45097.96,
+                    time: 1578700800000
+                },
+                {
+                    price: 45162.91,
+                    time: 1578528000000
+                },
+                {
+                    price: 45073.25,
+                    time: 1578355200000
+                },
+                {
+                    price: 44909.67,
+                    time: 1578182400000
+                },
+                {
+                    price: 44715.15,
+                    time: 1578009600000
+                },
+                {
+                    price: 44004.07,
+                    time: 1577836800000
+                },
+                {
+                    price: 43522.21,
+                    time: 1577664000000
+                },
+                {
+                    price: 43523.32,
+                    time: 1577491200000
+                },
+                {
+                    price: 43477.69,
+                    time: 1577318400000
+                },
+                {
+                    price: 43453.6,
+                    time: 1577145600000
+                },
+                {
+                    price: 43059.45,
+                    time: 1576972800000
+                },
+                {
+                    price: 42885.75,
+                    time: 1576800000000
+                },
+                {
+                    price: 42734.32,
+                    time: 1576627200000
+                },
+                {
+                    price: 42547.92,
+                    time: 1576454400000
+                },
+                {
+                    price: 42606.86,
+                    time: 1576281600000
+                },
+                {
+                    price: 42683.94,
+                    time: 1576108800000
+                },
+                {
+                    price: 42587.96,
+                    time: 1575936000000
+                },
+                {
+                    price: 42460.56,
+                    time: 1575763200000
+                },
+                {
+                    price: 42454.56,
+                    time: 1575590400000
+                },
+                {
+                    price: 42736.79,
+                    time: 1575417600000
+                },
+                {
+                    price: 42845.47,
+                    time: 1575244800000
+                },
+                {
+                    price: 42657.57,
+                    time: 1575072000000
+                },
+                {
+                    price: 42719.37,
+                    time: 1574899200000
+                },
+                {
+                    price: 42569.47,
+                    time: 1574726400000
+                },
+                {
+                    price: 42457.11,
+                    time: 1574553600000
+                },
+                {
+                    price: 42650.92,
+                    time: 1574380800000
+                },
+                {
+                    price: 42569.71,
+                    time: 1574208000000
+                },
+                {
+                    price: 42793.22,
+                    time: 1574035200000
+                },
+                {
+                    price: 42730.43,
+                    time: 1573862400000
+                },
+                {
+                    price: 42717.05,
+                    time: 1573689600000
+                },
+                {
+                    price: 42740.88,
+                    time: 1573516800000
+                },
+                {
+                    price: 42412.47,
+                    time: 1573344000000
+                },
+                {
+                    price: 42574.88,
+                    time: 1573171200000
+                }
+            ]
+        }
+    };
+
+    const valuesList: MainBoardState[ 'valuesList' ] = Object.values(values)
+        .reduce<MainBoardState[ 'valuesList' ]>(
+            (acc, { id, board }: BoardValueInfos) => {
+                acc[board].push(id);
+                return acc;
+            },
+            {
+                cash: [],
+                gold: [],
+                market: []
+            }
+        );
+
+    return {
+        values,
+        valuesList,
         status: {
             cash: {
                 loading: false,

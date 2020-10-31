@@ -4,6 +4,7 @@ import React from 'react';
 import { AppHeader } from '../../ui-components/app-header/app-header';
 import { gainUnitContext } from '../../ui-components/contexts/gain-unit-context';
 import { UIPaneHeaderTemplate } from '../../ui-components/pane/ui-pane-header-template';
+import { VisitDialog } from '../../visit/visit-dialog';
 import { MainPane } from './main-pane';
 
 export const MainBoardView: React.FC = () => {
@@ -35,6 +36,8 @@ export const MainBoardView: React.FC = () => {
 
             </Grid>
         </Box>
+
+        <VisitDialog />
 
     </gainUnitContext.Provider>;
 };

@@ -52,7 +52,7 @@ export const AuthView: React.FC = () => {
 
     const renderError = ({ id, title, content }: AuthError) => (
         <Snackbar open>
-            <Alert severity='error' variant='outlined' onClose={() => dispatchErrorRemove({ id })}>
+            <Alert severity='error' onClose={() => dispatchErrorRemove({ id })}>
                 <AlertTitle>{title}</AlertTitle>
                 {content.map((line, i) => <React.Fragment key={i}>{i > 0 && <br />}{line}</React.Fragment>)}
             </Alert>
