@@ -3,7 +3,6 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { AppStepRouter } from '../../app-step/view/app-step-router';
 import { StoreManager } from '../store-manager';
-import { HeadContent } from './head-content';
 import { UIThemeProvider } from './ui-theme-provider';
 
 type ViewProps = {
@@ -13,9 +12,6 @@ type ViewProps = {
 export const createView = ({ storeManager }: ViewProps) => {
 
     return <React.StrictMode>
-
-        <HeadContent />
-
         <Provider store={storeManager.store}>
             <UIThemeProvider>
 

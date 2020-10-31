@@ -23,12 +23,24 @@
     -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;600&display=swap" rel="stylesheet">
 
-  <!-- 
-    Injected in order:
-      - styles
-      - title & meta
-      - scripts
-   -->
+  <title>%REACT_APP_TITLE%</title>
+  <meta name="title" content="%REACT_APP_TITLE%" />
+  <meta name="description" content="%REACT_APP_DESCRIPTION%" />
+  <meta name="author" content="%REACT_APP_AUTHOR%" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="%REACT_APP_URL%" />
+  <meta property="og:title" content="%REACT_APP_TITLE%" />
+  <meta property="og:description" content="%REACT_APP_DESCRIPTION%" />
+  <meta property="og:image" content="%REACT_APP_PREVIEW_IMG%" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="%REACT_APP_URL%" />
+  <meta property="twitter:title" content="%REACT_APP_TITLE%" />
+  <meta property="twitter:description" content="%REACT_APP_DESCRIPTION%" />
+  <meta property="twitter:image" content="%REACT_APP_PREVIEW_IMG%" />
 </head>
 
 <body>
