@@ -9,7 +9,7 @@
     <a href="https://picsou-dashboard.web.app">PREVIEW</a>
 </h6>
 
-A dashboard to see all your financial investments on a single-page, for mobile & desktop.
+A dashboard to see all your financial investments on one place, for mobile & desktop.
 
 - Handle these kind of value:
   - :bank: **cash** (banks)
@@ -24,6 +24,8 @@ A dashboard to see all your financial investments on a single-page, for mobile &
 - **PWA compliant**, you can install this app then use it like a mobile app, or desktop one
 - Preview mode with fake data, to show the concept to your best friends
 - Used by Balthazar Picsou himself
+
+:warning: **This is a read-only app.** You cannot buy/sell stock actions, gold, or manipulate your bank account: you're seeing changes, not doing them. 
 
 <p align="center">
 <span style="padding: 10px">
@@ -47,7 +49,7 @@ You just have to be ok with Google confidentiality policy.
 
 You can see database rules [here](./database.rules.json). They allow database access only on auth users that are in the whitelist.
 
-Some external services are used to get some fresh data (current stock price, gold price, etc). More infos below.
+Some external services are used to get fresh data (current stock price, gold price, etc). More infos below.
 
 ## Setup
 
