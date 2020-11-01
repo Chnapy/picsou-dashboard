@@ -105,10 +105,11 @@ export const mainMiddleware = createMiddleware(() => api => next => {
                     : [];
 
                 const boardValues = normalize(
-                    currentValues.map(({ id, currentValue }): BoardValueInfos => ({
+                    currentValues.map(({ id, currentValue, previousValue }): BoardValueInfos => ({
                         ...valueLines[ id ],
                         id,
-                        currentValue: currentValue.price
+                        currentValue: currentValue.price,
+                        previousValue: previousValue?.price
                     }))
                 );
 

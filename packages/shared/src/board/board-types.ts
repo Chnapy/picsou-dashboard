@@ -16,6 +16,7 @@ export type BoardValueInfos = ValueBasicInfos & {
         quantity: number;
     }[];
     currentValue: number;
+    previousValue?: number;
     history: HistoryValue[];
 };
 

@@ -20,7 +20,8 @@ export const createCashFetcher = createFetcher(() => {
                     currentValue: {
                         time: Date.now(),
                         price: snapPrice.val()
-                    }
+                    },
+                    previousValue: undefined
                 };
             }));
         },

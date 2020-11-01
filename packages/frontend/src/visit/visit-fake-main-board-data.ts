@@ -5194,10 +5194,16 @@ export const getVisitFakeMainBoardData = (): Pick<MainBoardState, 'values' | 'va
         }
     };
 
-    const valuesList: MainBoardState[ 'valuesList' ] = Object.values(values)
+    const valuesListRaw = Object.values(values);
+
+    valuesListRaw.forEach(value => {
+        value.previousValue = value.history[ 1 ]?.price;
+    });
+
+    const valuesList: MainBoardState[ 'valuesList' ] = valuesListRaw
         .reduce<MainBoardState[ 'valuesList' ]>(
             (acc, { id, board }: BoardValueInfos) => {
-                acc[board].push(id);
+                acc[ board ].push(id);
                 return acc;
             },
             {

@@ -37,6 +37,7 @@ export const createMarketFetcher = createFetcher(() => {
             return data.map(({ id, history }) => ({
                 id,
                 currentValue: history[ 0 ],
+                previousValue: history[ 1 ]
             }));
         },
 

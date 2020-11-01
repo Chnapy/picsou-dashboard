@@ -55,7 +55,7 @@ export const extractGoldHistory = async ({ id: id_, latestOnly, interval }: Part
     const data: BullionResData = await res.json();
 
     const dataList = latestOnly
-        ? data.prices.slice(0, 1)
+        ? data.prices.slice(0, 3)
         : data.prices;
 
     return [ {

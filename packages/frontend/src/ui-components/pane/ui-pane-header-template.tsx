@@ -48,9 +48,11 @@ export const UIPaneHeaderTemplate: React.FC<UIPaneHeaderTemplateProps> = ({
             </Grid>
 
             <Grid item>
-                {getMenuContent && <UIMenuIcon>
-                    {getMenuContent}
-                </UIMenuIcon>}
+                {getMenuContent && <Box ml={-1}>
+                    <UIMenuIcon>
+                        {getMenuContent}
+                    </UIMenuIcon>
+                </Box>}
             </Grid>
 
         </Grid>

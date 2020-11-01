@@ -24,7 +24,8 @@ describe('# market-fetcher', () => {
         expect(data).toEqual<typeof data>([
             {
                 id: 997026,
-                currentValue: expect.any(Object)
+                currentValue: expect.any(Object),
+                previousValue: expect.any(Object)
             }
         ]);
     });

@@ -8,7 +8,7 @@ import { NormalizeObject } from '../../util/normalize';
 import { UIMenuIcon } from '../menu-icon/ui-menu-icon';
 import { EditValuesLine, EditValuesLineProps } from './edit-values-line';
 
-export type InputBoardValueInfos = Omit<BoardValueInfos, 'currentValue'>;
+export type InputBoardValueInfos = Omit<BoardValueInfos, 'currentValue' | 'previousValue'>;
 
 export type EditSearchData = Pick<InputBoardValueInfos, 'id' | 'name'> & {
     extra?: string;

@@ -3,6 +3,7 @@ import { HistoryValue } from '@picsou/shared';
 export type FetchCurrentValueData = {
     id: number;
     currentValue: HistoryValue;
+    previousValue: HistoryValue | undefined;
 }[];
 
 export type FetchHistoryData = {

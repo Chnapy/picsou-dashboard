@@ -22,7 +22,8 @@ describe('gold fetcher', () => {
         expect(data).toEqual<typeof data>([
             {
                 id: 1,
-                currentValue: expect.any(Object)
+                currentValue: expect.any(Object),
+                previousValue: expect.any(Object)
             }
         ]);
     });

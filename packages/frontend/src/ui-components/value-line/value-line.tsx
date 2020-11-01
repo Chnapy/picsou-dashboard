@@ -3,8 +3,10 @@ import { BoardValueInfos } from '@picsou/shared';
 import React from 'react';
 import { enumToString } from '../../util/enum-to-string';
 import { UIEuroValue, UIEuroValueProps } from '../misc/ui-euro-value';
-import { UIGain } from '../misc/ui-gain';
+import { UIGain, UIGainNumericData } from '../misc/ui-gain';
+import { UIVerticalDivider } from '../misc/ui-vertical-divider';
 import { UITypography } from '../typography/ui-typography';
+import { useComputedValue } from './hooks/use-computed-value';
 import { OldValueChip, PaddedValue } from './old-value-chip';
 
 export type ValueLineProps = {
@@ -26,28 +28,23 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
 export const ValueLine: React.FC<ValueLineProps> = ({
     valueLine, onClick
 }) => {
-    const { name, oldValueList, currentValue, board } = valueLine;
+    const { name, oldValueList, board } = valueLine;
     const classes = useStyles();
 
-    const quantityTotal = oldValueList.reduce((acc, v) => acc + v.quantity, 0);
-
-    const oldValueFull = oldValueList.reduce((acc, v) => acc + v.oldValue * v.quantity, 0);
-    const currentValueFull = currentValue * quantityTotal;
-
-    const oldValueAverage = oldValueFull / quantityTotal;
+    const computedValue = useComputedValue(valueLine);
 
     const quantityUnit = enumToString.quantityUnit(board);
 
-    const showDetails = enumToString.shouldShowQuantity(quantityTotal, quantityUnit);
+    const showDetails = enumToString.shouldShowQuantity(computedValue.quantityTotal, quantityUnit);
 
-    const renderValue = ({ color, oldValue, currentValue }: Pick<UIEuroValueProps, 'color'> & { oldValue: number; currentValue: number; }) => (
+    const renderValue = ({ color, oldValue, newValue }: Pick<UIEuroValueProps, 'color'> & UIGainNumericData) => (
         <PaddedValue mr>
             <Grid container direction='column' alignItems='flex-end'>
                 <Grid item>
-                    <UIEuroValue value={currentValue} variant='body1' color={color} />
+                    <UIEuroValue value={newValue} variant='body1' color={color} />
                 </Grid>
                 <Grid item style={{ marginTop: -4 }}>
-                    <UIGain unit='euro' variant='labelMini' oldValue={oldValue} newValue={currentValue} style={{ fontWeight: 400 }} />
+                    <UIGain unit='euro' variant='labelMini' oldValue={oldValue} newValue={newValue} style={{ fontWeight: 400 }} />
                 </Grid>
             </Grid>
         </PaddedValue>
@@ -63,7 +60,13 @@ export const ValueLine: React.FC<ValueLineProps> = ({
                     </UITypography>
                 </Grid>
                 <Grid item>
-                    <UIGain unit='percent' oldValue={oldValueFull} newValue={currentValueFull} variant='h4' />
+                    <UIGain unit='percent' variant='h4' {...computedValue.getFullGainProps()} />
+                </Grid>
+                <Grid item>
+                    <UIVerticalDivider mx={1} />
+                </Grid>
+                <Grid item>
+                    <UIGain unit='percent' variant='h4' {...computedValue.getFromYesterdayGainProps()} />
                 </Grid>
             </Grid>
 
@@ -86,8 +89,7 @@ export const ValueLine: React.FC<ValueLineProps> = ({
                 <Grid item>
                     {renderValue({
                         color: 'primary',
-                        oldValue: oldValueAverage,
-                        currentValue
+                        ...computedValue.getValueGainProps(),
                     })}
                 </Grid>
             </Grid>
@@ -95,15 +97,12 @@ export const ValueLine: React.FC<ValueLineProps> = ({
             {showDetails && <Grid container item wrap='nowrap' alignItems='center' spacing={1}>
                 <Grid item>
                     <PaddedValue ml>
-                        <UIEuroValue value={oldValueFull} variant='body1' disabled />
+                        <UIEuroValue value={computedValue.oldValueFull} variant='body1' disabled />
                     </PaddedValue>
                 </Grid>
 
                 <Grid container item justify='flex-end'>
-                    {renderValue({
-                        oldValue: oldValueFull,
-                        currentValue: currentValueFull
-                    })}
+                    {renderValue(computedValue.getFullGainProps())}
                 </Grid>
             </Grid>}
 
